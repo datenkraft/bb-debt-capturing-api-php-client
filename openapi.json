@@ -1,0 +1,224 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Backbone Debt Capturing API",
+    "description": "Backbone Debt Capturing API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "UNDEFINED",
+      "description": "Production server"
+    },
+    {
+      "url": "UNDEFINED",
+      "description": "Staging server"
+    },
+    {
+      "url": "https://localhost:30270",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/debt-line-item/csv": {
+      "get": {
+        "tags": [
+          "debtLineItem"
+        ],
+        "summary": "Get debtLineItems csv export.",
+        "description": "Get debtLineItems csv export.",
+        "operationId": "getDebtLineItemCsv",
+        "parameters": [
+          {
+            "name": "filter[projectId]",
+            "in": "query",
+            "description": "Task projectId filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[dateFrom]",
+            "in": "query",
+            "description": "Date from filter",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "filter[dateTo]",
+            "in": "query",
+            "description": "Date to filter",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "bb-debt-capturing-api/debt-line-item:get"
+            ]
+          }
+        ]
+      }
+    },
+    "/docs": {
+      "get": {
+        "tags": [
+          "docs"
+        ],
+        "summary": "Get the openapi documentation as json",
+        "description": "Get the openapi documentation as json",
+        "operationId": "getOpenApi",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/docs/openapi.{format}": {
+      "get": {
+        "tags": [
+          "docs"
+        ],
+        "summary": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+        "description": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+        "operationId": "getOpenApiInFormat",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Openapi file format",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "yaml",
+                "json"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "errorResponse": {
+        "properties": {
+          "errors": {
+            "description": "errors",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "error": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "description": "Code",
+            "type": "string"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "oAuthAuthorization": {
+        "type": "oauth2",
+        "description": "OAuth2 Authorization",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://localhost:30250/oauth/token",
+            "refreshUrl": "UNDEFINED",
+            "scopes": {
+              "XXX": "XXX"
+            }
+          }
+        }
+      }
+    }
+  }
+}
