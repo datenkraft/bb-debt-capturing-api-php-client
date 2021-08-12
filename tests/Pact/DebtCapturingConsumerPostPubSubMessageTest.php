@@ -41,8 +41,6 @@ class DebtCapturingConsumerPostPubSubMessageTest extends DebtCapturingConsumerTe
 
         $this->responseData = [];
 
-        $this->path = '/sku-usage';
-
         $this->path = '/pubsub-push';
     }
 
