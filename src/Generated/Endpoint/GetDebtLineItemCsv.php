@@ -38,7 +38,7 @@ class GetDebtLineItemCsv extends \Datenkraft\Backbone\Client\DebtCapturingApi\Ge
     {
         $optionsResolver = parent::getQueryOptionsResolver();
         $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]'));
-        $optionsResolver->setRequired(array());
+        $optionsResolver->setRequired(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]'));
         $optionsResolver->setDefaults(array());
         $optionsResolver->setAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[dateFrom]', array('string'));

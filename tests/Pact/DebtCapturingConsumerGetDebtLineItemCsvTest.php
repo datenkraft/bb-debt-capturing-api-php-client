@@ -44,15 +44,24 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
             'Content-Type' => 'application/json',
         ];
         $this->responseHeadersSuccess = [
-            'Content-Type' => 'text/csv',
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => $this->matcher
+                ->like('attachment; filename=' . (new DateTime())->format('Y-m-d-H:i:s') . '_debtLineItems.csv'),
         ];
 
-        $this->projectId = '52e84eca-2857-467e-9aa2-70182e34f8e1'; // labelhair
+        $this->projectId = 'ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8';
         $this->dateFrom = (new DateTime('2021-06-01 11:11:11'))->format(DateTimeInterface::ATOM);
         $this->dateTo = (new DateTime('2021-07-01 11:11:11'))->format(DateTimeInterface::ATOM);
 
         $this->requestData = [];
-        $this->responseData = [];
+        $this->responseData = $this->matcher->like(
+            "Id,Sku_Code,Quantity,Project_Id,Unit,UsageStart,UsageEnd,PriceTotalMinor,PriceCurrency\n" .
+            "4c3e0218-c4b4-4123-956a-19820f33c30e,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-03 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n" .
+            "5642739b-c556-4125-95d5-89ec24f765df,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-04 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n" .
+            "67b33bd3-6103-47b6-aee2-6f466ca7aa17,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-05 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n" .
+            "67c7c3de-87ff-4d40-9f4c-4b0ee20391f0,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-01 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n" .
+            "73a3ddee-f234-4834-8a5b-349094537e5d,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-02 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n"
+        );
 
         $this->queryParams = [
             'filter[projectId]' => $this->projectId,
@@ -66,6 +75,7 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
     public function testGetDebtLineItemCsvSuccess()
     {
         $this->expectedStatusCode = '200';
+        $this->responseHeaders = $this->responseHeadersSuccess;
 
         $this->builder
             ->given('The request is valid, the token is valid and has a valid scope')
@@ -110,7 +120,7 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
      * @throws AuthException
      * @throws ConfigException
      */
-    protected function doClientRequest()
+    protected function doClientRequest(): ResponseInterface
     {
         $factory = new ClientFactory(
             ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
@@ -118,6 +128,6 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getDebtLineItemCsv($this->queryParams);
+        return $client->getDebtLineItemCsv($this->queryParams, Client::FETCH_RESPONSE);
     }
 }
