@@ -22,20 +22,21 @@ class DebtCapturingConsumerPostPubSubMessageTest extends DebtCapturingConsumerTe
             'Content-Type' => 'application/json',
         ];
 
-        $data = "eyJza3VVc2FnZUlkIjoiMDc5ZDU1M2YtNjM2Zi00ODE0LWI3MzYtMTJjZGVlYzJjMWM4Iiwic2t1Q29kZSI6ImRpc2NvX3NoaXBwaW5nX2Nvc3RzLURITF9iaXNfMjBfMGtnIiwicXVhbnRpdHkiOjIsInByb2plY3RJZCI6IjUyZTg0ZWNhLTI4NTctNDY3ZS05YWEyLTcwMTgyZTM0ZjhlMSIsInVzYWdlU3RhcnQiOiIyMDIxLTA3LTAxVDAwOjAwOjAwKzAwOjAwIiwidXNhZ2VFbmQiOiIyMDIxLTA3LTAxVDIzOjU5OjU5KzAwOjAwIiwiZXh0ZXJuYWxJZCI6IkRJU0NPXzIwMjEwNzAxMDAwMDAwXzIwMjEwNzAxMjM1OTU5IiwibWV0YSI6eyJuYW1lIjoiREhMIGJpcyAyMCwwa2ciLCJjb3N0cyI6NCwiZ3JhbmRUb3RhbCI6OH19";
+        $data = [
+            'skuUsageId' => 'skuUsageId_test',
+            'skuCode' => 'disco-reconsignment',
+            'quantity' => 1,
+            'projectId' => 'ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8',
+            'usageStart' => '2021-06-01T00:00:00+00:00',
+            'usageEnd' => '2021-06-01T23:59:59+00:00',
+            'externalId' => 'externalId_test',
+            'meta' => [],
+        ];
         $this->requestData = [
-            "message" =>
+            'message' =>
                 [
-                    "attributes" => [
-                        "key" => "value",
-                    ],
-                    "data" => $data,
-                    "messageId" => "2070443601311540",
-                    "message_id" => "2070443601311540",
-                    "publishTime" => "2021-02-26T19:13:55.749Z",
-                    "publish_time" => "2021-02-26T19:13:55.749Z",
+                    'data' => base64_encode(json_encode($data)),
                 ],
-            "subscription" => "projects/myproject/subscriptions/mysubscription",
         ];
 
         $this->responseData = [];
@@ -47,7 +48,7 @@ class DebtCapturingConsumerPostPubSubMessageTest extends DebtCapturingConsumerTe
 
     public function testPostPubSubMessageSuccess(): void
     {
-        $this->expectedStatusCode = '201';
+        $this->expectedStatusCode = '200';
 
         // Build and register the interaction
         $this->builder
@@ -56,6 +57,22 @@ class DebtCapturingConsumerPostPubSubMessageTest extends DebtCapturingConsumerTe
             )
             ->uponReceiving('Successful POST request to /pubsub-push');
 
+        $this->beginTest();
+    }
+
+    public function testPostPubSubMessageBadRequest(): void
+    {
+        // empty request body
+        $this->requestData = [];
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('An error occurred')
+            ->uponReceiving('Bad POST request to /pubsub-push');
+
+        $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
