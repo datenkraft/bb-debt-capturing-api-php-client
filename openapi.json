@@ -33,6 +33,7 @@
             "name": "filter[projectId]",
             "in": "query",
             "description": "Task projectId filter",
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -41,6 +42,7 @@
             "name": "filter[dateFrom]",
             "in": "query",
             "description": "Date from filter",
+            "required": true,
             "schema": {
               "type": "string",
               "format": "date-time"
@@ -50,6 +52,7 @@
             "name": "filter[dateTo]",
             "in": "query",
             "description": "Date to filter",
+            "required": true,
             "schema": {
               "type": "string",
               "format": "date-time"

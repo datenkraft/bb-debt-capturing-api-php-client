@@ -27,6 +27,9 @@ class Client extends Generated\Client
         return $clientFactory->createClient(static::class, $endpointUrl);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getDebtLineItemCsv(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new GetDebtLineItemCsv($queryParameters), $fetch);

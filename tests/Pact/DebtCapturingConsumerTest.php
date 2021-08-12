@@ -78,7 +78,7 @@ abstract class DebtCapturingConsumerTest extends TestCase
         $response = $this->doClientRequest();
 
         $this->assertEquals($this->expectedStatusCode, $response->getStatusCode());
-        if ($this->expectedStatusCode != 204) {
+        if ($this->responseHeaders['Content-Type'] == 'application/json') {
             $this->assertJson($response->getBody());
         }
     }
