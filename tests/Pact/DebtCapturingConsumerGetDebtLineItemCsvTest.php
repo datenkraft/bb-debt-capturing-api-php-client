@@ -72,7 +72,7 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
         $this->path = '/debt-line-item/csv';
     }
 
-    public function testGetDebtLineItemCsvSuccess()
+    public function testGetDebtLineItemCsvSuccess(): void
     {
         $this->expectedStatusCode = '200';
         $this->responseHeaders = $this->responseHeadersSuccess;
@@ -84,7 +84,7 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
         $this->beginTest();
     }
 
-    public function testGetDebtLineItemCsvUnauthorized()
+    public function testGetDebtLineItemCsvUnauthorized(): void
     {
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
@@ -100,7 +100,7 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
         $this->beginTest();
     }
 
-    public function testGetDebtLineItemCsvForbidden()
+    public function testGetDebtLineItemCsvForbidden(): void
     {
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
@@ -111,6 +111,23 @@ class DebtCapturingConsumerGetDebtLineItemCsvTest extends DebtCapturingConsumerT
         $this->builder
             ->given('The token is valid with an invalid scope')
             ->uponReceiving('Forbidden GET request to /debt-line-item/csv');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetDebtLineItemCsvBadRequest(): void
+    {
+        // invalid uuid query param projectId
+        $this->queryParams['filter[projectId]'] = 'invalid_uuid';
+
+        // Error code in response is 400
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The request query is invalid or missing')
+            ->uponReceiving('Bad GET request to /debt-line-item/csv');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
