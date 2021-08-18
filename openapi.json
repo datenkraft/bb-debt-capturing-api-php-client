@@ -27,12 +27,12 @@
         ],
         "summary": "Get debtLineItems csv export.",
         "description": "Get debtLineItems csv export.",
-        "operationId": "getDebtLineItemCsv",
+        "operationId": "getDebtLineItemCollectionCsv",
         "parameters": [
           {
             "name": "filter[projectId]",
             "in": "query",
-            "description": "Task projectId filter",
+            "description": "projectId filter",
             "required": true,
             "schema": {
               "type": "string"
@@ -92,6 +92,323 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "bb-debt-capturing-api/debt-line-item:get"
+            ]
+          }
+        ]
+      }
+    },
+    "/debt-line-item": {
+      "get": {
+        "tags": [
+          "debtLineItem"
+        ],
+        "summary": "Query Debt Line Items by projectId and time range",
+        "description": "Query Debt Line Items by projectId and time range",
+        "operationId": "getDebtLineItemCollection",
+        "parameters": [
+          {
+            "name": "filter[projectId]",
+            "in": "query",
+            "description": "projectId filter",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[dateFrom]",
+            "in": "query",
+            "description": "Date from filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "filter[dateTo]",
+            "in": "query",
+            "description": "Date to filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getDebtLineItemCollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "bb-debt-capturing-api/debt-line-item:get"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "debtLineItem"
+        ],
+        "summary": "Update one ore more Debt Line Items",
+        "description": "Update one or more fields of one ore more Debt Line Items",
+        "operationId": "patchDebtLineItemCollection",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patchDebtLineItemCollectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getDebtLineItemCollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "bb-debt-capturing-api/debt-line-item:patch"
+            ]
+          }
+        ]
+      }
+    },
+    "/debt-line-item/{debtLineItemId}": {
+      "get": {
+        "tags": [
+          "debtLineItem"
+        ],
+        "summary": "Get a Debt Line Item by debtLineItemId",
+        "description": "Get a Debt Line Item by debtLineItemId",
+        "operationId": "getDebtLineItem",
+        "parameters": [
+          {
+            "name": "debtLineItemId",
+            "in": "path",
+            "description": "Debt Line Item ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/debtLineItemResource"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -206,6 +523,88 @@
           }
         },
         "type": "object"
+      },
+      "debtLineItemResource": {
+        "required": [
+          "debtLineItemId",
+          "skuCode",
+          "projectId",
+          "usageStart",
+          "usageEnd"
+        ],
+        "properties": {
+          "debtLineItemId": {
+            "description": "Debt Line Item ID",
+            "type": "string"
+          },
+          "skuCode": {
+            "description": "SKU Code",
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Quantity",
+            "type": "integer"
+          },
+          "projectId": {
+            "description": "Project Id",
+            "type": "string"
+          },
+          "unit": {
+            "description": "Unit",
+            "type": "string"
+          },
+          "usageStart": {
+            "description": "Start time of the usage",
+            "type": "string",
+            "format": "date-time"
+          },
+          "usageEnd": {
+            "description": "End time of the usage",
+            "type": "string",
+            "format": "date-time"
+          },
+          "priceTotalMinor": {
+            "description": "Price in minor (cents)",
+            "type": "integer"
+          },
+          "priceCurrency": {
+            "description": "Currency of the price",
+            "type": "string"
+          },
+          "invoiceNumber": {
+            "description": "Invoice number",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "getDebtLineItemCollectionResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/debtLineItemResource"
+        }
+      },
+      "patchDebtLineItemResource": {
+        "required": [
+          "debtLineItemId"
+        ],
+        "properties": {
+          "debtLineItemId": {
+            "description": "Debt Line Item ID",
+            "type": "string"
+          },
+          "invoiceNumber": {
+            "description": "Invoice number",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "patchDebtLineItemCollectionRequest": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/patchDebtLineItemResource"
+        }
       }
     },
     "securitySchemes": {

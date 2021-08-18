@@ -6,7 +6,7 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi;
 
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
-use Datenkraft\Backbone\Client\DebtCapturingApi\Endpoint\GetDebtLineItemCsv;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Endpoint\GetDebtLineItemCollectionCsv;
 
 /**
  * Class Client
@@ -32,6 +32,6 @@ class Client extends Generated\Client
      */
     public function getDebtLineItemCsv(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new GetDebtLineItemCsv($queryParameters), $fetch);
+        return $this->executeEndpoint(new GetDebtLineItemCollectionCsv($queryParameters), $fetch);
     }
 }
