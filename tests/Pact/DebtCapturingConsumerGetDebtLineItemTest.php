@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class SKUUsageConsumerGetTaskTest
  * @package Pact
  */
-class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingConsumerTest
+class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
 {
     /** @var string */
     protected $projectId;
@@ -23,6 +23,10 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
     protected $dateFrom;
     /** @var string */
     protected $dateTo;
+    /**
+     * @var string
+     */
+    protected $debtLineItemId;
 
     /**
      * @throws Exception
@@ -42,59 +46,37 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
             'Content-Type' => 'application/json',
         ];
 
-        $this->projectId = 'ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8';
-        $this->dateFrom = (new DateTime('2021-08-01 11:11:11'))->format(DateTimeInterface::ATOM);
-        $this->dateTo = (new DateTime('2021-09-01 11:11:11'))->format(DateTimeInterface::ATOM);
+        $this->debtLineItemId = '8388e0c9-080c-449c-af8c-0de620268f33';
 
         $this->requestData = [];
         $this->responseData = [
-            [
-                'debtLineItem' => $this->matcher->uuid(),
-                'skuCode' => $this->skuCode,
-                'quantity' => 1,
-                'projectId' => $this->projectId,
-                'unit' => null,
-                'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'priceTotalMinor' => 1000,
-                'priceCurrency' => 'EUR',
-                'invoiceNumber' => null,
-            ],
-            [
-                'debtLineItem' => $this->matcher->uuid(),
-                'skuCode' => $this->skuCode,
-                'quantity' => 2,
-                'projectId' => $this->projectId,
-                'unit' => null,
-                'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'priceTotalMinor' => 2000,
-                'priceCurrency' => 'EUR',
-                'invoiceNumber' => null,
-            ],
-        ];
+            'debtLineItemId' => $this->debtLineItemId,
+            'skuCode' => $this->skuCode,
+            'quantity' => 1,
+            'projectId' => $this->projectId,
+            'unit' => null,
+            'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
+            'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
+            'priceTotalMinor' => 1000,
+            'priceCurrency' => 'EUR',
+            'invoiceNumber' => null,
+            ];
 
-        $this->queryParams = [
-            'filter[projectId]' => $this->projectId,
-            'filter[dateFrom]' => $this->dateFrom,
-            'filter[dateTo]' => $this->dateTo,
-        ];
-
-        $this->path = '/debt-line-item';
+        $this->path = '/debt-line-item/' . $this->debtLineItemId;
     }
 
-    public function testGetDebtLineItemCollectionSuccess(): void
+    public function testGetDebtLineItemSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
         $this->builder
             ->given('The request is valid, the token is valid and has a valid scope')
-            ->uponReceiving('Successful GET request to /debt-line-item');
+            ->uponReceiving('Successful GET request to /debt-line-item/{debtLineItemId}');
 
         $this->beginTest();
     }
 
-    public function testGetDebtLineItemCollectionUnauthorized(): void
+    public function testGetDebtLineItemUnauthorized(): void
     {
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
@@ -104,13 +86,13 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /debt-line-item');
+            ->uponReceiving('Unauthorized GET request to /debt-line-item/{debtLineItemId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetDebtLineItemCollectionForbidden(): void
+    public function testGetDebtLineItemForbidden(): void
     {
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
@@ -120,24 +102,25 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
 
         $this->builder
             ->given('The token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /debt-line-item');
+            ->uponReceiving('Forbidden GET request to /debt-line-item/{debtLineItemId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetDebtLineItemCollectionBadRequest(): void
+    public function testGetDebtLineItemBadRequest(): void
     {
-        // invalid uuid query param projectId
-        $this->queryParams['filter[projectId]'] = 'invalid_uuid';
+        // invalid uuid debtLineItemId
+        $this->debtLineItemId = 'invalid_uuid';
+        $this->path = '/debt-line-item/' . $this->debtLineItemId;
 
         // Error code in response is 400
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request query is invalid or missing')
-            ->uponReceiving('Bad GET request to /debt-line-item');
+            ->given('The request query is invalid')
+            ->uponReceiving('Bad GET request to /debt-line-item/{debtLineItemId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -155,6 +138,6 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getDebtLineItemCollection($this->queryParams, Client::FETCH_RESPONSE);
+        return $client->getDebtLineItem($this->debtLineItemId, Client::FETCH_RESPONSE);
     }
 }

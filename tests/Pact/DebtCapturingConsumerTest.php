@@ -36,6 +36,8 @@ abstract class DebtCapturingConsumerTest extends TestCase
 
     protected $queryParams;
 
+    protected $skuCode;
+
     /**
      * @throws Exception
      */
@@ -48,7 +50,7 @@ abstract class DebtCapturingConsumerTest extends TestCase
             fsockopen($this->config->getHost(), $this->config->getPort());
         } catch (Exception $exception) {
             throw new Exception(
-                'Mock server not running. Make sure the Testsuite was started with the PactTestListener: '.
+                'Mock server not running. Make sure the Testsuite was started with the PactTestListener: ' .
                 $exception->getMessage()
             );
         }
@@ -62,6 +64,8 @@ abstract class DebtCapturingConsumerTest extends TestCase
                 ],
             ],
         ];
+
+        $this->skuCode = 'skuCode_test';
     }
 
     protected function tearDown(): void
