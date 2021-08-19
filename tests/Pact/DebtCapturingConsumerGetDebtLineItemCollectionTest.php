@@ -17,13 +17,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingConsumerTest
 {
-    /** @var string */
-    protected $projectId;
-    /** @var string */
-    protected $dateFrom;
-    /** @var string */
-    protected $dateTo;
-
     /**
      * @throws Exception
      */
@@ -42,14 +35,10 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
             'Content-Type' => 'application/json',
         ];
 
-        $this->projectId = 'ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8';
-        $this->dateFrom = (new DateTime('2021-08-01 11:11:11'))->format(DateTimeInterface::ATOM);
-        $this->dateTo = (new DateTime('2021-09-01 11:11:11'))->format(DateTimeInterface::ATOM);
-
         $this->requestData = [];
         $this->responseData = [
             [
-                'debtLineItem' => $this->matcher->uuid(),
+                'debtLineItemId' => $this->matcher->uuid(),
                 'skuCode' => $this->skuCode,
                 'quantity' => 1,
                 'projectId' => $this->projectId,
@@ -61,7 +50,7 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
                 'invoiceNumber' => null,
             ],
             [
-                'debtLineItem' => $this->matcher->uuid(),
+                'debtLineItemId' => $this->matcher->uuid(),
                 'skuCode' => $this->skuCode,
                 'quantity' => 2,
                 'projectId' => $this->projectId,

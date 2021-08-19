@@ -13,7 +13,7 @@ class PatchDebtLineItemResource
     /**
      * Invoice number
      *
-     * @var string
+     * @var string|null
      */
     protected $invoiceNumber;
     /**
@@ -40,20 +40,20 @@ class PatchDebtLineItemResource
     /**
      * Invoice number
      *
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceNumber() : string
+    public function getInvoiceNumber() : ?string
     {
         return $this->invoiceNumber;
     }
     /**
      * Invoice number
      *
-     * @param string $invoiceNumber
+     * @param string|null $invoiceNumber
      *
      * @return self
      */
-    public function setInvoiceNumber(string $invoiceNumber) : self
+    public function setInvoiceNumber(?string $invoiceNumber) : self
     {
         $this->invoiceNumber = $invoiceNumber;
         return $this;

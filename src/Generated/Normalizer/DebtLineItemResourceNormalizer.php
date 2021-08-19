@@ -42,14 +42,20 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         if (\array_key_exists('skuCode', $data)) {
             $object->setSkuCode($data['skuCode']);
         }
-        if (\array_key_exists('quantity', $data)) {
+        if (\array_key_exists('quantity', $data) && $data['quantity'] !== null) {
             $object->setQuantity($data['quantity']);
+        }
+        elseif (\array_key_exists('quantity', $data) && $data['quantity'] === null) {
+            $object->setQuantity(null);
         }
         if (\array_key_exists('projectId', $data)) {
             $object->setProjectId($data['projectId']);
         }
-        if (\array_key_exists('unit', $data)) {
+        if (\array_key_exists('unit', $data) && $data['unit'] !== null) {
             $object->setUnit($data['unit']);
+        }
+        elseif (\array_key_exists('unit', $data) && $data['unit'] === null) {
+            $object->setUnit(null);
         }
         if (\array_key_exists('usageStart', $data)) {
             $object->setUsageStart(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageStart']));
@@ -57,14 +63,23 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         if (\array_key_exists('usageEnd', $data)) {
             $object->setUsageEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageEnd']));
         }
-        if (\array_key_exists('priceTotalMinor', $data)) {
+        if (\array_key_exists('priceTotalMinor', $data) && $data['priceTotalMinor'] !== null) {
             $object->setPriceTotalMinor($data['priceTotalMinor']);
         }
-        if (\array_key_exists('priceCurrency', $data)) {
+        elseif (\array_key_exists('priceTotalMinor', $data) && $data['priceTotalMinor'] === null) {
+            $object->setPriceTotalMinor(null);
+        }
+        if (\array_key_exists('priceCurrency', $data) && $data['priceCurrency'] !== null) {
             $object->setPriceCurrency($data['priceCurrency']);
         }
-        if (\array_key_exists('invoiceNumber', $data)) {
+        elseif (\array_key_exists('priceCurrency', $data) && $data['priceCurrency'] === null) {
+            $object->setPriceCurrency(null);
+        }
+        if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
             $object->setInvoiceNumber($data['invoiceNumber']);
+        }
+        elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
+            $object->setInvoiceNumber(null);
         }
         return $object;
     }

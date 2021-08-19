@@ -39,8 +39,11 @@ class PatchDebtLineItemResourceNormalizer implements DenormalizerInterface, Norm
         if (\array_key_exists('debtLineItemId', $data)) {
             $object->setDebtLineItemId($data['debtLineItemId']);
         }
-        if (\array_key_exists('invoiceNumber', $data)) {
+        if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
             $object->setInvoiceNumber($data['invoiceNumber']);
+        }
+        elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
+            $object->setInvoiceNumber(null);
         }
         return $object;
     }

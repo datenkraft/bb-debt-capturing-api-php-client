@@ -2,6 +2,8 @@
 
 namespace Pact;
 
+use DateTime;
+use DateTimeInterface;
 use Exception;
 use PhpPact\Consumer\InteractionBuilder;
 use PhpPact\Consumer\Matcher\Matcher;
@@ -36,7 +38,16 @@ abstract class DebtCapturingConsumerTest extends TestCase
 
     protected $queryParams;
 
+    /** @var string */
     protected $skuCode;
+    /** @var string */
+    protected $projectId;
+    /** @var string */
+    protected $dateFrom;
+    /** @var string */
+    protected $dateTo;
+    /** @var string */
+    protected $debtLineItemIdNotFound;
 
     /**
      * @throws Exception
@@ -66,6 +77,10 @@ abstract class DebtCapturingConsumerTest extends TestCase
         ];
 
         $this->skuCode = 'skuCode_test';
+        $this->projectId = 'ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8';
+        $this->dateFrom = (new DateTime('2021-06-01 11:11:11'))->format(DateTimeInterface::ATOM);
+        $this->dateTo = (new DateTime('2021-07-01 11:11:11'))->format(DateTimeInterface::ATOM);
+        $this->debtLineItemIdNotFound = '409788bb-1ca6-4582-9be9-c3c19c2a6c77';
     }
 
     protected function tearDown(): void

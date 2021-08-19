@@ -23,9 +23,7 @@ class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
     protected $dateFrom;
     /** @var string */
     protected $dateTo;
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $debtLineItemId;
 
     /**
@@ -103,6 +101,24 @@ class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
         $this->builder
             ->given('The token is valid with an invalid scope')
             ->uponReceiving('Forbidden GET request to /debt-line-item/{debtLineItemId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetDebtLineItemNotFound(): void
+    {
+        // Path with debtLineItemId for non existent debtLineItem
+        $this->debtLineItemId = $this->debtLineItemIdNotFound;
+        $this->path = '/debt-line-item/' . $this->debtLineItemId;
+
+        // Error code in response is 404
+        $this->expectedStatusCode = '404';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('A debtLineItem with debtLineItemId does not exist')
+            ->uponReceiving('Not Found GET request to /debt-line-item/{debtLineItemId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

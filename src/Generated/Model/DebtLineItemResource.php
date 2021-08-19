@@ -19,7 +19,7 @@ class DebtLineItemResource
     /**
      * Quantity
      *
-     * @var int
+     * @var int|null
      */
     protected $quantity;
     /**
@@ -31,7 +31,7 @@ class DebtLineItemResource
     /**
      * Unit
      *
-     * @var string
+     * @var string|null
      */
     protected $unit;
     /**
@@ -49,19 +49,19 @@ class DebtLineItemResource
     /**
      * Price in minor (cents)
      *
-     * @var int
+     * @var int|null
      */
     protected $priceTotalMinor;
     /**
      * Currency of the price
      *
-     * @var string
+     * @var string|null
      */
     protected $priceCurrency;
     /**
      * Invoice number
      *
-     * @var string
+     * @var string|null
      */
     protected $invoiceNumber;
     /**
@@ -109,20 +109,20 @@ class DebtLineItemResource
     /**
      * Quantity
      *
-     * @return int
+     * @return int|null
      */
-    public function getQuantity() : int
+    public function getQuantity() : ?int
     {
         return $this->quantity;
     }
     /**
      * Quantity
      *
-     * @param int $quantity
+     * @param int|null $quantity
      *
      * @return self
      */
-    public function setQuantity(int $quantity) : self
+    public function setQuantity(?int $quantity) : self
     {
         $this->quantity = $quantity;
         return $this;
@@ -151,20 +151,20 @@ class DebtLineItemResource
     /**
      * Unit
      *
-     * @return string
+     * @return string|null
      */
-    public function getUnit() : string
+    public function getUnit() : ?string
     {
         return $this->unit;
     }
     /**
      * Unit
      *
-     * @param string $unit
+     * @param string|null $unit
      *
      * @return self
      */
-    public function setUnit(string $unit) : self
+    public function setUnit(?string $unit) : self
     {
         $this->unit = $unit;
         return $this;
@@ -214,20 +214,20 @@ class DebtLineItemResource
     /**
      * Price in minor (cents)
      *
-     * @return int
+     * @return int|null
      */
-    public function getPriceTotalMinor() : int
+    public function getPriceTotalMinor() : ?int
     {
         return $this->priceTotalMinor;
     }
     /**
      * Price in minor (cents)
      *
-     * @param int $priceTotalMinor
+     * @param int|null $priceTotalMinor
      *
      * @return self
      */
-    public function setPriceTotalMinor(int $priceTotalMinor) : self
+    public function setPriceTotalMinor(?int $priceTotalMinor) : self
     {
         $this->priceTotalMinor = $priceTotalMinor;
         return $this;
@@ -235,20 +235,20 @@ class DebtLineItemResource
     /**
      * Currency of the price
      *
-     * @return string
+     * @return string|null
      */
-    public function getPriceCurrency() : string
+    public function getPriceCurrency() : ?string
     {
         return $this->priceCurrency;
     }
     /**
      * Currency of the price
      *
-     * @param string $priceCurrency
+     * @param string|null $priceCurrency
      *
      * @return self
      */
-    public function setPriceCurrency(string $priceCurrency) : self
+    public function setPriceCurrency(?string $priceCurrency) : self
     {
         $this->priceCurrency = $priceCurrency;
         return $this;
@@ -256,20 +256,20 @@ class DebtLineItemResource
     /**
      * Invoice number
      *
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceNumber() : string
+    public function getInvoiceNumber() : ?string
     {
         return $this->invoiceNumber;
     }
     /**
      * Invoice number
      *
-     * @param string $invoiceNumber
+     * @param string|null $invoiceNumber
      *
      * @return self
      */
-    public function setInvoiceNumber(string $invoiceNumber) : self
+    public function setInvoiceNumber(?string $invoiceNumber) : self
     {
         $this->invoiceNumber = $invoiceNumber;
         return $this;

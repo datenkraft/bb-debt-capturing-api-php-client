@@ -19,12 +19,6 @@ class DebtCapturingConsumerGetDebtLineItemCollectionCsvTest extends DebtCapturin
 {
     /** @var string[] */
     protected $responseHeadersSuccess;
-    /** @var string */
-    protected $projectId;
-    /** @var string */
-    protected $dateFrom;
-    /** @var string */
-    protected $dateTo;
 
     /**
      * @throws Exception
@@ -48,10 +42,6 @@ class DebtCapturingConsumerGetDebtLineItemCollectionCsvTest extends DebtCapturin
             'Content-Disposition' => $this->matcher
                 ->like('attachment; filename=' . (new DateTime())->format('Y-m-d-H:i:s') . '_debtLineItems.csv'),
         ];
-
-        $this->projectId = 'ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8';
-        $this->dateFrom = (new DateTime('2021-06-01 11:11:11'))->format(DateTimeInterface::ATOM);
-        $this->dateTo = (new DateTime('2021-07-01 11:11:11'))->format(DateTimeInterface::ATOM);
 
         $this->requestData = [];
         $this->responseData = $this->matcher->like(

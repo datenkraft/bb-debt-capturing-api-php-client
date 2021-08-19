@@ -243,7 +243,7 @@
         "tags": [
           "debtLineItem"
         ],
-        "summary": "Update one ore more Debt Line Items",
+        "summary": "Update one or more Debt Line Items",
         "description": "Update one or more fields of one ore more Debt Line Items",
         "operationId": "patchDebtLineItemCollection",
         "requestBody": {
@@ -542,6 +542,7 @@
             "type": "string"
           },
           "quantity": {
+            "nullable": true,
             "description": "Quantity",
             "type": "integer"
           },
@@ -550,6 +551,7 @@
             "type": "string"
           },
           "unit": {
+            "nullable": true,
             "description": "Unit",
             "type": "string"
           },
@@ -564,14 +566,17 @@
             "format": "date-time"
           },
           "priceTotalMinor": {
+            "nullable": true,
             "description": "Price in minor (cents)",
             "type": "integer"
           },
           "priceCurrency": {
+            "nullable": true,
             "description": "Currency of the price",
             "type": "string"
           },
           "invoiceNumber": {
+            "nullable": true,
             "description": "Invoice number",
             "type": "string"
           }
@@ -594,6 +599,7 @@
             "type": "string"
           },
           "invoiceNumber": {
+            "nullable": true,
             "description": "Invoice number",
             "type": "string"
           }
