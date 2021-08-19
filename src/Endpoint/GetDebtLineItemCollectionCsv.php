@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Endpoint;
 
-use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCsv as GetDebtLineItemCsvGenerated;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCollectionCsv as GetDebtLineItemCollectionCsvGenerated;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class GetDebtLineItemCsv
  * @package Datenkraft\Backbone\Client\DebtCapturingApi\Endpoint
  */
-class GetDebtLineItemCsv extends GetDebtLineItemCsvGenerated
+class GetDebtLineItemCollectionCsv extends GetDebtLineItemCollectionCsvGenerated
 {
-
     /**
      * @inheritDoc
      */

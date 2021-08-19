@@ -2,12 +2,12 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class GetDebtLineItemCsvInternalServerErrorException extends InternalServerErrorException
+class PatchDebtLineItemCollectionForbiddenException extends ForbiddenException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Server error', 500);
+        parent::__construct('Forbidden', 403);
         $this->errorResponse = $errorResponse;
     }
     public function getErrorResponse()
