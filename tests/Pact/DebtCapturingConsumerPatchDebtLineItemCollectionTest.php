@@ -69,7 +69,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'priceTotalMinor' => 1000,
                 'priceCurrency' => 'EUR',
-                'invoiceNumber' => null,
+                'invoiceNumber' => 'invoiceNumber_test_1',
             ],
             [
                 'debtLineItemId' => $this->debtLineItemId2,
@@ -81,7 +81,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'priceTotalMinor' => 2000,
                 'priceCurrency' => 'EUR',
-                'invoiceNumber' => null,
+                'invoiceNumber' => 'invoiceNumber_test_2',
             ],
         ];
 
@@ -95,7 +95,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
 
     public function testPatchDebtLineItemCollectionSuccess()
     {
-        $this->expectedStatusCode = '201';
+        $this->expectedStatusCode = '200';
 
         // Build and register the interaction
         $this->builder
