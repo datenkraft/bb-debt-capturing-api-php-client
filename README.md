@@ -48,7 +48,7 @@ $factory = new ClientFactory($config);
 $client = Client::createWithFactory($factory);
 ~~~~
 
-### Example Endpoint: Get Debt Line Item CSV
+### Example Endpoint: Get Debt Line Item Collection
 ~~~~ php
 $queryParams = [
     'filter[projectId]' => 'projectId',
@@ -56,7 +56,7 @@ $queryParams = [
     'filter[dateTo]' => (new DateTime())->format(DateTimeInterface::ATOM),
 ];
 
-$response = $client->getDebtLineItemCsv($queryParams);
+$response = $client->getDebtLineItemCollection($queryParams);
 $response; // tasks[]
 
 ~~~~
