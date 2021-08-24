@@ -23,6 +23,8 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
     protected $debtLineItemId2;
     /** @var string */
     protected $debtLineItemIdUnprocessable;
+    /** @var string */
+    protected $debtLineItemIdInvalid;
 
     /**
      * @throws Exception
@@ -46,15 +48,18 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         $this->debtLineItemId1 = '7b3151d3-cdee-4971-936c-a26bd853d58f';
         $this->debtLineItemId2 = '464d7292-1e3f-4dd0-b3bd-16d6f15eb020';
         $this->debtLineItemIdUnprocessable = '744226b0-7c59-4ee5-ad4f-7b4209311536';
+        $this->debtLineItemIdInvalid = 'invalid_uuid';
 
+        $invoiceNumber1 = 'invoiceNumber_test_1';
+        $invoiceNumber2 = 'invoiceNumber_test_2';
         $this->requestData = [
             [
                 'debtLineItemId' => $this->debtLineItemId1,
-                'invoiceNumber' => 'invoiceNumber_test_1',
+                'invoiceNumber' => $invoiceNumber1,
             ],
             [
                 'debtLineItemId' => $this->debtLineItemId2,
-                'invoiceNumber' => 'invoiceNumber_test_2',
+                'invoiceNumber' => $invoiceNumber2,
             ],
         ];
 
@@ -69,7 +74,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'priceTotalMinor' => 1000,
                 'priceCurrency' => 'EUR',
-                'invoiceNumber' => null,
+                'invoiceNumber' => $invoiceNumber1,
             ],
             [
                 'debtLineItemId' => $this->debtLineItemId2,
@@ -81,7 +86,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'priceTotalMinor' => 2000,
                 'priceCurrency' => 'EUR',
-                'invoiceNumber' => null,
+                'invoiceNumber' => $invoiceNumber2,
             ],
         ];
 
@@ -95,7 +100,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
 
     public function testPatchDebtLineItemCollectionSuccess()
     {
-        $this->expectedStatusCode = '201';
+        $this->expectedStatusCode = '200';
 
         // Build and register the interaction
         $this->builder
@@ -145,14 +150,18 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         $this->beginTest();
     }
 
-    public function testPatchDebtLineItemNotFound(): void
+    public function testPatchDebtLineItemCollectionNotFound(): void
     {
         // debtLineItemId for non existent debtLineItem
         $this->requestData[0]['debtLineItemId'] = $this->debtLineItemIdNotFound;
+        unset($this->requestData[1]);
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+        $this->errorResponse['errors'][0]['extra'] = [
+            'debtLineItemId' => $this->requestData[0]['debtLineItemId']
+        ];
 
         $this->builder
             ->given('A debtLineItem with debtLineItemId does not exist')
@@ -170,12 +179,13 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
     {
         // the invoiceNumber of the debtLineItem is already set
         $this->requestData[0]['debtLineItemId'] = $this->debtLineItemIdUnprocessable;
+        unset($this->requestData[1]);
 
         // Error code in response is 422
         $this->expectedStatusCode = '422';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
         $this->errorResponse['errors'][0]['extra'] = [
-            'externalId' => $this->requestData[0]['debtLineItemId']
+            'debtLineItemId' => $this->requestData[0]['debtLineItemId']
         ];
 
         $this->builder
@@ -195,8 +205,9 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
      */
     public function testPatchDebtLineItemCollectionBadRequest()
     {
-        // debtLineItemId is empty
-        $this->requestData[0]['debtLineItemId'] = '';
+        // debtLineItemId is an invalid uuid
+        $this->requestData[0]['debtLineItemId'] = $this->debtLineItemIdInvalid;
+        unset($this->requestData[1]);
 
         // Error code in response is 400
         $this->expectedStatusCode = '400';
@@ -215,8 +226,8 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
      */
     public function testPatchDebtLineItemCollectionMultipleErrors()
     {
-        // debtLineItemId is empty
-        $this->requestData[0]['debtLineItemId'] = '';
+        // debtLineItemId is an invalid uuid
+        $this->requestData[0]['debtLineItemId'] = $this->debtLineItemIdInvalid;
 
         // Status code of the response is 400
         $this->expectedStatusCode = '400';
@@ -225,9 +236,6 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         $this->errorResponse['errors'][0] = [
             'code' => '400',
             'message' => $this->matcher->like('Example error message'),
-            'extra' => [
-                'debtLineItemId' => $this->requestData[0]['debtLineItemId']
-            ]
         ];
 
         // the invoiceNumber of the debtLineItem is already set
@@ -238,7 +246,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
             'code' => '422',
             'message' => $this->matcher->like('Example error message'),
             'extra' => [
-                'debtLineItemId' => $this->requestData[0]['debtLineItemId']
+                'debtLineItemId' => $this->requestData[1]['debtLineItemId']
             ]
         ];
 

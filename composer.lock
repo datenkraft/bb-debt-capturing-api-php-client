@@ -2567,16 +2567,16 @@
         },
         {
             "name": "amphp/http-server",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "d1f71b05c5a2f642b54df88b8b328b721eada625"
+                "reference": "1f16f115497e5fe16263ec40fc73395c09fe8126"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/d1f71b05c5a2f642b54df88b8b328b721eada625",
-                "reference": "d1f71b05c5a2f642b54df88b8b328b721eada625",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/1f16f115497e5fe16263ec40fc73395c09fe8126",
+                "reference": "1f16f115497e5fe16263ec40fc73395c09fe8126",
                 "shasum": ""
             },
             "require": {
@@ -2653,7 +2653,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server/issues",
-                "source": "https://github.com/amphp/http-server/tree/v2.1.2"
+                "source": "https://github.com/amphp/http-server/tree/v2.1.3"
             },
             "funding": [
                 {
@@ -2661,7 +2661,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-16T08:52:44+00:00"
+            "time": "2021-08-16T19:21:32+00:00"
         },
         {
             "name": "amphp/log",
@@ -3656,16 +3656,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.19.1",
+            "version": "v2.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "1fa4af92841f67362c053728989b262fba8eb1ec"
+                "reference": "d5c737c2e18ba502b75b44832b31fe627f82e307"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/1fa4af92841f67362c053728989b262fba8eb1ec",
-                "reference": "1fa4af92841f67362c053728989b262fba8eb1ec",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/d5c737c2e18ba502b75b44832b31fe627f82e307",
+                "reference": "d5c737c2e18ba502b75b44832b31fe627f82e307",
                 "shasum": ""
             },
             "require": {
@@ -3753,7 +3753,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.19.1"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.19.2"
             },
             "funding": [
                 {
@@ -3761,7 +3761,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-02T17:52:09+00:00"
+            "time": "2021-08-18T19:55:46+00:00"
         },
         {
             "name": "jane-php/json-schema",
@@ -4318,12 +4318,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pact-foundation/pact-php.git",
-                "reference": "aceafe615ba9364806671d89e467f21356b6ac7f"
+                "reference": "d02208f4980293c7f3aa484bad6f825014141f5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pact-foundation/pact-php/zipball/aceafe615ba9364806671d89e467f21356b6ac7f",
-                "reference": "aceafe615ba9364806671d89e467f21356b6ac7f",
+                "url": "https://api.github.com/repos/pact-foundation/pact-php/zipball/d02208f4980293c7f3aa484bad6f825014141f5a",
+                "reference": "d02208f4980293c7f3aa484bad6f825014141f5a",
                 "shasum": ""
             },
             "require": {
@@ -4339,7 +4339,7 @@
                 "amphp/socket": "^1.1.3",
                 "amphp/sync": "^1.4.0",
                 "amphp/windows-registry": "v0.3.3",
-                "composer/semver": "^3.2.4",
+                "composer/semver": "^1.4.0|^3.2.0",
                 "ext-json": "*",
                 "ext-openssl": "*",
                 "guzzlehttp/guzzle": "^7.2.0",
@@ -4347,7 +4347,7 @@
                 "phpunit/phpunit": ">=8.2.3"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.19",
+                "friendsofphp/php-cs-fixer": "^3.0",
                 "mockery/mockery": "^1.4.2",
                 "php-amqplib/php-amqplib": "^3.0",
                 "phpstan/phpstan": "^0.12.90",
@@ -4386,7 +4386,7 @@
                 "issues": "https://github.com/pact-foundation/pact-php/issues",
                 "source": "https://github.com/pact-foundation/pact-php/tree/master"
             },
-            "time": "2021-07-05T16:03:06+00:00"
+            "time": "2021-08-22T20:20:58+00:00"
         },
         {
             "name": "phar-io/manifest",
