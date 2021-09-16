@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
-class DebtCapturingConsumerPostPubSubMessageTest extends DebtCapturingConsumerTest
+class DebtCapturingConsumerPostPubSubSkuUsageAddedMessageTest extends DebtCapturingConsumerTest
 {
 
     protected function setUp(): void
@@ -41,10 +41,10 @@ class DebtCapturingConsumerPostPubSubMessageTest extends DebtCapturingConsumerTe
 
         $this->responseData = [];
 
-        $this->path = '/pubsub-push';
+        $this->path = '/pubsub-push/sku-usage-added';
     }
 
-    public function testPostPubSubMessageSuccess(): void
+    public function testPostPubSubSkuUsageAddedMessageSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
@@ -58,7 +58,7 @@ class DebtCapturingConsumerPostPubSubMessageTest extends DebtCapturingConsumerTe
         $this->beginTest();
     }
 
-    public function testPostPubSubMessageBadRequest(): void
+    public function testPostPubSubSkuUsageAddedMessageBadRequest(): void
     {
         // empty request body
         $this->requestData = [];
