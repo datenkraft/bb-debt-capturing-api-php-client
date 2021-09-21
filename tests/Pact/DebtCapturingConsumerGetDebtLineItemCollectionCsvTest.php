@@ -45,7 +45,7 @@ class DebtCapturingConsumerGetDebtLineItemCollectionCsvTest extends DebtCapturin
 
         $this->requestData = [];
         $this->responseData = $this->matcher->like(
-            "Id,Sku_Code,Quantity,Project_Id,Unit,UsageStart,UsageEnd,PriceTotalMinor,PriceCurrency\n" .
+            "Id,Sku_Code,Quantity,Project_Id,UsageStart,UsageEnd,PriceTotalMinor,PriceCurrency\n" .
             "4c3e0218-c4b4-4123-956a-19820f33c30e,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-03 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n" .
             "5642739b-c556-4125-95d5-89ec24f765df,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-04 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n" .
             "67b33bd3-6103-47b6-aee2-6f466ca7aa17,test_sku_code,1,ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8,,\"2021-06-05 11:11:11\",\"2021-07-01 11:11:11\",100,EUR\n" .

@@ -873,11 +873,6 @@
                         "description": "Project Id",
                         "type": "string"
                     },
-                    "unit": {
-                        "nullable": true,
-                        "description": "Unit",
-                        "type": "string"
-                    },
                     "usageStart": {
                         "description": "Start time of the usage",
                         "type": "string",

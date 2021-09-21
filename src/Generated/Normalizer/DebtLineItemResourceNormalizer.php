@@ -51,12 +51,6 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         if (\array_key_exists('projectId', $data)) {
             $object->setProjectId($data['projectId']);
         }
-        if (\array_key_exists('unit', $data) && $data['unit'] !== null) {
-            $object->setUnit($data['unit']);
-        }
-        elseif (\array_key_exists('unit', $data) && $data['unit'] === null) {
-            $object->setUnit(null);
-        }
         if (\array_key_exists('usageStart', $data)) {
             $object->setUsageStart(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageStart']));
         }
@@ -92,9 +86,6 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
             $data['quantity'] = $object->getQuantity();
         }
         $data['projectId'] = $object->getProjectId();
-        if (null !== $object->getUnit()) {
-            $data['unit'] = $object->getUnit();
-        }
         $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
         $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
         if (null !== $object->getPriceTotalMinor()) {
