@@ -29,12 +29,6 @@ class DebtLineItemResource
      */
     protected $projectId;
     /**
-     * Unit
-     *
-     * @var string|null
-     */
-    protected $unit;
-    /**
      * Start time of the usage
      *
      * @var \DateTime
@@ -146,27 +140,6 @@ class DebtLineItemResource
     public function setProjectId(string $projectId) : self
     {
         $this->projectId = $projectId;
-        return $this;
-    }
-    /**
-     * Unit
-     *
-     * @return string|null
-     */
-    public function getUnit() : ?string
-    {
-        return $this->unit;
-    }
-    /**
-     * Unit
-     *
-     * @param string|null $unit
-     *
-     * @return self
-     */
-    public function setUnit(?string $unit) : self
-    {
-        $this->unit = $unit;
         return $this;
     }
     /**

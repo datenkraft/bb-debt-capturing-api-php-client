@@ -52,7 +52,6 @@ class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
             'skuCode' => $this->skuCode,
             'quantity' => 1,
             'projectId' => $this->projectId,
-            'unit' => null,
             'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
             'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
             'priceTotalMinor' => 1000,
