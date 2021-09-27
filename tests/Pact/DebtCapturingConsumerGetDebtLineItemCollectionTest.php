@@ -26,8 +26,6 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_DEBT_LINE_ITEM_GET');
-
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
         ];
@@ -99,7 +97,7 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
 
     public function testGetDebtLineItemCollectionForbidden(): void
     {
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

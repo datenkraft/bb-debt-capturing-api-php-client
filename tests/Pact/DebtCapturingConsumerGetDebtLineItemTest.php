@@ -17,14 +17,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
 {
-    /** @var string */
-    protected $projectId;
-    /** @var string */
-    protected $dateFrom;
-    /** @var string */
-    protected $dateTo;
-    /** @var string */
-    protected $debtLineItemId;
+    protected string $projectId;
+    protected string $dateFrom;
+    protected string $dateTo;
+    protected string $debtLineItemId;
 
     /**
      * @throws Exception
@@ -34,8 +30,6 @@ class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
         parent::setUp();
 
         $this->method = 'GET';
-
-        $this->token = getenv('VALID_TOKEN_DEBT_LINE_ITEM_GET');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -91,7 +85,7 @@ class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
 
     public function testGetDebtLineItemForbidden(): void
     {
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';
