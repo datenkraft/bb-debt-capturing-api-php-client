@@ -18,36 +18,31 @@ use PhpPact\Consumer\Model\ProviderResponse;
  */
 abstract class DebtCapturingConsumerTest extends TestCase
 {
-    protected $builder;
-    protected $config;
+    protected InteractionBuilder $builder;
+    protected MockServerEnvConfig $config;
 
-    protected $token;
+    protected string $token;
 
-    protected $method;
-    protected $path;
+    protected string $method;
+    protected string $path;
 
-    protected $requestHeaders;
-    protected $responseHeaders;
-    protected $expectedStatusCode;
+    protected array $requestHeaders;
+    protected array $responseHeaders;
+    protected string $expectedStatusCode;
 
-    protected $requestData;
-    protected $responseData;
-    protected $errorResponse;
+    protected array $requestData;
+    protected array $responseData;
+    protected array $errorResponse;
 
-    protected $matcher;
+    protected Matcher $matcher;
 
-    protected $queryParams;
+    protected array $queryParams = [];
 
-    /** @var string */
-    protected $skuCode;
-    /** @var string */
-    protected $projectId;
-    /** @var string */
-    protected $dateFrom;
-    /** @var string */
-    protected $dateTo;
-    /** @var string */
-    protected $debtLineItemIdNotFound;
+    protected string $skuCode;
+    protected string $projectId;
+    protected string $dateFrom;
+    protected string $dateTo;
+    protected string $debtLineItemIdNotFound;
 
     /**
      * @throws Exception
@@ -55,6 +50,9 @@ abstract class DebtCapturingConsumerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
+
         $this->matcher = new Matcher();
         $this->config = new MockServerEnvConfig();
         try {

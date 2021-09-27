@@ -17,8 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class DebtCapturingConsumerGetDebtLineItemCollectionCsvTest extends DebtCapturingConsumerTest
 {
-    /** @var string[] */
-    protected $responseHeadersSuccess;
+    protected array $responseHeadersSuccess;
 
     /**
      * @throws Exception
@@ -28,8 +27,6 @@ class DebtCapturingConsumerGetDebtLineItemCollectionCsvTest extends DebtCapturin
         parent::setUp();
 
         $this->method = 'GET';
-
-        $this->token = getenv('VALID_TOKEN_DEBT_LINE_ITEM_GET');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -92,7 +89,7 @@ class DebtCapturingConsumerGetDebtLineItemCollectionCsvTest extends DebtCapturin
 
     public function testGetDebtLineItemCollectionCsvForbidden(): void
     {
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

@@ -17,14 +17,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturingConsumerTest
 {
-    /** @var string */
-    protected $debtLineItemId1;
-    /** @var string */
-    protected $debtLineItemId2;
-    /** @var string */
-    protected $debtLineItemIdUnprocessable;
-    /** @var string */
-    protected $debtLineItemIdInvalid;
+    protected string $debtLineItemId1;
+    protected string $debtLineItemId2;
+    protected string $debtLineItemIdUnprocessable;
+    protected string $debtLineItemIdInvalid;
 
     /**
      * @throws Exception
@@ -34,8 +30,6 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         parent::setUp();
 
         $this->method = 'PATCH';
-
-        $this->token = getenv('VALID_TOKEN_DEBT_LINE_ITEM_PATCH');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -132,8 +126,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
 
     public function testPatchDebtLineItemCollectionForbidden()
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403, extra is not defined

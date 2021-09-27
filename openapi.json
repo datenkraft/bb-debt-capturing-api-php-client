@@ -447,14 +447,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-debt-capturing-api/debt-line-item:get"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/debt-line-item": {
@@ -557,14 +550,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-debt-capturing-api/debt-line-item:get"
-                        ]
-                    }
-                ]
+                }
             },
             "patch": {
                 "tags": [
@@ -664,14 +650,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-debt-capturing-api/debt-line-item:patch"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/debt-line-item/{debtLineItemId}": {
@@ -764,14 +743,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-debt-capturing-api/debt-line-item:get"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/docs": {
@@ -1012,10 +984,7 @@
                     "clientCredentials": {
                         "tokenUrl": "https://localhost:30250/oauth/token",
                         "refreshUrl": "UNDEFINED",
-                        "scopes": {
-                            "bb-debt-capturing-api/debt-line-item:patch": "Update one or more fields of one ore more Debt Line Items",
-                            "bb-debt-capturing-api/debt-line-item:get": "Get Debt Line Items"
-                        }
+                        "scopes": {}
                     }
                 }
             }
