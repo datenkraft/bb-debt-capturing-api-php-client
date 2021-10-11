@@ -42,8 +42,10 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
                 'projectId' => $this->projectId,
                 'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'priceTotalMinor' => 1000,
-                'priceCurrency' => 'EUR',
+                'priceTotal' => [
+                    'minorMicro' => 1000000000,
+                    'currency' => 'EUR',
+                ],
                 'invoiceNumber' => null,
             ],
             [
@@ -53,8 +55,10 @@ class DebtCapturingConsumerGetDebtLineItemCollectionTest extends DebtCapturingCo
                 'projectId' => $this->projectId,
                 'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'priceTotalMinor' => 2000,
-                'priceCurrency' => 'EUR',
+                'priceTotal' => [
+                    'minorMicro' => 1000000000,
+                    'currency' => 'EUR',
+                ],
                 'invoiceNumber' => null,
             ],
         ];

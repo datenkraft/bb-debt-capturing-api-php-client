@@ -48,8 +48,10 @@ class DebtCapturingConsumerGetDebtLineItemTest extends DebtCapturingConsumerTest
             'projectId' => $this->projectId,
             'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
             'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-            'priceTotalMinor' => 1000,
-            'priceCurrency' => 'EUR',
+            'priceTotal' => [
+                'minorMicro' => 1000000000,
+                'currency' => 'EUR',
+            ],
             'invoiceNumber' => null,
             ];
 
