@@ -928,19 +928,32 @@
                         "type": "string",
                         "format": "date-time"
                     },
-                    "priceTotalMinor": {
-                        "nullable": true,
-                        "description": "Price in minor (cents)",
-                        "type": "integer"
-                    },
-                    "priceCurrency": {
-                        "nullable": true,
-                        "description": "Currency of the price",
-                        "type": "string"
+                    "priceTotal": {
+                        "$ref": "#/components/schemas/priceProperty"
                     },
                     "invoiceNumber": {
                         "nullable": true,
                         "description": "Invoice number",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "priceProperty": {
+                "required": [
+                    "minorMicro",
+                    "currency"
+                ],
+                "properties": {
+                    "minorMicro": {
+                        "nullable": true,
+                        "description": "MinorMicro",
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    "currency": {
+                        "nullable": true,
+                        "description": "Currency",
                         "type": "string"
                     }
                 },
@@ -982,7 +995,7 @@
                 "description": "OAuth2 Authorization",
                 "flows": {
                     "clientCredentials": {
-                        "tokenUrl": "https://localhost:30250/oauth/token",
+                        "tokenUrl": "https://authentication-api.conqore.niceshops.com/oauth/token",
                         "refreshUrl": "UNDEFINED",
                         "scopes": {}
                     }

@@ -57,17 +57,8 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         if (\array_key_exists('usageEnd', $data)) {
             $object->setUsageEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageEnd']));
         }
-        if (\array_key_exists('priceTotalMinor', $data) && $data['priceTotalMinor'] !== null) {
-            $object->setPriceTotalMinor($data['priceTotalMinor']);
-        }
-        elseif (\array_key_exists('priceTotalMinor', $data) && $data['priceTotalMinor'] === null) {
-            $object->setPriceTotalMinor(null);
-        }
-        if (\array_key_exists('priceCurrency', $data) && $data['priceCurrency'] !== null) {
-            $object->setPriceCurrency($data['priceCurrency']);
-        }
-        elseif (\array_key_exists('priceCurrency', $data) && $data['priceCurrency'] === null) {
-            $object->setPriceCurrency(null);
+        if (\array_key_exists('priceTotal', $data)) {
+            $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty', 'json', $context));
         }
         if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
             $object->setInvoiceNumber($data['invoiceNumber']);
@@ -88,11 +79,8 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         $data['projectId'] = $object->getProjectId();
         $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
         $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getPriceTotalMinor()) {
-            $data['priceTotalMinor'] = $object->getPriceTotalMinor();
-        }
-        if (null !== $object->getPriceCurrency()) {
-            $data['priceCurrency'] = $object->getPriceCurrency();
+        if (null !== $object->getPriceTotal()) {
+            $data['priceTotal'] = $this->normalizer->normalize($object->getPriceTotal(), 'json', $context);
         }
         if (null !== $object->getInvoiceNumber()) {
             $data['invoiceNumber'] = $object->getInvoiceNumber();

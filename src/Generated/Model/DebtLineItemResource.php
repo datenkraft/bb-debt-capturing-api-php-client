@@ -41,17 +41,11 @@ class DebtLineItemResource
      */
     protected $usageEnd;
     /**
-     * Price in minor (cents)
+     * 
      *
-     * @var int|null
+     * @var PriceProperty
      */
-    protected $priceTotalMinor;
-    /**
-     * Currency of the price
-     *
-     * @var string|null
-     */
-    protected $priceCurrency;
+    protected $priceTotal;
     /**
      * Invoice number
      *
@@ -185,45 +179,24 @@ class DebtLineItemResource
         return $this;
     }
     /**
-     * Price in minor (cents)
+     * 
      *
-     * @return int|null
+     * @return PriceProperty
      */
-    public function getPriceTotalMinor() : ?int
+    public function getPriceTotal() : PriceProperty
     {
-        return $this->priceTotalMinor;
+        return $this->priceTotal;
     }
     /**
-     * Price in minor (cents)
+     * 
      *
-     * @param int|null $priceTotalMinor
+     * @param PriceProperty $priceTotal
      *
      * @return self
      */
-    public function setPriceTotalMinor(?int $priceTotalMinor) : self
+    public function setPriceTotal(PriceProperty $priceTotal) : self
     {
-        $this->priceTotalMinor = $priceTotalMinor;
-        return $this;
-    }
-    /**
-     * Currency of the price
-     *
-     * @return string|null
-     */
-    public function getPriceCurrency() : ?string
-    {
-        return $this->priceCurrency;
-    }
-    /**
-     * Currency of the price
-     *
-     * @param string|null $priceCurrency
-     *
-     * @return self
-     */
-    public function setPriceCurrency(?string $priceCurrency) : self
-    {
-        $this->priceCurrency = $priceCurrency;
+        $this->priceTotal = $priceTotal;
         return $this;
     }
     /**
