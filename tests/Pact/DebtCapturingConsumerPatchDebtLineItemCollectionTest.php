@@ -20,7 +20,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
     protected string $debtLineItemId1;
     protected string $debtLineItemId2;
     protected string $debtLineItemIdUnprocessable;
-    protected string $debtLineItemIdInvalid;
+    protected string $debtLineItemIdNotFound;
 
     /**
      * @throws Exception
@@ -42,7 +42,8 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         $this->debtLineItemId1 = '7b3151d3-cdee-4971-936c-a26bd853d58f';
         $this->debtLineItemId2 = '464d7292-1e3f-4dd0-b3bd-16d6f15eb020';
         $this->debtLineItemIdUnprocessable = '744226b0-7c59-4ee5-ad4f-7b4209311536';
-        $this->debtLineItemIdInvalid = 'invalid_uuid';
+        $this->debtLineItemIdUnprocessable2 = '744226b0-7c59-4ee5-ad4f-7b4209311537';
+        $this->debtLineItemIdNotFound = '00000000-0000-0000-0000-000000000000';
 
         $invoiceNumber1 = 'invoiceNumber_test_1';
         $invoiceNumber2 = 'invoiceNumber_test_2';
@@ -154,9 +155,6 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
-        $this->errorResponse['errors'][0]['extra'] = [
-            'debtLineItemId' => $this->requestData[0]['debtLineItemId']
-        ];
 
         $this->builder
             ->given('A debtLineItem with debtLineItemId does not exist')
@@ -201,7 +199,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
     public function testPatchDebtLineItemCollectionBadRequest()
     {
         // debtLineItemId is an invalid uuid
-        $this->requestData[0]['debtLineItemId'] = $this->debtLineItemIdInvalid;
+        $this->requestData[0]['debtLineItemId'] = 'invalid_uuid';
         unset($this->requestData[1]);
 
         // Error code in response is 400
@@ -211,47 +209,6 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         $this->builder
             ->given('The debtLineItemId in the request is empty')
             ->uponReceiving('Bad PATCH request to /debt-line-item');
-
-        $this->responseData = $this->errorResponse;
-        $this->beginTest();
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testPatchDebtLineItemCollectionMultipleErrors()
-    {
-        // debtLineItemId is an invalid uuid
-        $this->requestData[0]['debtLineItemId'] = $this->debtLineItemIdInvalid;
-
-        // Status code of the response is 400
-        $this->expectedStatusCode = '400';
-
-        // Error code of first error is 400
-        $this->errorResponse['errors'][0] = [
-            'code' => '400',
-            'message' => $this->matcher->like('Example error message'),
-        ];
-
-        // the invoiceNumber of the debtLineItem is already set
-        $this->requestData[1]['debtLineItemId'] = $this->debtLineItemIdUnprocessable;
-
-        // Error code of second error is 422
-        $this->errorResponse['errors'][1] = [
-            'code' => '422',
-            'message' => $this->matcher->like('Example error message'),
-            'extra' => [
-                'debtLineItemId' => $this->requestData[1]['debtLineItemId']
-            ]
-        ];
-
-        $this->builder
-            ->given(
-                'No debtLineItemId is provided in the request, ' .
-                'the debtLineItems invoiceNumber is already set, ' .
-                'the request is valid, the token is valid and has a valid scope'
-            )
-            ->uponReceiving('Multiple Errors PATCH request to /debt-line-item');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
