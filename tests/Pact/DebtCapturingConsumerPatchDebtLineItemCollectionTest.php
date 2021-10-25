@@ -42,8 +42,7 @@ class DebtCapturingConsumerPatchDebtLineItemCollectionTest extends DebtCapturing
         $this->debtLineItemId1 = '7b3151d3-cdee-4971-936c-a26bd853d58f';
         $this->debtLineItemId2 = '464d7292-1e3f-4dd0-b3bd-16d6f15eb020';
         $this->debtLineItemIdUnprocessable = '744226b0-7c59-4ee5-ad4f-7b4209311536';
-        $this->debtLineItemIdUnprocessable2 = '744226b0-7c59-4ee5-ad4f-7b4209311537';
-        $this->debtLineItemIdNotFound = '00000000-0000-0000-0000-000000000000';
+        $this->debtLineItemIdNotFound = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';
 
         $invoiceNumber1 = 'invoiceNumber_test_1';
         $invoiceNumber2 = 'invoiceNumber_test_2';
