@@ -20,6 +20,51 @@
         }
     ],
     "paths": {
+        "/docs": {
+            "get": {
+                "tags": [
+                    "docs"
+                ],
+                "summary": "Get the openapi documentation as json",
+                "description": "Get the openapi documentation as json",
+                "operationId": "getOpenApi",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/docs/openapi.{format}": {
+            "get": {
+                "tags": [
+                    "docs"
+                ],
+                "summary": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+                "description": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+                "operationId": "getOpenApiInFormat",
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "description": "Openapi file format",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "yaml",
+                                "json"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/auth/role": {
             "get": {
                 "tags": [
@@ -352,8 +397,8 @@
                 "tags": [
                     "debtLineItem"
                 ],
-                "summary": "Get debtLineItems csv export.",
-                "description": "Get debtLineItems csv export.",
+                "summary": "Get debtLineItems csv export by projectId and time range",
+                "description": "Get debtLineItems csv export by projectId and time range",
                 "operationId": "getDebtLineItemCollectionCsv",
                 "parameters": [
                     {
@@ -368,7 +413,7 @@
                     {
                         "name": "filter[dateFrom]",
                         "in": "query",
-                        "description": "Date from filter",
+                        "description": "dateFrom filter",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -378,7 +423,7 @@
                     {
                         "name": "filter[dateTo]",
                         "in": "query",
-                        "description": "Date to filter",
+                        "description": "dateTo filter",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -455,8 +500,8 @@
                 "tags": [
                     "debtLineItem"
                 ],
-                "summary": "Query Debt Line Items by projectId and time range",
-                "description": "Query Debt Line Items by projectId and time range",
+                "summary": "Get debtLineItems by projectId and time range",
+                "description": "Get debtLineItems by projectId and time range",
                 "operationId": "getDebtLineItemCollection",
                 "parameters": [
                     {
@@ -471,7 +516,7 @@
                     {
                         "name": "filter[dateFrom]",
                         "in": "query",
-                        "description": "Date from filter",
+                        "description": "dateFrom filter",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -481,7 +526,7 @@
                     {
                         "name": "filter[dateTo]",
                         "in": "query",
-                        "description": "Date to filter",
+                        "description": "dateTo filter",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -556,15 +601,52 @@
                 "tags": [
                     "debtLineItem"
                 ],
-                "summary": "Update one or more Debt Line Items",
-                "description": "Update one or more fields of one ore more Debt Line Items",
+                "summary": "Update debtLineItems by projectId and time range where the invoiceNumber is not already set",
+                "description": "Update debtLineItems by projectId and time range where the invoiceNumber is not already set",
                 "operationId": "patchDebtLineItemCollection",
+                "parameters": [
+                    {
+                        "name": "filter[projectId]",
+                        "in": "query",
+                        "description": "projectId filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[dateFrom]",
+                        "in": "query",
+                        "description": "dateFrom filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "filter[dateTo]",
+                        "in": "query",
+                        "description": "dateTo filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/patchDebtLineItemCollectionRequest"
+                                "properties": {
+                                    "invoiceNumber": {
+                                        "description": "invoiceNumber",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -610,18 +692,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
+                    "409": {
+                        "description": "Conflict",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -658,14 +730,14 @@
                 "tags": [
                     "debtLineItem"
                 ],
-                "summary": "Get a Debt Line Item by debtLineItemId",
-                "description": "Get a Debt Line Item by debtLineItemId",
+                "summary": "Get a debtLineItem by debtLineItemId",
+                "description": "Get a debtLineItem by debtLineItemId",
                 "operationId": "getDebtLineItem",
                 "parameters": [
                     {
                         "name": "debtLineItemId",
                         "in": "path",
-                        "description": "Debt Line Item ID",
+                        "description": "debtLineItemId",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -744,49 +816,121 @@
                         }
                     }
                 }
-            }
-        },
-        "/docs": {
-            "get": {
+            },
+            "patch": {
                 "tags": [
-                    "docs"
+                    "debtLineItem"
                 ],
-                "summary": "Get the openapi documentation as json",
-                "description": "Get the openapi documentation as json",
-                "operationId": "getOpenApi",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/docs/openapi.{format}": {
-            "get": {
-                "tags": [
-                    "docs"
-                ],
-                "summary": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
-                "description": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
-                "operationId": "getOpenApiInFormat",
+                "summary": "Update a debtLineItem by debtLineItemId",
+                "description": "Update a debtLineItem by debtLineItemId",
+                "operationId": "patchDebtLineItem",
                 "parameters": [
                     {
-                        "name": "format",
+                        "name": "debtLineItemId",
                         "in": "path",
-                        "description": "Openapi file format",
+                        "description": "debtLineItemId",
                         "required": true,
                         "schema": {
-                            "type": "string",
-                            "enum": [
-                                "yaml",
-                                "json"
-                            ]
+                            "type": "string"
                         }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "invoiceNumber": {
+                                        "description": "invoiceNumber",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/debtLineItemResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -794,6 +938,144 @@
     },
     "components": {
         "schemas": {
+            "authRoleResource": {
+                "required": [
+                    "roleCode",
+                    "name"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleResource"
+                }
+            },
+            "getAuthPermissionCollectionResponse": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authPermissionResource"
+                }
+            },
+            "authPermissionResource": {
+                "required": [
+                    "permissionCode",
+                    "name"
+                ],
+                "properties": {
+                    "permissionCode": {
+                        "description": "Permission Code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleIdentityCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleIdentityResource"
+                }
+            },
+            "authRoleIdentityResource": {
+                "required": [
+                    "roleCode",
+                    "identityId"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "identityId": {
+                        "description": "Identity ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "debtLineItemResource": {
+                "required": [
+                    "debtLineItemId",
+                    "skuCode",
+                    "projectId",
+                    "usageStart",
+                    "usageEnd"
+                ],
+                "properties": {
+                    "debtLineItemId": {
+                        "description": "debtLineItemId",
+                        "type": "string"
+                    },
+                    "skuCode": {
+                        "description": "skuCode",
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "description": "quantity",
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "projectId": {
+                        "description": "projectId",
+                        "type": "string"
+                    },
+                    "usageStart": {
+                        "description": "Start time of the usage",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "usageEnd": {
+                        "description": "End time of the usage",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "priceTotal": {
+                        "$ref": "#/components/schemas/priceProperty"
+                    },
+                    "invoiceNumber": {
+                        "description": "invoiceNumber",
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "priceProperty": {
+                "properties": {
+                    "minorMicro": {
+                        "description": "minorMicro",
+                        "type": "number",
+                        "format": "integer",
+                        "nullable": true
+                    },
+                    "currency": {
+                        "description": "currency",
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "getDebtLineItemCollectionResponse": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/debtLineItemResource"
+                }
+            },
             "errorResponse": {
                 "properties": {
                     "errors": {
@@ -822,171 +1104,6 @@
                     }
                 },
                 "type": "object"
-            },
-            "authPermissionResource": {
-                "required": [
-                    "permissionCode",
-                    "name"
-                ],
-                "properties": {
-                    "permissionCode": {
-                        "description": "Permission Code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "getAuthPermissionCollectionResponse": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authPermissionResource"
-                }
-            },
-            "authRoleResource": {
-                "required": [
-                    "roleCode",
-                    "name"
-                ],
-                "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "authRoleCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleResource"
-                }
-            },
-            "authRoleIdentityResource": {
-                "required": [
-                    "roleCode",
-                    "identityId"
-                ],
-                "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
-                        "type": "string"
-                    },
-                    "identityId": {
-                        "description": "Identity ID",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "authRoleIdentityCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleIdentityResource"
-                }
-            },
-            "debtLineItemResource": {
-                "required": [
-                    "debtLineItemId",
-                    "skuCode",
-                    "projectId",
-                    "usageStart",
-                    "usageEnd"
-                ],
-                "properties": {
-                    "debtLineItemId": {
-                        "description": "Debt Line Item ID",
-                        "type": "string"
-                    },
-                    "skuCode": {
-                        "description": "SKU Code",
-                        "type": "string"
-                    },
-                    "quantity": {
-                        "nullable": true,
-                        "description": "Quantity",
-                        "type": "integer"
-                    },
-                    "projectId": {
-                        "description": "Project Id",
-                        "type": "string"
-                    },
-                    "usageStart": {
-                        "description": "Start time of the usage",
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "usageEnd": {
-                        "description": "End time of the usage",
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "priceTotal": {
-                        "$ref": "#/components/schemas/priceProperty"
-                    },
-                    "invoiceNumber": {
-                        "nullable": true,
-                        "description": "Invoice number",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "priceProperty": {
-                "required": [
-                    "minorMicro",
-                    "currency"
-                ],
-                "properties": {
-                    "minorMicro": {
-                        "nullable": true,
-                        "description": "MinorMicro",
-                        "type": "number",
-                        "format": "integer"
-                    },
-                    "currency": {
-                        "nullable": true,
-                        "description": "Currency",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "getDebtLineItemCollectionResponse": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/debtLineItemResource"
-                }
-            },
-            "patchDebtLineItemResource": {
-                "required": [
-                    "debtLineItemId"
-                ],
-                "properties": {
-                    "debtLineItemId": {
-                        "description": "Debt Line Item ID",
-                        "type": "string"
-                    },
-                    "invoiceNumber": {
-                        "nullable": true,
-                        "description": "Invoice number",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "patchDebtLineItemCollectionRequest": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/patchDebtLineItemResource"
-                }
             }
         },
         "securitySchemes": {

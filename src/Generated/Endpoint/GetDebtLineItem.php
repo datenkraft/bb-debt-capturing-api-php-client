@@ -6,9 +6,9 @@ class GetDebtLineItem extends \Datenkraft\Backbone\Client\DebtCapturingApi\Gener
 {
     protected $debtLineItemId;
     /**
-     * Get a Debt Line Item by debtLineItemId
+     * Get a debtLineItem by debtLineItemId
      *
-     * @param string $debtLineItemId Debt Line Item ID
+     * @param string $debtLineItemId debtLineItemId
      */
     public function __construct(string $debtLineItemId)
     {
