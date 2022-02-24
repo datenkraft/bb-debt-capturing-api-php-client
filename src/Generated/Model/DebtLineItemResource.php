@@ -5,25 +5,25 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 class DebtLineItemResource
 {
     /**
-     * Debt Line Item ID
+     * debtLineItemId
      *
      * @var string
      */
     protected $debtLineItemId;
     /**
-     * SKU Code
+     * skuCode
      *
      * @var string
      */
     protected $skuCode;
     /**
-     * Quantity
+     * quantity
      *
      * @var int|null
      */
     protected $quantity;
     /**
-     * Project Id
+     * projectId
      *
      * @var string
      */
@@ -47,13 +47,13 @@ class DebtLineItemResource
      */
     protected $priceTotal;
     /**
-     * Invoice number
+     * invoiceNumber
      *
      * @var string|null
      */
     protected $invoiceNumber;
     /**
-     * Debt Line Item ID
+     * debtLineItemId
      *
      * @return string
      */
@@ -62,7 +62,7 @@ class DebtLineItemResource
         return $this->debtLineItemId;
     }
     /**
-     * Debt Line Item ID
+     * debtLineItemId
      *
      * @param string $debtLineItemId
      *
@@ -74,7 +74,7 @@ class DebtLineItemResource
         return $this;
     }
     /**
-     * SKU Code
+     * skuCode
      *
      * @return string
      */
@@ -83,7 +83,7 @@ class DebtLineItemResource
         return $this->skuCode;
     }
     /**
-     * SKU Code
+     * skuCode
      *
      * @param string $skuCode
      *
@@ -95,7 +95,7 @@ class DebtLineItemResource
         return $this;
     }
     /**
-     * Quantity
+     * quantity
      *
      * @return int|null
      */
@@ -104,7 +104,7 @@ class DebtLineItemResource
         return $this->quantity;
     }
     /**
-     * Quantity
+     * quantity
      *
      * @param int|null $quantity
      *
@@ -116,7 +116,7 @@ class DebtLineItemResource
         return $this;
     }
     /**
-     * Project Id
+     * projectId
      *
      * @return string
      */
@@ -125,7 +125,7 @@ class DebtLineItemResource
         return $this->projectId;
     }
     /**
-     * Project Id
+     * projectId
      *
      * @param string $projectId
      *
@@ -200,7 +200,7 @@ class DebtLineItemResource
         return $this;
     }
     /**
-     * Invoice number
+     * invoiceNumber
      *
      * @return string|null
      */
@@ -209,7 +209,7 @@ class DebtLineItemResource
         return $this->invoiceNumber;
     }
     /**
-     * Invoice number
+     * invoiceNumber
      *
      * @param string|null $invoiceNumber
      *

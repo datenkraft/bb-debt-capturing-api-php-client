@@ -6,6 +6,29 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
 {
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getOpenApi(string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetOpenApi(), $fetch);
+    }
+    /**
+     * Get the openapi documentation in the specified format (yaml or json, fallback is json)
+     *
+     * @param string $format Openapi file format
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getOpenApiInFormat(string $format, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetOpenApiInFormat($format), $fetch);
+    }
+    /**
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleCollectionForbiddenException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleCollectionInternalServerErrorException
@@ -70,12 +93,12 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PostAuthRoleIdentityCollection($requestBody), $fetch);
     }
     /**
-     * Get debtLineItems csv export.
+     * Get debtLineItems csv export by projectId and time range
      *
      * @param array $queryParameters {
      *     @var string $filter[projectId] projectId filter
-     *     @var string $filter[dateFrom] Date from filter
-     *     @var string $filter[dateTo] Date to filter
+     *     @var string $filter[dateFrom] dateFrom filter
+     *     @var string $filter[dateTo] dateTo filter
      * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionCsvBadRequestException
@@ -91,12 +114,12 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCollectionCsv($queryParameters), $fetch);
     }
     /**
-     * Query Debt Line Items by projectId and time range
+     * Get debtLineItems by projectId and time range
      *
      * @param array $queryParameters {
      *     @var string $filter[projectId] projectId filter
-     *     @var string $filter[dateFrom] Date from filter
-     *     @var string $filter[dateTo] Date to filter
+     *     @var string $filter[dateFrom] dateFrom filter
+     *     @var string $filter[dateTo] dateTo filter
      * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionBadRequestException
@@ -112,28 +135,32 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCollection($queryParameters), $fetch);
     }
     /**
-     * Update one or more fields of one ore more Debt Line Items
+     * Update debtLineItems by projectId and time range where the invoiceNumber is not already set
      *
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\PatchDebtLineItemResource[] $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemPatchBody $requestBody 
+     * @param array $queryParameters {
+     *     @var string $filter[projectId] projectId filter
+     *     @var string $filter[dateFrom] dateFrom filter
+     *     @var string $filter[dateTo] dateTo filter
+     * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionNotFoundException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionUnprocessableEntityException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionConflictException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
      * @return null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function patchDebtLineItemCollection(array $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchDebtLineItemCollection(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemPatchBody $requestBody, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PatchDebtLineItemCollection($requestBody), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PatchDebtLineItemCollection($requestBody, $queryParameters), $fetch);
     }
     /**
-     * Get a Debt Line Item by debtLineItemId
+     * Get a debtLineItem by debtLineItemId
      *
-     * @param string $debtLineItemId Debt Line Item ID
+     * @param string $debtLineItemId debtLineItemId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemUnauthorizedException
@@ -149,27 +176,24 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItem($debtLineItemId), $fetch);
     }
     /**
+     * Update a debtLineItem by debtLineItemId
+     *
+     * @param string $debtLineItemId debtLineItemId
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemDebtLineItemIdPatchBody $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemBadRequestException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemNotFoundException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemConflictException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function getOpenApi(string $fetch = self::FETCH_OBJECT)
+    public function patchDebtLineItem(string $debtLineItemId, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemDebtLineItemIdPatchBody $requestBody, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetOpenApi(), $fetch);
-    }
-    /**
-     * Get the openapi documentation in the specified format (yaml or json, fallback is json)
-     *
-     * @param string $format Openapi file format
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return null|\Psr\Http\Message\ResponseInterface
-     */
-    public function getOpenApiInFormat(string $format, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetOpenApiInFormat($format), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PatchDebtLineItem($debtLineItemId, $requestBody), $fetch);
     }
     public static function create($httpClient = null, array $additionalPlugins = array())
     {

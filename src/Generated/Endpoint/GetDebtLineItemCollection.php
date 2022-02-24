@@ -5,12 +5,12 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint;
 class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\Endpoint
 {
     /**
-     * Query Debt Line Items by projectId and time range
+     * Get debtLineItems by projectId and time range
      *
      * @param array $queryParameters {
      *     @var string $filter[projectId] projectId filter
-     *     @var string $filter[dateFrom] Date from filter
-     *     @var string $filter[dateTo] Date to filter
+     *     @var string $filter[dateFrom] dateFrom filter
+     *     @var string $filter[dateTo] dateTo filter
      * }
      */
     public function __construct(array $queryParameters = array())

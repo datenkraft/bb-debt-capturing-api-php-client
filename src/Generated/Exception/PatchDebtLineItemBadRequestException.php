@@ -2,12 +2,12 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class PatchDebtLineItemCollectionUnprocessableEntityException extends UnprocessableEntityException
+class PatchDebtLineItemBadRequestException extends BadRequestException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Unprocessable Entity', 422);
+        parent::__construct('Bad Request', 400);
         $this->errorResponse = $errorResponse;
     }
     public function getErrorResponse()

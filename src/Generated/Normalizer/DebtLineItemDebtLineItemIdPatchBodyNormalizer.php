@@ -11,18 +11,18 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-class PricePropertyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class DebtLineItemDebtLineItemIdPatchBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty';
+        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemDebtLineItemIdPatchBody';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemDebtLineItemIdPatchBody';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
@@ -32,32 +32,20 @@ class PricePropertyNormalizer implements DenormalizerInterface, NormalizerInterf
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\PriceProperty();
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemDebtLineItemIdPatchBody();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('minorMicro', $data) && $data['minorMicro'] !== null) {
-            $object->setMinorMicro($data['minorMicro']);
-        }
-        elseif (\array_key_exists('minorMicro', $data) && $data['minorMicro'] === null) {
-            $object->setMinorMicro(null);
-        }
-        if (\array_key_exists('currency', $data) && $data['currency'] !== null) {
-            $object->setCurrency($data['currency']);
-        }
-        elseif (\array_key_exists('currency', $data) && $data['currency'] === null) {
-            $object->setCurrency(null);
+        if (\array_key_exists('invoiceNumber', $data)) {
+            $object->setInvoiceNumber($data['invoiceNumber']);
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getMinorMicro()) {
-            $data['minorMicro'] = $object->getMinorMicro();
-        }
-        if (null !== $object->getCurrency()) {
-            $data['currency'] = $object->getCurrency();
+        if (null !== $object->getInvoiceNumber()) {
+            $data['invoiceNumber'] = $object->getInvoiceNumber();
         }
         return $data;
     }

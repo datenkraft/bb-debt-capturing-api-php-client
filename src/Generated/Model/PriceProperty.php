@@ -5,19 +5,19 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 class PriceProperty
 {
     /**
-     * MinorMicro
+     * minorMicro
      *
      * @var float|null
      */
     protected $minorMicro;
     /**
-     * Currency
+     * currency
      *
      * @var string|null
      */
     protected $currency;
     /**
-     * MinorMicro
+     * minorMicro
      *
      * @return float|null
      */
@@ -26,7 +26,7 @@ class PriceProperty
         return $this->minorMicro;
     }
     /**
-     * MinorMicro
+     * minorMicro
      *
      * @param float|null $minorMicro
      *
@@ -38,7 +38,7 @@ class PriceProperty
         return $this;
     }
     /**
-     * Currency
+     * currency
      *
      * @return string|null
      */
@@ -47,7 +47,7 @@ class PriceProperty
         return $this->currency;
     }
     /**
-     * Currency
+     * currency
      *
      * @param string|null $currency
      *
