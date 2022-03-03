@@ -53,6 +53,18 @@ class DebtLineItemResource
      */
     protected $invoiceNumber;
     /**
+     * Unit
+     *
+     * @var string|null
+     */
+    protected $unit;
+    /**
+     * 
+     *
+     * @var PriceProperty
+     */
+    protected $pricePerUnit;
+    /**
      * debtLineItemId
      *
      * @return string
@@ -218,6 +230,48 @@ class DebtLineItemResource
     public function setInvoiceNumber(?string $invoiceNumber) : self
     {
         $this->invoiceNumber = $invoiceNumber;
+        return $this;
+    }
+    /**
+     * Unit
+     *
+     * @return string|null
+     */
+    public function getUnit() : ?string
+    {
+        return $this->unit;
+    }
+    /**
+     * Unit
+     *
+     * @param string|null $unit
+     *
+     * @return self
+     */
+    public function setUnit(?string $unit) : self
+    {
+        $this->unit = $unit;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return PriceProperty
+     */
+    public function getPricePerUnit() : PriceProperty
+    {
+        return $this->pricePerUnit;
+    }
+    /**
+     * 
+     *
+     * @param PriceProperty $pricePerUnit
+     *
+     * @return self
+     */
+    public function setPricePerUnit(PriceProperty $pricePerUnit) : self
+    {
+        $this->pricePerUnit = $pricePerUnit;
         return $this;
     }
 }
