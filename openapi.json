@@ -7,11 +7,11 @@
     },
     "servers": [
         {
-            "url": "UNDEFINED",
+            "url": "https://debt-capturing.conqore.niceshops.com/v1",
             "description": "Production server"
         },
         {
-            "url": "UNDEFINED",
+            "url": "https://debt-capturing.staging.backbone.datenkraft.info/v1",
             "description": "Staging server"
         },
         {
@@ -744,16 +744,6 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
                     "409": {
                         "description": "Conflict",
                         "content": {
@@ -938,76 +928,37 @@
     },
     "components": {
         "schemas": {
-            "authRoleResource": {
-                "required": [
-                    "roleCode",
-                    "name"
-                ],
+            "errorResponse": {
                 "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name",
-                        "type": "string"
+                    "errors": {
+                        "description": "errors",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/error"
+                        }
                     }
                 },
                 "type": "object"
             },
-            "authRoleCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleResource"
-                }
-            },
-            "authRoleIdentityCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleIdentityResource"
-                }
-            },
-            "authRoleIdentityResource": {
+            "error": {
                 "required": [
-                    "roleCode",
-                    "identityId"
+                    "code",
+                    "message"
                 ],
                 "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
+                    "code": {
+                        "description": "Code",
                         "type": "string"
                     },
-                    "identityId": {
-                        "description": "Identity ID",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "getAuthPermissionCollectionResponse": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authPermissionResource"
-                }
-            },
-            "authPermissionResource": {
-                "required": [
-                    "permissionCode",
-                    "name"
-                ],
-                "properties": {
-                    "permissionCode": {
-                        "description": "Permission Code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name",
+                    "message": {
+                        "description": "Message",
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
             "getDebtLineItemCollectionResponse": {
+                "description": "Class DebtLineItemResourceCollection",
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/debtLineItemResource"
@@ -1069,6 +1020,7 @@
                 "type": "object"
             },
             "priceProperty": {
+                "description": "Class DebtLineItemResource",
                 "properties": {
                     "minorMicro": {
                         "description": "minorMicro",
@@ -1084,34 +1036,74 @@
                 },
                 "type": "object"
             },
-            "errorResponse": {
+            "authPermissionResource": {
+                "required": [
+                    "permissionCode",
+                    "name"
+                ],
                 "properties": {
-                    "errors": {
-                        "description": "errors",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/error"
-                        }
+                    "permissionCode": {
+                        "description": "Permission Code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "error": {
+            "getAuthPermissionCollectionResponse": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authPermissionResource"
+                }
+            },
+            "authRoleIdentityResource": {
                 "required": [
-                    "code",
-                    "message"
+                    "roleCode",
+                    "identityId"
                 ],
                 "properties": {
-                    "code": {
-                        "description": "Code",
+                    "roleCode": {
+                        "description": "Role Code",
                         "type": "string"
                     },
-                    "message": {
-                        "description": "Message",
+                    "identityId": {
+                        "description": "Identity ID",
                         "type": "string"
                     }
                 },
                 "type": "object"
+            },
+            "authRoleIdentityCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleIdentityResource"
+                }
+            },
+            "authRoleResource": {
+                "required": [
+                    "roleCode",
+                    "name"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleResource"
+                }
             }
         },
         "securitySchemes": {
