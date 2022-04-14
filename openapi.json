@@ -20,89 +20,6 @@
         }
     ],
     "paths": {
-        "/sku-usage-debt-line-item": {
-            "get": {
-                "tags": [
-                    "skuUsageDebtLineItem"
-                ],
-                "summary": "Get skuUsages for debtLineItems",
-                "description": "Get skuUsages for debtLineItems",
-                "operationId": "getSkuUsageDebtLineItemCollection",
-                "parameters": [
-                    {
-                        "name": "filter[debtLineItemIds]",
-                        "in": "query",
-                        "description": "debtLineItemIds filter",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/skuUsageDebtLineItemResourceCollection"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/debt-line-item/csv": {
             "get": {
                 "tags": [
@@ -646,6 +563,134 @@
                 }
             }
         },
+        "/sku-usage-debt-line-item": {
+            "get": {
+                "tags": [
+                    "skuUsageDebtLineItem"
+                ],
+                "summary": "Get skuUsages for debtLineItems",
+                "description": "Get skuUsages for debtLineItems",
+                "operationId": "getSkuUsageDebtLineItemCollection",
+                "parameters": [
+                    {
+                        "name": "filter[debtLineItemIds]",
+                        "in": "query",
+                        "description": "debtLineItemIds filter",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/skuUsageDebtLineItemResourceCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/docs": {
+            "get": {
+                "tags": [
+                    "docs"
+                ],
+                "summary": "Get the openapi documentation as json",
+                "description": "Get the openapi documentation as json",
+                "operationId": "getOpenApi",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/docs/openapi.{format}": {
+            "get": {
+                "tags": [
+                    "docs"
+                ],
+                "summary": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+                "description": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+                "operationId": "getOpenApiInFormat",
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "description": "Openapi file format",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "yaml",
+                                "json"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/auth/role": {
             "get": {
                 "tags": [
@@ -962,79 +1007,10 @@
                     }
                 }
             }
-        },
-        "/docs": {
-            "get": {
-                "tags": [
-                    "docs"
-                ],
-                "summary": "Get the openapi documentation as json",
-                "description": "Get the openapi documentation as json",
-                "operationId": "getOpenApi",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/docs/openapi.{format}": {
-            "get": {
-                "tags": [
-                    "docs"
-                ],
-                "summary": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
-                "description": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
-                "operationId": "getOpenApiInFormat",
-                "parameters": [
-                    {
-                        "name": "format",
-                        "in": "path",
-                        "description": "Openapi file format",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "yaml",
-                                "json"
-                            ]
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
         }
     },
     "components": {
         "schemas": {
-            "skuUsageDebtLineItemResource": {
-                "required": [
-                    "skuUsageId",
-                    "debtLineItemId"
-                ],
-                "properties": {
-                    "skuUsageId": {
-                        "description": "skuUsageId",
-                        "type": "string"
-                    },
-                    "debtLineItemId": {
-                        "description": "debtLineItemId",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "skuUsageDebtLineItemResourceCollection": {
-                "description": "Class SkuUsageDebtLineItemResourceCollection",
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/skuUsageDebtLineItemResource"
-                }
-            },
             "getDebtLineItemCollectionResponse": {
                 "type": "array",
                 "items": {
@@ -1112,6 +1088,36 @@
                 },
                 "type": "object"
             },
+            "skuUsageDebtLineItemResourceCollection": {
+                "description": "Class SkuUsageDebtLineItemResourceCollection",
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/skuUsageDebtLineItemResource"
+                }
+            },
+            "skuUsageDebtLineItemResource": {
+                "required": [
+                    "skuUsageId",
+                    "debtLineItemId"
+                ],
+                "properties": {
+                    "skuUsageId": {
+                        "description": "skuUsageId",
+                        "type": "string"
+                    },
+                    "debtLineItemId": {
+                        "description": "debtLineItemId",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleResource"
+                }
+            },
             "authRoleResource": {
                 "required": [
                     "roleCode",
@@ -1124,35 +1130,6 @@
                     },
                     "name": {
                         "description": "Name",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "authRoleCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleResource"
-                }
-            },
-            "authRoleIdentityCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleIdentityResource"
-                }
-            },
-            "authRoleIdentityResource": {
-                "required": [
-                    "roleCode",
-                    "identityId"
-                ],
-                "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
-                        "type": "string"
-                    },
-                    "identityId": {
-                        "description": "Identity ID",
                         "type": "string"
                     }
                 },
@@ -1180,6 +1157,29 @@
                     }
                 },
                 "type": "object"
+            },
+            "authRoleIdentityResource": {
+                "required": [
+                    "roleCode",
+                    "identityId"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "identityId": {
+                        "description": "Identity ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleIdentityCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleIdentityResource"
+                }
             },
             "errorResponse": {
                 "properties": {
