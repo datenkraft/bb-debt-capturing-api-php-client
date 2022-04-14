@@ -41,7 +41,7 @@ class DebtLineItemResource
      */
     protected $usageEnd;
     /**
-     * Class DebtLineItemResource
+     * 
      *
      * @var PriceProperty
      */
@@ -59,7 +59,7 @@ class DebtLineItemResource
      */
     protected $unit;
     /**
-     * Class DebtLineItemResource
+     * 
      *
      * @var PriceProperty
      */
@@ -191,7 +191,7 @@ class DebtLineItemResource
         return $this;
     }
     /**
-     * Class DebtLineItemResource
+     * 
      *
      * @return PriceProperty
      */
@@ -200,7 +200,7 @@ class DebtLineItemResource
         return $this->priceTotal;
     }
     /**
-     * Class DebtLineItemResource
+     * 
      *
      * @param PriceProperty $priceTotal
      *
@@ -254,7 +254,7 @@ class DebtLineItemResource
         return $this;
     }
     /**
-     * Class DebtLineItemResource
+     * 
      *
      * @return PriceProperty
      */
@@ -263,7 +263,7 @@ class DebtLineItemResource
         return $this->pricePerUnit;
     }
     /**
-     * Class DebtLineItemResource
+     * 
      *
      * @param PriceProperty $pricePerUnit
      *
