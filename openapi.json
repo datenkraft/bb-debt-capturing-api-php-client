@@ -7,11 +7,11 @@
     },
     "servers": [
         {
-            "url": "UNDEFINED",
+            "url": "https://debt-capturing-api.conqore.niceshops.com/v1",
             "description": "Production server"
         },
         {
-            "url": "UNDEFINED",
+            "url": "https://debt-capturing-api.staging.backbone.datenkraft.info/v1",
             "description": "Staging server"
         },
         {
@@ -20,6 +20,94 @@
         }
     ],
     "paths": {
+        "/sku-usage-debt-line-item": {
+            "get": {
+                "tags": [
+                    "skuUsageDebtLineItem"
+                ],
+                "summary": "Get skuUsages for debtLineItems",
+                "description": "Get skuUsages for debtLineItems",
+                "operationId": "getSkuUsageDebtLineItemCollection",
+                "parameters": [
+                    {
+                        "name": "filter[debtLineItemIds]",
+                        "in": "query",
+                        "description": "debtLineItemIds filter",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/skuUsageDebtLineItemResourceCollection"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
+            }
+        },
         "/debt-line-item/csv": {
             "get": {
                 "tags": [
@@ -120,7 +208,120 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
+            }
+        },
+        "/debt-line-item/xlsx": {
+            "get": {
+                "tags": [
+                    "debtLineItem"
+                ],
+                "summary": "Get debtLineItems xlsx export by projectId and time range",
+                "description": "Get debtLineItems xlsx export by projectId and time range",
+                "operationId": "getDebtLineItemCollectionXlsx",
+                "parameters": [
+                    {
+                        "name": "filter[projectId]",
+                        "in": "query",
+                        "description": "projectId filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[dateFrom]",
+                        "in": "query",
+                        "description": "dateFrom filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "filter[dateTo]",
+                        "in": "query",
+                        "description": "dateTo filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "text/xlsx": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             }
         },
         "/debt-line-item": {
@@ -223,7 +424,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -350,7 +556,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             }
         },
         "/debt-line-item/{debtLineItemId}": {
@@ -443,7 +654,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -560,7 +776,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             }
         },
         "/auth/role": {
@@ -622,7 +843,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             }
         },
         "/auth/role-identity": {
@@ -684,7 +910,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -744,16 +975,6 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
                     "409": {
                         "description": "Conflict",
                         "content": {
@@ -794,7 +1015,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -803,16 +1029,6 @@
                 "summary": "Delete one or more role to identity assignments in this resource server",
                 "description": "Delete one or more role to identity assignments in this resource server",
                 "operationId": "deleteAuthRoleIdentityCollection",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/authRoleIdentityCollection"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -887,7 +1103,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    }
+                ]
             }
         },
         "/docs": {
@@ -902,7 +1123,8 @@
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "security": []
             }
         },
         "/docs/openapi.{format}": {
@@ -938,74 +1160,29 @@
     },
     "components": {
         "schemas": {
-            "authRoleResource": {
+            "skuUsageDebtLineItemResource": {
                 "required": [
-                    "roleCode",
-                    "name"
+                    "skuUsageId",
+                    "debtLineItemId"
                 ],
                 "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
+                    "skuUsageId": {
+                        "description": "skuUsageId",
                         "type": "string"
                     },
-                    "name": {
-                        "description": "Name",
+                    "debtLineItemId": {
+                        "description": "debtLineItemId",
                         "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "authRoleCollection": {
+            "skuUsageDebtLineItemResourceCollection": {
+                "description": "Class SkuUsageDebtLineItemResourceCollection",
                 "type": "array",
                 "items": {
-                    "$ref": "#/components/schemas/authRoleResource"
+                    "$ref": "#/components/schemas/skuUsageDebtLineItemResource"
                 }
-            },
-            "authRoleIdentityCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleIdentityResource"
-                }
-            },
-            "authRoleIdentityResource": {
-                "required": [
-                    "roleCode",
-                    "identityId"
-                ],
-                "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
-                        "type": "string"
-                    },
-                    "identityId": {
-                        "description": "Identity ID",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "getAuthPermissionCollectionResponse": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authPermissionResource"
-                }
-            },
-            "authPermissionResource": {
-                "required": [
-                    "permissionCode",
-                    "name"
-                ],
-                "properties": {
-                    "permissionCode": {
-                        "description": "Permission Code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
             },
             "getDebtLineItemCollectionResponse": {
                 "type": "array",
@@ -1080,6 +1257,75 @@
                         "description": "currency",
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleResource": {
+                "required": [
+                    "roleCode",
+                    "name"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleResource"
+                }
+            },
+            "authRoleIdentityCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleIdentityResource"
+                }
+            },
+            "authRoleIdentityResource": {
+                "required": [
+                    "roleCode",
+                    "identityId"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "identityId": {
+                        "description": "Identity ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "getAuthPermissionCollectionResponse": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authPermissionResource"
+                }
+            },
+            "authPermissionResource": {
+                "required": [
+                    "permissionCode",
+                    "name"
+                ],
+                "properties": {
+                    "permissionCode": {
+                        "description": "Permission Code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
                     }
                 },
                 "type": "object"

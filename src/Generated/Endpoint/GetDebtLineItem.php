@@ -70,6 +70,6 @@ class GetDebtLineItem extends \Datenkraft\Backbone\Client\DebtCapturingApi\Gener
     }
     public function getAuthenticationScopes() : array
     {
-        return array();
+        return array('oAuthAuthorization');
     }
 }
