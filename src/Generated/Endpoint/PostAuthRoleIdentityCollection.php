@@ -76,6 +76,6 @@ class PostAuthRoleIdentityCollection extends \Datenkraft\Backbone\Client\DebtCap
     }
     public function getAuthenticationScopes() : array
     {
-        return array();
+        return array('oAuthAuthorization');
     }
 }
