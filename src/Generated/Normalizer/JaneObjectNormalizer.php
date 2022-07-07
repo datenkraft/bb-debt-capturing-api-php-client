@@ -14,21 +14,27 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    protected $normalizers = array('Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\SkuUsageDebtLineItemResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\SkuUsageDebtLineItemResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\DebtLineItemResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\PricePropertyNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\AuthRoleResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\AuthRoleResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\AuthRoleIdentityResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\AuthRoleIdentityResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\AuthPermissionResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\AuthPermissionResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\ErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\Error' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\ErrorNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemPatchBody' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\DebtLineItemPatchBodyNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemDebtLineItemIdPatchBody' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\DebtLineItemDebtLineItemIdPatchBodyNormalizer', '\\Jane\\JsonSchemaRuntime\\Reference' => '\\Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Runtime\\Normalizer\\ReferenceNormalizer'), $normalizersCache = array();
-    public function supportsDenormalization($data, $type, $format = null)
+    protected $normalizers = array('Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\SkuUsageDebtLineItemResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\SkuUsageDebtLineItemResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\DebtLineItemResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\PricePropertyNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\AuthRoleResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\AuthRoleResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\AuthRoleIdentityResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\AuthRoleIdentityResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\AuthPermissionResource' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\AuthPermissionResourceNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\ErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\Error' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\ErrorNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemPatchBody' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\DebtLineItemPatchBodyNormalizer', 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemDebtLineItemIdPatchBody' => 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Normalizer\\DebtLineItemDebtLineItemIdPatchBodyNormalizer', '\\Jane\\Component\\JsonSchemaRuntime\\Reference' => '\\Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Runtime\\Normalizer\\ReferenceNormalizer'), $normalizersCache = array();
+    public function supportsDenormalization($data, $type, $format = null) : bool
     {
         return array_key_exists($type, $this->normalizers);
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null) : bool
     {
         return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
         $normalizerClass = $this->normalizers[get_class($object)];
         $normalizer = $this->getNormalizer($normalizerClass);
         return $normalizer->normalize($object, $format, $context);
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
         $denormalizerClass = $this->normalizers[$class];
