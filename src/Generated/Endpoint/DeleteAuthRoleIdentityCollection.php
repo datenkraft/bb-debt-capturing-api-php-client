@@ -64,6 +64,6 @@ class DeleteAuthRoleIdentityCollection extends \Datenkraft\Backbone\Client\DebtC
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

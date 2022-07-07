@@ -80,6 +80,6 @@ class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturin
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

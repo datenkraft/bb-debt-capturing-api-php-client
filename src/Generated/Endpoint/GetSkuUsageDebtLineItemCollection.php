@@ -76,6 +76,6 @@ class GetSkuUsageDebtLineItemCollection extends \Datenkraft\Backbone\Client\Debt
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

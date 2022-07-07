@@ -79,6 +79,6 @@ class PatchDebtLineItem extends \Datenkraft\Backbone\Client\DebtCapturingApi\Gen
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

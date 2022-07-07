@@ -52,6 +52,6 @@ class GetAuthRoleCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

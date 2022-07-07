@@ -79,6 +79,6 @@ class GetDebtLineItemCollectionXlsx extends \Datenkraft\Backbone\Client\DebtCapt
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }
