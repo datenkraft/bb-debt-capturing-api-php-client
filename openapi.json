@@ -2,8 +2,8 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Backbone Debt Capturing API",
-        "description": "Backbone Debt Capturing API",
-        "version": "1.0.0"
+        "description": "\n- alpha: Currently developed API version. Subject to major changes.\n- beta: A semi-stable early access version. New features can be added. Breaking changes are possible.\n- stable: The API is recommended for use in production.\n\n[Changelog](https:\/\/debt-capturing-api.conqore.niceshops.com\/v1\/docs\/changelog.html)\n\nAll data is transferred in UTF-8 encoding.\\\nThe API uses stateless HTTP. No cookies have to be kept.\\\nAuthentication via OAuth2 client credentials flow.\n\n[Backbone Debt Capturing API PHP client @Packagist](https:\/\/packagist.org\/packages\/datenkraft\/bb-debt-capturing-api-php-client)",
+        "version": "v1.beta"
     },
     "servers": [
         {
@@ -33,8 +33,8 @@
                 "tags": [
                     "docs"
                 ],
-                "summary": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
-                "description": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+                "summary": "Get the openapi documentation in the specified format",
+                "description": "Get the openapi documentation in the specified format",
                 "operationId": "getOpenApiInFormat",
                 "parameters": [
                     {
@@ -54,6 +54,42 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    }
+                }
+            }
+        },
+        "/docs/changelog.{format}": {
+            "get": {
+                "tags": [
+                    "docs"
+                ],
+                "summary": "Get the changelog in the specified format",
+                "description": "Get the changelog in the specified format",
+                "operationId": "getChangelogInFormat",
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "description": "Changelog file format",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "md",
+                                "html"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Changelog not found"
+                    },
+                    "400": {
+                        "description": "Invalid format"
                     }
                 }
             }
@@ -89,6 +125,16 @@
                     },
                     "403": {
                         "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -159,6 +205,16 @@
                     },
                     "403": {
                         "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -312,6 +368,16 @@
                 "summary": "Delete one or more role to identity assignments in this resource server",
                 "description": "Delete one or more role to identity assignments in this resource server",
                 "operationId": "deleteAuthRoleIdentityCollection",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/authRoleIdentityCollection"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "204": {
                         "description": "No Content"
@@ -397,62 +463,32 @@
                 ]
             }
         },
-        "/debt-line-item/csv": {
+        "/event-sourcing/replay": {
             "get": {
                 "tags": [
-                    "debtLineItem"
+                    "eventSourcingReplay"
                 ],
-                "summary": "Get debtLineItems csv export by projectId and time range",
-                "description": "Get debtLineItems csv export by projectId and time range",
-                "operationId": "getDebtLineItemCollectionCsv",
-                "parameters": [
-                    {
-                        "name": "filter[projectId]",
-                        "in": "query",
-                        "description": "projectId filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "filter[dateFrom]",
-                        "in": "query",
-                        "description": "dateFrom filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    {
-                        "name": "filter[dateTo]",
-                        "in": "query",
-                        "description": "dateTo filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    }
-                ],
+                "summary": "Get the status of the event sourcing replay",
+                "description": "Get the status of the event sourcing replay",
+                "operationId": "getEventSourcingReplay",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
-                            "text/csv": {
-                                "schema": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
+                                    "properties": {
+                                        "status": {
+                                            "description": "status",
+                                            "type": "string",
+                                            "enum": [
+                                                "active",
+                                                "available",
+                                                "locked"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -506,44 +542,136 @@
                         "bearerAuth": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "eventSourcingReplay"
+                ],
+                "summary": "Execute event sourcing replay (recalculates all DebtLineItems)",
+                "description": "Execute event sourcing replay (recalculates all DebtLineItems).\n\nPlease be aware of the effects a replay involves!\n- The replay does not affect DebtLineItems with an InvoiceNumber set.\n- Changes of the calculators/prices will affect non invoiced, past, events\nand therefore also the resulting DebtLineItems.\n- At the beginning/before the replay starts, every DebtLineItem,\nwhich is not invoiced yet/no InvoiceNumber set, gets deleted.",
+                "operationId": "postEventSourcingReplay",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "infoMailAddress": {
+                                        "description": "Email to send info messages about the event sourcing replay to",
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "date": {
+                                            "description": "date",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    },
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/debt-line-item/xlsx": {
+        "/sku-usage-debt-line-item": {
             "get": {
                 "tags": [
-                    "debtLineItem"
+                    "skuUsageDebtLineItem"
                 ],
-                "summary": "Get debtLineItems xlsx export by projectId and time range",
-                "description": "Get debtLineItems xlsx export by projectId and time range",
-                "operationId": "getDebtLineItemCollectionXlsx",
+                "summary": "Get skuUsages for debtLineItems",
+                "description": "Get skuUsages for debtLineItems",
+                "operationId": "getSkuUsageDebtLineItemCollection",
                 "parameters": [
                     {
-                        "name": "filter[projectId]",
+                        "name": "filter[debtLineItemIds]",
                         "in": "query",
-                        "description": "projectId filter",
-                        "required": true,
+                        "description": "debtLineItemIds filter",
+                        "required": false,
                         "schema": {
                             "type": "string"
-                        }
-                    },
-                    {
-                        "name": "filter[dateFrom]",
-                        "in": "query",
-                        "description": "dateFrom filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    {
-                        "name": "filter[dateTo]",
-                        "in": "query",
-                        "description": "dateTo filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time"
                         }
                     }
                 ],
@@ -551,9 +679,9 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "text/xlsx": {
+                            "application/json": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/skuUsageDebtLineItemResourceCollection"
                                 }
                             }
                         }
@@ -1091,22 +1219,158 @@
                 ]
             }
         },
-        "/sku-usage-debt-line-item": {
+        "/report/undefined-shipping-costs.{format}": {
             "get": {
                 "tags": [
-                    "skuUsageDebtLineItem"
+                    "report"
                 ],
-                "summary": "Get skuUsages for debtLineItems",
-                "description": "Get skuUsages for debtLineItems",
-                "operationId": "getSkuUsageDebtLineItemCollection",
+                "summary": "Get a list of undefined shipping costs in the specified time frame",
+                "description": "Get a list of undefined shipping costs in the specified time frame and the requested format",
+                "operationId": "getUndefinedShippingCostsCollectionReport",
                 "parameters": [
                     {
-                        "name": "filter[debtLineItemIds]",
+                        "name": "format",
+                        "in": "path",
+                        "description": "Export file format",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "xlsx",
+                                "csv"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter[dateFrom]",
                         "in": "query",
-                        "description": "debtLineItemIds filter",
-                        "required": false,
+                        "description": "dateFrom filter in UTC",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2022-01-01"
+                    },
+                    {
+                        "name": "filter[dateTo]",
+                        "in": "query",
+                        "description": "dateTo filter in UTC",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2023-01-01"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid format or timespan"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    },
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/report/debt-line-item.{format}": {
+            "get": {
+                "tags": [
+                    "report"
+                ],
+                "summary": "Get debtLineItems file export by projectId and time range",
+                "description": "Get debtLineItems file export by projectId and time range",
+                "operationId": "getDebtLineItemCollectionReport",
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "description": "Export file format",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "xlsx",
+                                "csv"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter[projectId]",
+                        "in": "query",
+                        "description": "projectId filter",
+                        "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[dateFrom]",
+                        "in": "query",
+                        "description": "dateFrom filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "filter[dateTo]",
+                        "in": "query",
+                        "description": "dateTo filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
                         }
                     }
                 ],
@@ -1114,9 +1378,14 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "application/json": {
+                            "text/csv": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/skuUsageDebtLineItemResourceCollection"
+                                    "type": "string"
+                                }
+                            },
+                            "text/xlsx": {
+                                "schema": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -1181,172 +1450,6 @@
                     }
                 ]
             }
-        },
-        "/event-sourcing/replay": {
-            "get": {
-                "tags": [
-                    "eventSourcingReplay"
-                ],
-                "summary": "Get the status of the event sourcing replay",
-                "description": "Get the status of the event sourcing replay",
-                "operationId": "getEventSourcingReplay",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "description": "status",
-                                            "type": "string",
-                                            "enum": [
-                                                "active",
-                                                "queued",
-                                                "inactive"
-                                            ]
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": []
-                    },
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "eventSourcingReplay"
-                ],
-                "summary": "Execute event sourcing replay (recalculates all DebtLineItems)",
-                "description": "Execute event sourcing replay (recalculates all DebtLineItems).\n\nPlease be aware of the effects a replay involves!\n- The replay does not affect DebtLineItems with an InvoiceNumber set.\n- Changes of the calculators/prices will affect non invoiced, past, events\nand therefore also the resulting DebtLineItems.\n- At the beginning/before the replay starts, every DebtLineItem,\nwhich is not invoiced yet/no InvoiceNumber set, gets deleted.",
-                "operationId": "postEventSourcingReplay",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "date": {
-                                            "description": "date",
-                                            "type": "string",
-                                            "format": "date-time"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Conflict",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": []
-                    },
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
         }
     },
     "components": {
@@ -1362,6 +1465,30 @@
                     }
                 },
                 "type": "object"
+            },
+            "informationResponse": {
+                "properties": {
+                    "information": {
+                        "description": "information",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/information"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "information": {
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/error"
+                    }
+                ]
             },
             "error": {
                 "required": [
@@ -1380,11 +1507,34 @@
                 },
                 "type": "object"
             },
-            "authRoleIdentityCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleIdentityResource"
-                }
+            "collection": {
+                "title": "collection",
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/collectionPagination"
+                    },
+                    "data": {
+                        "description": "",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "collectionPagination": {
+                "title": "collectionPagination",
+                "properties": {
+                    "page": {
+                        "description": "The page contained in this collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "description": "The page size used for reading the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "type": "object"
             },
             "authRoleIdentityResource": {
                 "required": [
@@ -1403,27 +1553,10 @@
                 },
                 "type": "object"
             },
-            "authPermissionResource": {
-                "required": [
-                    "permissionCode",
-                    "name"
-                ],
-                "properties": {
-                    "permissionCode": {
-                        "description": "Permission Code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "getAuthPermissionCollectionResponse": {
+            "authRoleIdentityCollection": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/components/schemas/authPermissionResource"
+                    "$ref": "#/components/schemas/authRoleIdentityResource"
                 }
             },
             "authRoleResource": {
@@ -1449,25 +1582,24 @@
                     "$ref": "#/components/schemas/authRoleResource"
                 }
             },
-            "skuUsageDebtLineItemResourceCollection": {
-                "description": "Class SkuUsageDebtLineItemResourceCollection",
+            "getAuthPermissionCollectionResponse": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/components/schemas/skuUsageDebtLineItemResource"
+                    "$ref": "#/components/schemas/authPermissionResource"
                 }
             },
-            "skuUsageDebtLineItemResource": {
+            "authPermissionResource": {
                 "required": [
-                    "skuUsageId",
-                    "debtLineItemId"
+                    "permissionCode",
+                    "name"
                 ],
                 "properties": {
-                    "skuUsageId": {
-                        "description": "skuUsageId",
+                    "permissionCode": {
+                        "description": "Permission Code",
                         "type": "string"
                     },
-                    "debtLineItemId": {
-                        "description": "debtLineItemId",
+                    "name": {
+                        "description": "Name",
                         "type": "string"
                     }
                 },
@@ -1510,7 +1642,12 @@
                         "format": "date-time"
                     },
                     "priceTotal": {
-                        "$ref": "#/components/schemas/priceProperty"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/priceProperty"
+                            }
+                        ],
+                        "nullable": true
                     },
                     "invoiceNumber": {
                         "description": "invoiceNumber",
@@ -1523,7 +1660,12 @@
                         "nullable": true
                     },
                     "pricePerUnit": {
-                        "$ref": "#/components/schemas/priceProperty"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/priceProperty"
+                            }
+                        ],
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -1549,6 +1691,30 @@
                 "items": {
                     "$ref": "#/components/schemas/debtLineItemResource"
                 }
+            },
+            "skuUsageDebtLineItemResourceCollection": {
+                "description": "Class SkuUsageDebtLineItemResourceCollection",
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/skuUsageDebtLineItemResource"
+                }
+            },
+            "skuUsageDebtLineItemResource": {
+                "required": [
+                    "skuUsageId",
+                    "debtLineItemId"
+                ],
+                "properties": {
+                    "skuUsageId": {
+                        "description": "skuUsageId",
+                        "type": "string"
+                    },
+                    "debtLineItemId": {
+                        "description": "debtLineItemId",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {

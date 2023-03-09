@@ -60,8 +60,11 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         if (\array_key_exists('usageEnd', $data)) {
             $object->setUsageEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageEnd']));
         }
-        if (\array_key_exists('priceTotal', $data)) {
-            $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty', 'json', $context));
+        if (\array_key_exists('priceTotal', $data) && $data['priceTotal'] !== null) {
+            $object->setPriceTotal($data['priceTotal']);
+        }
+        elseif (\array_key_exists('priceTotal', $data) && $data['priceTotal'] === null) {
+            $object->setPriceTotal(null);
         }
         if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
             $object->setInvoiceNumber($data['invoiceNumber']);
@@ -75,8 +78,11 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         elseif (\array_key_exists('unit', $data) && $data['unit'] === null) {
             $object->setUnit(null);
         }
-        if (\array_key_exists('pricePerUnit', $data)) {
-            $object->setPricePerUnit($this->denormalizer->denormalize($data['pricePerUnit'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty', 'json', $context));
+        if (\array_key_exists('pricePerUnit', $data) && $data['pricePerUnit'] !== null) {
+            $object->setPricePerUnit($data['pricePerUnit']);
+        }
+        elseif (\array_key_exists('pricePerUnit', $data) && $data['pricePerUnit'] === null) {
+            $object->setPricePerUnit(null);
         }
         return $object;
     }
@@ -95,7 +101,7 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
         $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
         if (null !== $object->getPriceTotal()) {
-            $data['priceTotal'] = $this->normalizer->normalize($object->getPriceTotal(), 'json', $context);
+            $data['priceTotal'] = $object->getPriceTotal();
         }
         if (null !== $object->getInvoiceNumber()) {
             $data['invoiceNumber'] = $object->getInvoiceNumber();
@@ -104,7 +110,7 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
             $data['unit'] = $object->getUnit();
         }
         if (null !== $object->getPricePerUnit()) {
-            $data['pricePerUnit'] = $this->normalizer->normalize($object->getPricePerUnit(), 'json', $context);
+            $data['pricePerUnit'] = $object->getPricePerUnit();
         }
         return $data;
     }

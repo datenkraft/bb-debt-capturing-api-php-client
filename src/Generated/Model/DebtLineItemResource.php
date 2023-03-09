@@ -43,7 +43,7 @@ class DebtLineItemResource
     /**
      * 
      *
-     * @var PriceProperty
+     * @var mixed|null
      */
     protected $priceTotal;
     /**
@@ -61,7 +61,7 @@ class DebtLineItemResource
     /**
      * 
      *
-     * @var PriceProperty
+     * @var mixed|null
      */
     protected $pricePerUnit;
     /**
@@ -193,20 +193,20 @@ class DebtLineItemResource
     /**
      * 
      *
-     * @return PriceProperty
+     * @return mixed
      */
-    public function getPriceTotal() : PriceProperty
+    public function getPriceTotal()
     {
         return $this->priceTotal;
     }
     /**
      * 
      *
-     * @param PriceProperty $priceTotal
+     * @param mixed $priceTotal
      *
      * @return self
      */
-    public function setPriceTotal(PriceProperty $priceTotal) : self
+    public function setPriceTotal($priceTotal) : self
     {
         $this->priceTotal = $priceTotal;
         return $this;
@@ -256,20 +256,20 @@ class DebtLineItemResource
     /**
      * 
      *
-     * @return PriceProperty
+     * @return mixed
      */
-    public function getPricePerUnit() : PriceProperty
+    public function getPricePerUnit()
     {
         return $this->pricePerUnit;
     }
     /**
      * 
      *
-     * @param PriceProperty $pricePerUnit
+     * @param mixed $pricePerUnit
      *
      * @return self
      */
-    public function setPricePerUnit(PriceProperty $pricePerUnit) : self
+    public function setPricePerUnit($pricePerUnit) : self
     {
         $this->pricePerUnit = $pricePerUnit;
         return $this;
