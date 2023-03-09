@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class GetDebtLineItemCollectionXlsxForbiddenException extends ForbiddenException
+class GetUndefinedShippingCostsCollectionReportUnauthorizedException extends UnauthorizedException
 {
     /**
      * @var \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
@@ -10,7 +10,7 @@ class GetDebtLineItemCollectionXlsxForbiddenException extends ForbiddenException
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Forbidden');
+        parent::__construct('Unauthorized');
         $this->errorResponse = $errorResponse;
     }
     public function getErrorResponse() : \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse

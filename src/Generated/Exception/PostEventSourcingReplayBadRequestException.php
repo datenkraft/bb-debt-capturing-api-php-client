@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class GetDebtLineItemCollectionXlsxBadRequestException extends BadRequestException
+class PostEventSourcingReplayBadRequestException extends BadRequestException
 {
     /**
      * @var \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
