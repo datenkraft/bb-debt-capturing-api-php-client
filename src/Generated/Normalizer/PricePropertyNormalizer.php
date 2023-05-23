@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class PricePropertyNormalizer implements DenormalizerInterface, NormalizerInterf
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty';
     }
@@ -36,20 +38,30 @@ class PricePropertyNormalizer implements DenormalizerInterface, NormalizerInterf
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\PriceProperty();
+        if (\array_key_exists('minorMicro', $data) && \is_int($data['minorMicro'])) {
+            $data['minorMicro'] = (double) $data['minorMicro'];
+        }
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('minorMicro', $data) && $data['minorMicro'] !== null) {
             $object->setMinorMicro($data['minorMicro']);
+            unset($data['minorMicro']);
         }
         elseif (\array_key_exists('minorMicro', $data) && $data['minorMicro'] === null) {
             $object->setMinorMicro(null);
         }
         if (\array_key_exists('currency', $data) && $data['currency'] !== null) {
             $object->setCurrency($data['currency']);
+            unset($data['currency']);
         }
         elseif (\array_key_exists('currency', $data) && $data['currency'] === null) {
             $object->setCurrency(null);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -59,11 +71,16 @@ class PricePropertyNormalizer implements DenormalizerInterface, NormalizerInterf
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getMinorMicro()) {
+        if ($object->isInitialized('minorMicro') && null !== $object->getMinorMicro()) {
             $data['minorMicro'] = $object->getMinorMicro();
         }
-        if (null !== $object->getCurrency()) {
+        if ($object->isInitialized('currency') && null !== $object->getCurrency()) {
             $data['currency'] = $object->getCurrency();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
         return $data;
     }

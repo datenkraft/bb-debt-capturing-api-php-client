@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class EventSourcingReplayPostBody
+class EventSourcingReplayPostBody extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Email to send info messages about the event sourcing replay to
      *
@@ -28,6 +36,7 @@ class EventSourcingReplayPostBody
      */
     public function setInfoMailAddress(string $infoMailAddress) : self
     {
+        $this->initialized['infoMailAddress'] = true;
         $this->infoMailAddress = $infoMailAddress;
         return $this;
     }
