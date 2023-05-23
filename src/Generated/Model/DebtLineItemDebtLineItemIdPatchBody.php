@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class DebtLineItemDebtLineItemIdPatchBody
+class DebtLineItemDebtLineItemIdPatchBody extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * invoiceNumber
      *
@@ -28,6 +36,7 @@ class DebtLineItemDebtLineItemIdPatchBody
      */
     public function setInvoiceNumber(string $invoiceNumber) : self
     {
+        $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
         return $this;
     }

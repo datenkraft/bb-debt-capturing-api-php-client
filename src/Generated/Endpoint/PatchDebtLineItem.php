@@ -47,30 +47,32 @@ class PatchDebtLineItem extends \Datenkraft\Backbone\Client\DebtCapturingApi\Gen
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
+     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemResource', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemUnauthorizedException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemUnauthorizedException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemForbiddenException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemForbiddenException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemNotFoundException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemNotFoundException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (mb_strpos($contentType, 'application/json') !== false) {
             return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json');

@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class EventSourcingReplayPostResponse200Normalizer implements DenormalizerInterf
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\EventSourcingReplayPostResponse200';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\EventSourcingReplayPostResponse200';
     }
@@ -41,6 +43,12 @@ class EventSourcingReplayPostResponse200Normalizer implements DenormalizerInterf
         }
         if (\array_key_exists('date', $data)) {
             $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
+            unset($data['date']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -50,8 +58,13 @@ class EventSourcingReplayPostResponse200Normalizer implements DenormalizerInterf
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getDate()) {
+        if ($object->isInitialized('date') && null !== $object->getDate()) {
             $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:sP');
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
         }
         return $data;
     }
