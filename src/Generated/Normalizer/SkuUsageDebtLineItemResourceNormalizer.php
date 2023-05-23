@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class SkuUsageDebtLineItemResourceNormalizer implements DenormalizerInterface, N
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\SkuUsageDebtLineItemResource';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\SkuUsageDebtLineItemResource';
     }
@@ -41,9 +43,16 @@ class SkuUsageDebtLineItemResourceNormalizer implements DenormalizerInterface, N
         }
         if (\array_key_exists('skuUsageId', $data)) {
             $object->setSkuUsageId($data['skuUsageId']);
+            unset($data['skuUsageId']);
         }
         if (\array_key_exists('debtLineItemId', $data)) {
             $object->setDebtLineItemId($data['debtLineItemId']);
+            unset($data['debtLineItemId']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -55,6 +64,11 @@ class SkuUsageDebtLineItemResourceNormalizer implements DenormalizerInterface, N
         $data = array();
         $data['skuUsageId'] = $object->getSkuUsageId();
         $data['debtLineItemId'] = $object->getDebtLineItemId();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
         return $data;
     }
 }
