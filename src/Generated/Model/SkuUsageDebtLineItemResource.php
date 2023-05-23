@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class SkuUsageDebtLineItemResource
+class SkuUsageDebtLineItemResource extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * skuUsageId
      *
@@ -34,6 +42,7 @@ class SkuUsageDebtLineItemResource
      */
     public function setSkuUsageId(string $skuUsageId) : self
     {
+        $this->initialized['skuUsageId'] = true;
         $this->skuUsageId = $skuUsageId;
         return $this;
     }
@@ -55,6 +64,7 @@ class SkuUsageDebtLineItemResource
      */
     public function setDebtLineItemId(string $debtLineItemId) : self
     {
+        $this->initialized['debtLineItemId'] = true;
         $this->debtLineItemId = $debtLineItemId;
         return $this;
     }

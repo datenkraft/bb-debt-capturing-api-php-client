@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class DebtLineItemResource
+class DebtLineItemResource extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * debtLineItemId
      *
@@ -82,6 +90,7 @@ class DebtLineItemResource
      */
     public function setDebtLineItemId(string $debtLineItemId) : self
     {
+        $this->initialized['debtLineItemId'] = true;
         $this->debtLineItemId = $debtLineItemId;
         return $this;
     }
@@ -103,6 +112,7 @@ class DebtLineItemResource
      */
     public function setSkuCode(string $skuCode) : self
     {
+        $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
         return $this;
     }
@@ -124,6 +134,7 @@ class DebtLineItemResource
      */
     public function setQuantity(?int $quantity) : self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
         return $this;
     }
@@ -145,6 +156,7 @@ class DebtLineItemResource
      */
     public function setProjectId(string $projectId) : self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
         return $this;
     }
@@ -166,6 +178,7 @@ class DebtLineItemResource
      */
     public function setUsageStart(\DateTime $usageStart) : self
     {
+        $this->initialized['usageStart'] = true;
         $this->usageStart = $usageStart;
         return $this;
     }
@@ -187,6 +200,7 @@ class DebtLineItemResource
      */
     public function setUsageEnd(\DateTime $usageEnd) : self
     {
+        $this->initialized['usageEnd'] = true;
         $this->usageEnd = $usageEnd;
         return $this;
     }
@@ -208,6 +222,7 @@ class DebtLineItemResource
      */
     public function setPriceTotal($priceTotal) : self
     {
+        $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;
         return $this;
     }
@@ -229,6 +244,7 @@ class DebtLineItemResource
      */
     public function setInvoiceNumber(?string $invoiceNumber) : self
     {
+        $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
         return $this;
     }
@@ -250,6 +266,7 @@ class DebtLineItemResource
      */
     public function setUnit(?string $unit) : self
     {
+        $this->initialized['unit'] = true;
         $this->unit = $unit;
         return $this;
     }
@@ -271,6 +288,7 @@ class DebtLineItemResource
      */
     public function setPricePerUnit($pricePerUnit) : self
     {
+        $this->initialized['pricePerUnit'] = true;
         $this->pricePerUnit = $pricePerUnit;
         return $this;
     }
