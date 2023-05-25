@@ -11,18 +11,18 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-class CollectionPaginationNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class NewInvoiceNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     public function supportsDenormalization($data, $type, $format = null) : bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\CollectionPagination';
+        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\NewInvoice';
     }
     public function supportsNormalization($data, $format = null) : bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\CollectionPagination';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\NewInvoice';
     }
     /**
      * @return mixed
@@ -35,21 +35,21 @@ class CollectionPaginationNormalizer implements DenormalizerInterface, Normalize
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\CollectionPagination();
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewInvoice();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('page', $data)) {
-            $object->setPage($data['page']);
+        if (\array_key_exists('projectId', $data)) {
+            $object->setProjectId($data['projectId']);
         }
-        if (\array_key_exists('pageSize', $data)) {
-            $object->setPageSize($data['pageSize']);
+        if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
+            $object->setInvoiceNumber($data['invoiceNumber']);
         }
-        if (\array_key_exists('totalCount', $data) && $data['totalCount'] !== null) {
-            $object->setTotalCount($data['totalCount']);
+        elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
+            $object->setInvoiceNumber(null);
         }
-        elseif (\array_key_exists('totalCount', $data) && $data['totalCount'] === null) {
-            $object->setTotalCount(null);
+        if (\array_key_exists('cutoffDate', $data)) {
+            $object->setCutoffDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['cutoffDate']));
         }
         return $object;
     }
@@ -59,15 +59,9 @@ class CollectionPaginationNormalizer implements DenormalizerInterface, Normalize
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getPage()) {
-            $data['page'] = $object->getPage();
-        }
-        if (null !== $object->getPageSize()) {
-            $data['pageSize'] = $object->getPageSize();
-        }
-        if (null !== $object->getTotalCount()) {
-            $data['totalCount'] = $object->getTotalCount();
-        }
+        $data['projectId'] = $object->getProjectId();
+        $data['invoiceNumber'] = $object->getInvoiceNumber();
+        $data['cutoffDate'] = $object->getCutoffDate()->format('Y-m-d\\TH:i:sP');
         return $data;
     }
 }
