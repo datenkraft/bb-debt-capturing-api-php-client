@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class DebtLineItemPatchBody extends \ArrayObject
+class UpdateInvoice extends \ArrayObject
 {
     /**
      * @var array
@@ -13,13 +13,13 @@ class DebtLineItemPatchBody extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * invoiceNumber
+     * The invoice number. Once set, not nullable anymore.
      *
      * @var string
      */
     protected $invoiceNumber;
     /**
-     * invoiceNumber
+     * The invoice number. Once set, not nullable anymore.
      *
      * @return string
      */
@@ -28,7 +28,7 @@ class DebtLineItemPatchBody extends \ArrayObject
         return $this->invoiceNumber;
     }
     /**
-     * invoiceNumber
+     * The invoice number. Once set, not nullable anymore.
      *
      * @param string $invoiceNumber
      *

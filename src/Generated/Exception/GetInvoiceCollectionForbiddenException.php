@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class PatchDebtLineItemUnauthorizedException extends UnauthorizedException
+class GetInvoiceCollectionForbiddenException extends ForbiddenException
 {
     /**
      * @var \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
@@ -14,7 +14,7 @@ class PatchDebtLineItemUnauthorizedException extends UnauthorizedException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Unauthorized');
+        parent::__construct('Forbidden');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
