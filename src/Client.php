@@ -7,7 +7,11 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi;
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 
-class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Client
+/**
+ * Class Client
+ * @package Datenkraft\Backbone\Client\DebtCapturingApi
+ */
+class Client extends Generated\Client
 {
     /**
      * @param ClientFactory $clientFactory
