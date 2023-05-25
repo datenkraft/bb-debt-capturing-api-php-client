@@ -63,6 +63,18 @@ $factory = new ClientFactory($config);
 $client = Client::createWithFactory($factory);
 ~~~~
 
+### Example Endpoint: Get Debt Line Item Collection
+~~~~ php
+$queryParams = [
+    'filter[projectId]' => 'projectId',
+    'filter[dateFrom]' => (new DateTime())->format(DateTimeInterface::ATOM),
+    'filter[dateTo]' => (new DateTime())->format(DateTimeInterface::ATOM),
+];
+
+$response = $client->getDebtLineItemCollection($queryParams);
+$response; // tasks[]
+
+~~~~
 
 ## Licence
 This repository is available under the [MIT license](https://opensource.org/licenses/MIT).
