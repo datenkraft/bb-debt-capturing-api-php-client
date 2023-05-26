@@ -75,12 +75,12 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         elseif (\array_key_exists('priceTotal', $data) && $data['priceTotal'] === null) {
             $object->setPriceTotal(null);
         }
-        if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
-            $object->setInvoiceNumber($data['invoiceNumber']);
-            unset($data['invoiceNumber']);
+        if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
+            $object->setInvoiceId($data['invoiceId']);
+            unset($data['invoiceId']);
         }
-        elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
-            $object->setInvoiceNumber(null);
+        elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
+            $object->setInvoiceId(null);
         }
         if (\array_key_exists('unit', $data) && $data['unit'] !== null) {
             $object->setUnit($data['unit']);
@@ -120,8 +120,8 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         if ($object->isInitialized('priceTotal') && null !== $object->getPriceTotal()) {
             $data['priceTotal'] = $object->getPriceTotal();
         }
-        if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
-            $data['invoiceNumber'] = $object->getInvoiceNumber();
+        if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
+            $data['invoiceId'] = $object->getInvoiceId();
         }
         if ($object->isInitialized('unit') && null !== $object->getUnit()) {
             $data['unit'] = $object->getUnit();

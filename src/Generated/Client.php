@@ -24,12 +24,95 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetSkuUsageDebtLineItemCollection($queryParameters), $fetch);
     }
     /**
+     * Get the invoice with the given invoice id.
+     *
+     * @param string $invoiceId invoice id
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceNotFoundException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function getInvoice(string $invoiceId, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetInvoice($invoiceId), $fetch);
+    }
+    /**
+     * Updates some fields on an invoice. Only a limited set of fields can be updated
+     *
+     * @param string $invoiceId invoice id
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\UpdateInvoice $requestBody 
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceBadRequestException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceNotFoundException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceConflictException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function patchInvoice(string $invoiceId, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\UpdateInvoice $requestBody, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PatchInvoice($invoiceId, $requestBody), $fetch);
+    }
+    /**
+    * Get a list of invoices.
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 20.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+                   
+    *     @var string $filter[projectId] Project id filter
+    *     @var string $filter[invoiceNumber] Invoice number filter
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionNotFoundException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getInvoiceCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetInvoiceCollection($queryParameters), $fetch);
+    }
+    /**
+     * Add a new invoice.
+     *
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewInvoice $requestBody 
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceBadRequestException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceNotFoundException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceConflictException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function postInvoice(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewInvoice $requestBody, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PostInvoice($requestBody), $fetch);
+    }
+    /**
      * Get debtLineItems by projectId and time range
      *
      * @param array $queryParameters {
      *     @var string $filter[projectId] projectId filter
      *     @var string $filter[dateFrom] dateFrom filter
      *     @var string $filter[dateTo] dateTo filter
+     *     @var string $filter[invoiceId] invoiceId filter
      * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionBadRequestException
@@ -43,29 +126,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     public function getDebtLineItemCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCollection($queryParameters), $fetch);
-    }
-    /**
-     * Update debtLineItems by projectId and time range where the invoiceNumber is not already set
-     *
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemPatchBody $requestBody 
-     * @param array $queryParameters {
-     *     @var string $filter[projectId] projectId filter
-     *     @var string $filter[dateFrom] dateFrom filter
-     *     @var string $filter[dateTo] dateTo filter
-     * }
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionBadRequestException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionConflictException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function patchDebtLineItemCollection(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemPatchBody $requestBody, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PatchDebtLineItemCollection($requestBody, $queryParameters), $fetch);
     }
     /**
      * Get a debtLineItem by debtLineItemId
@@ -84,26 +144,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     public function getDebtLineItem(string $debtLineItemId, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItem($debtLineItemId), $fetch);
-    }
-    /**
-     * Update a debtLineItem by debtLineItemId
-     *
-     * @param string $debtLineItemId debtLineItemId
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemDebtLineItemIdPatchBody $requestBody 
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemBadRequestException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemForbiddenException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemNotFoundException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemConflictException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchDebtLineItemInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function patchDebtLineItem(string $debtLineItemId, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemDebtLineItemIdPatchBody $requestBody, string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PatchDebtLineItem($debtLineItemId, $requestBody), $fetch);
     }
     /**
      * Get a list of undefined shipping costs in the specified time frame and the requested format
@@ -166,11 +206,11 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * Execute event sourcing replay (recalculates all DebtLineItems).
     
     Please be aware of the effects a replay involves!
-    - The replay does not affect DebtLineItems with an InvoiceNumber set.
+    - The replay does not affect DebtLineItems with an Invoice_Id set.
     - Changes of the calculators/prices will affect non invoiced, past, events
     and therefore also the resulting DebtLineItems.
     - At the beginning/before the replay starts, every DebtLineItem,
-    which is not invoiced yet/no InvoiceNumber set, gets deleted.
+    which is not invoiced yet/no Invoice_Id set, gets deleted.
     *
     * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody $requestBody 
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)

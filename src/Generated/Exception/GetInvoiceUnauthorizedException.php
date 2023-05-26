@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class PatchDebtLineItemCollectionInternalServerErrorException extends InternalServerErrorException
+class GetInvoiceUnauthorizedException extends UnauthorizedException
 {
     /**
      * @var \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
@@ -14,7 +14,7 @@ class PatchDebtLineItemCollectionInternalServerErrorException extends InternalSe
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Server error');
+        parent::__construct('Unauthorized');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }

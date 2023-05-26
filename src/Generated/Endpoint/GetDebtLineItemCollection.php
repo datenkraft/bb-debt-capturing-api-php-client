@@ -11,6 +11,7 @@ class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturin
      *     @var string $filter[projectId] projectId filter
      *     @var string $filter[dateFrom] dateFrom filter
      *     @var string $filter[dateTo] dateTo filter
+     *     @var string $filter[invoiceId] invoiceId filter
      * }
      */
     public function __construct(array $queryParameters = array())
@@ -37,12 +38,13 @@ class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturin
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]'));
+        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]', 'filter[invoiceId]'));
         $optionsResolver->setRequired(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]'));
         $optionsResolver->setDefaults(array());
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[dateFrom]', array('string'));
         $optionsResolver->addAllowedTypes('filter[dateTo]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[invoiceId]', array('string'));
         return $optionsResolver;
     }
     /**

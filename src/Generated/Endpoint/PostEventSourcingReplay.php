@@ -8,11 +8,11 @@ class PostEventSourcingReplay extends \Datenkraft\Backbone\Client\DebtCapturingA
     * Execute event sourcing replay (recalculates all DebtLineItems).
     
     Please be aware of the effects a replay involves!
-    - The replay does not affect DebtLineItems with an InvoiceNumber set.
+    - The replay does not affect DebtLineItems with an Invoice_Id set.
     - Changes of the calculators/prices will affect non invoiced, past, events
     and therefore also the resulting DebtLineItems.
     - At the beginning/before the replay starts, every DebtLineItem,
-    which is not invoiced yet/no InvoiceNumber set, gets deleted.
+    which is not invoiced yet/no Invoice_Id set, gets deleted.
     *
     * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody $requestBody 
     */

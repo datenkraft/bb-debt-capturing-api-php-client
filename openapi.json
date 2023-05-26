@@ -103,6 +103,448 @@
                 ]
             }
         },
+        "/invoice/{invoiceId}": {
+            "get": {
+                "tags": [
+                    "invoice"
+                ],
+                "summary": "Get the invoice with the given invoice id.",
+                "description": "Get the invoice with the given invoice id.",
+                "operationId": "getInvoice",
+                "parameters": [
+                    {
+                        "name": "invoiceId",
+                        "in": "path",
+                        "description": "invoice id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/invoice"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [],
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "invoice"
+                ],
+                "summary": "Update an invoice.",
+                "description": "Updates some fields on an invoice. Only a limited set of fields can be updated",
+                "operationId": "patchInvoice",
+                "parameters": [
+                    {
+                        "name": "invoiceId",
+                        "in": "path",
+                        "description": "invoice id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updateInvoice"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/invoice"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [],
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/invoice": {
+            "get": {
+                "tags": [
+                    "invoice"
+                ],
+                "summary": "Get a list of invoices.",
+                "description": "Get a list of invoices.",
+                "operationId": "getInvoiceCollection",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The page to read. Default is the first page.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "The maximum size per page is 100. Default is 20.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 20
+                    },
+                    {
+                        "name": "paginationMode",
+                        "in": "query",
+                        "description": "The paginationMode to use:\n- default: The total number of items in the collection will not be calculated.\n- totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.\n                ",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "default",
+                            "enum": [
+                                "default",
+                                "totalCount"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter[projectId]",
+                        "in": "query",
+                        "description": "Project id filter",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[invoiceNumber]",
+                        "in": "query",
+                        "description": "Invoice number filter",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/invoiceCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [],
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "invoice"
+                ],
+                "summary": "Add a new invoice.",
+                "description": "Add a new invoice.",
+                "operationId": "postInvoice",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/newInvoice"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/invoice"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [],
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/debt-line-item": {
             "get": {
                 "tags": [
@@ -140,133 +582,16 @@
                             "type": "string",
                             "format": "date-time"
                         }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/getDebtLineItemCollectionResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": []
                     },
                     {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "patch": {
-                "tags": [
-                    "debtLineItem"
-                ],
-                "summary": "Update debtLineItems by projectId and time range where the invoiceNumber is not already set",
-                "description": "Update debtLineItems by projectId and time range where the invoiceNumber is not already set",
-                "operationId": "patchDebtLineItemCollection",
-                "parameters": [
-                    {
-                        "name": "filter[projectId]",
+                        "name": "filter[invoiceId]",
                         "in": "query",
-                        "description": "projectId filter",
-                        "required": true,
+                        "description": "invoiceId filter",
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
-                        "name": "filter[dateFrom]",
-                        "in": "query",
-                        "description": "dateFrom filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    },
-                    {
-                        "name": "filter[dateTo]",
-                        "in": "query",
-                        "description": "dateTo filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "invoiceNumber": {
-                                        "description": "invoiceNumber",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -300,16 +625,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Conflict",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -411,131 +726,6 @@
                     },
                     "404": {
                         "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": []
-                    },
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "patch": {
-                "tags": [
-                    "debtLineItem"
-                ],
-                "summary": "Update a debtLineItem by debtLineItemId",
-                "description": "Update a debtLineItem by debtLineItemId",
-                "operationId": "patchDebtLineItem",
-                "parameters": [
-                    {
-                        "name": "debtLineItemId",
-                        "in": "path",
-                        "description": "debtLineItemId",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "invoiceNumber": {
-                                        "description": "invoiceNumber",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/debtLineItemResource"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Conflict",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -892,7 +1082,7 @@
                     "eventSourcingReplay"
                 ],
                 "summary": "Execute event sourcing replay (recalculates all DebtLineItems)",
-                "description": "Execute event sourcing replay (recalculates all DebtLineItems).\n\nPlease be aware of the effects a replay involves!\n- The replay does not affect DebtLineItems with an InvoiceNumber set.\n- Changes of the calculators/prices will affect non invoiced, past, events\nand therefore also the resulting DebtLineItems.\n- At the beginning/before the replay starts, every DebtLineItem,\nwhich is not invoiced yet/no InvoiceNumber set, gets deleted.",
+                "description": "Execute event sourcing replay (recalculates all DebtLineItems).\n\nPlease be aware of the effects a replay involves!\n- The replay does not affect DebtLineItems with an Invoice_Id set.\n- Changes of the calculators/prices will affect non invoiced, past, events\nand therefore also the resulting DebtLineItems.\n- At the beginning/before the replay starts, every DebtLineItem,\nwhich is not invoiced yet/no Invoice_Id set, gets deleted.",
                 "operationId": "postEventSourcingReplay",
                 "requestBody": {
                     "required": false,
@@ -2328,6 +2518,107 @@
                 "type": "object",
                 "additionalProperties": {}
             },
+            "invoiceCollection": {
+                "title": "invoiceCollection",
+                "description": "A collection of invoices",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/collection"
+                    },
+                    {
+                        "properties": {
+                            "data": {
+                                "description": "",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/invoice"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "baseInvoice": {
+                "required": [
+                    "projectId",
+                    "invoiceNumber",
+                    "cutoffDate"
+                ],
+                "properties": {
+                    "projectId": {
+                        "description": "Project id",
+                        "type": "string"
+                    },
+                    "invoiceNumber": {
+                        "description": "The invoice number, may be null.",
+                        "type": "string",
+                        "maxLength": 255,
+                        "nullable": true
+                    },
+                    "cutoffDate": {
+                        "description": "The invoice includes all DebtLineItems with a usageStart and usageEnd date less or equal than the cutoff date, which existed and were not already invoiced at the time of processing the invoice.",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "invoice": {
+                "required": [
+                    "invoiceId",
+                    "projectId",
+                    "invoiceStatus",
+                    "invoiceNumber",
+                    "cutoffDate"
+                ],
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/baseInvoice"
+                    },
+                    {
+                        "properties": {
+                            "invoiceId": {
+                                "description": "Invoice id",
+                                "type": "string"
+                            },
+                            "invoiceStatus": {
+                                "description": "The invoice status with the following possible values:\n- processing: only initially set before the DebtLineItems have been linked with the invoice.\n- completed: all DebtLineItems have been linked to the invoice.\n                    ",
+                                "type": "string",
+                                "enum": [
+                                    "processing",
+                                    "completed"
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "newInvoice": {
+                "required": [
+                    "projectId",
+                    "cutoffDate"
+                ],
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/baseInvoice"
+                    }
+                ]
+            },
+            "updateInvoice": {
+                "required": [
+                    "invoiceNumber"
+                ],
+                "properties": {
+                    "invoiceNumber": {
+                        "description": "The invoice number. Once set, not nullable anymore.",
+                        "type": "string",
+                        "maxLength": 255
+                    }
+                },
+                "type": "object"
+            },
             "debtLineItemResource": {
                 "required": [
                     "debtLineItemId",
@@ -2372,8 +2663,8 @@
                         ],
                         "nullable": true
                     },
-                    "invoiceNumber": {
-                        "description": "invoiceNumber",
+                    "invoiceId": {
+                        "description": "invoiceId",
                         "type": "string",
                         "nullable": true
                     },

@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-class DebtLineItemDebtLineItemIdPatchBodyNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class BaseInvoiceNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -20,11 +20,11 @@ class DebtLineItemDebtLineItemIdPatchBodyNormalizer implements DenormalizerInter
     use ValidatorTrait;
     public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemDebtLineItemIdPatchBody';
+        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\BaseInvoice';
     }
     public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemDebtLineItemIdPatchBody';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\BaseInvoice';
     }
     /**
      * @return mixed
@@ -37,13 +37,24 @@ class DebtLineItemDebtLineItemIdPatchBodyNormalizer implements DenormalizerInter
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemDebtLineItemIdPatchBody();
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\BaseInvoice();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('invoiceNumber', $data)) {
+        if (\array_key_exists('projectId', $data)) {
+            $object->setProjectId($data['projectId']);
+            unset($data['projectId']);
+        }
+        if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
             $object->setInvoiceNumber($data['invoiceNumber']);
             unset($data['invoiceNumber']);
+        }
+        elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
+            $object->setInvoiceNumber(null);
+        }
+        if (\array_key_exists('cutoffDate', $data)) {
+            $object->setCutoffDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['cutoffDate']));
+            unset($data['cutoffDate']);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -58,9 +69,9 @@ class DebtLineItemDebtLineItemIdPatchBodyNormalizer implements DenormalizerInter
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
-            $data['invoiceNumber'] = $object->getInvoiceNumber();
-        }
+        $data['projectId'] = $object->getProjectId();
+        $data['invoiceNumber'] = $object->getInvoiceNumber();
+        $data['cutoffDate'] = $object->getCutoffDate()->format('Y-m-d\\TH:i:sP');
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $data[$key] = $value;

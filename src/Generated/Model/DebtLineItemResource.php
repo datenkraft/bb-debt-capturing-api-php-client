@@ -55,11 +55,11 @@ class DebtLineItemResource extends \ArrayObject
      */
     protected $priceTotal;
     /**
-     * invoiceNumber
+     * invoiceId
      *
      * @var string|null
      */
-    protected $invoiceNumber;
+    protected $invoiceId;
     /**
      * Unit
      *
@@ -227,25 +227,25 @@ class DebtLineItemResource extends \ArrayObject
         return $this;
     }
     /**
-     * invoiceNumber
+     * invoiceId
      *
      * @return string|null
      */
-    public function getInvoiceNumber() : ?string
+    public function getInvoiceId() : ?string
     {
-        return $this->invoiceNumber;
+        return $this->invoiceId;
     }
     /**
-     * invoiceNumber
+     * invoiceId
      *
-     * @param string|null $invoiceNumber
+     * @param string|null $invoiceId
      *
      * @return self
      */
-    public function setInvoiceNumber(?string $invoiceNumber) : self
+    public function setInvoiceId(?string $invoiceId) : self
     {
-        $this->initialized['invoiceNumber'] = true;
-        $this->invoiceNumber = $invoiceNumber;
+        $this->initialized['invoiceId'] = true;
+        $this->invoiceId = $invoiceId;
         return $this;
     }
     /**
