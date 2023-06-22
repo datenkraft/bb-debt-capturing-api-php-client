@@ -5,15 +5,17 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint;
 class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\Endpoint
 {
     /**
-     * Get debtLineItems by projectId and time range
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[projectId] projectId filter
-     *     @var string $filter[dateFrom] dateFrom filter
-     *     @var string $filter[dateTo] dateTo filter
-     *     @var string $filter[invoiceId] invoiceId filter
-     * }
-     */
+    * Get debtLineItems by projectId and time range
+    *
+    * @param array $queryParameters {
+    *     @var string $filter[projectId] projectId filter
+    *     @var string $filter[dateFrom] dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
+              given.
+    *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
+              given.
+    *     @var string $filter[invoiceId] invoiceId filter
+    * }
+    */
     public function __construct(array $queryParameters = array())
     {
         $this->queryParameters = $queryParameters;
@@ -39,7 +41,7 @@ class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturin
     {
         $optionsResolver = parent::getQueryOptionsResolver();
         $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]', 'filter[invoiceId]'));
-        $optionsResolver->setRequired(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]'));
+        $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array());
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[dateFrom]', array('string'));
