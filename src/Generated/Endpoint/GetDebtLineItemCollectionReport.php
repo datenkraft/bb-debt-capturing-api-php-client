@@ -4,22 +4,23 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint;
 
 class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\Endpoint
 {
-    protected $format;
     protected $accept;
     /**
-     * Get debtLineItems file export by projectId and time range
-     *
-     * @param string $format Export file format
-     * @param array $queryParameters {
-     *     @var string $filter[projectId] projectId filter
-     *     @var string $filter[dateFrom] dateFrom filter
-     *     @var string $filter[dateTo] dateTo filter
-     * }
-     * @param array $accept Accept content header text/csv|text/xlsx|application/json
-     */
-    public function __construct(string $format, array $queryParameters = array(), array $accept = array())
+    * Get debtLineItems file export by projectId and time range.
+           The file type is controlled by the accept header.
+    *
+    * @param array $queryParameters {
+    *     @var string $filter[projectId] This filter restricts the data by the project id.
+    *     @var string $filter[dateFrom] This filter enables retrieval of data starting from a specified date in UTC.
+                   The filters dateFrom and dateTo are required unless an invoiceId filter is given.
+    *     @var string $filter[dateTo] This filter enables retrieval of data ending up to a specified date in UTC.
+                   The filters dateFrom and dateTo are required unless an invoiceId filter is given.
+    *     @var string $filter[invoiceId] This filter restricts the data by the invoice id.
+    * }
+    * @param array $accept Accept content header text/csv|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/json
+    */
+    public function __construct(array $queryParameters = array(), array $accept = array())
     {
-        $this->format = $format;
         $this->queryParameters = $queryParameters;
         $this->accept = $accept;
     }
@@ -30,7 +31,7 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
     }
     public function getUri() : string
     {
-        return str_replace(array('{format}'), array($this->format), '/report/debt-line-item.{format}');
+        return '/report/debt-line-item';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
@@ -39,19 +40,20 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
     public function getExtraHeaders() : array
     {
         if (empty($this->accept)) {
-            return array('Accept' => array('text/csv', 'text/xlsx', 'application/json'));
+            return array('Accept' => array('text/csv', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/json'));
         }
         return $this->accept;
     }
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]'));
-        $optionsResolver->setRequired(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]'));
+        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]', 'filter[invoiceId]'));
+        $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array());
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[dateFrom]', array('string'));
         $optionsResolver->addAllowedTypes('filter[dateTo]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[invoiceId]', array('string'));
         return $optionsResolver;
     }
     /**
@@ -60,6 +62,7 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportConflictException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -79,6 +82,9 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportForbiddenException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
+        }
+        if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
