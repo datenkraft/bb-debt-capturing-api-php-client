@@ -4,19 +4,17 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint;
 
 class GetUndefinedShippingCostsCollectionReport extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\Endpoint
 {
-    protected $format;
     /**
-     * Get a list of undefined shipping costs in the specified time frame and the requested format
-     *
-     * @param string $format Export file format
-     * @param array $queryParameters {
-     *     @var string $filter[dateFrom] dateFrom filter in UTC
-     *     @var string $filter[dateTo] dateTo filter in UTC
-     * }
-     */
-    public function __construct(string $format, array $queryParameters = array())
+    * Get a list of undefined shipping costs in the specified time frame and the requested format.
+           The file type is controlled by the accept header.
+    *
+    * @param array $queryParameters {
+    *     @var string $filter[dateFrom] This filter enables retrieval of data starting from a specified date in UTC.
+    *     @var string $filter[dateTo] This filter enables retrieval of data ending up to a specified date in UTC.
+    * }
+    */
+    public function __construct(array $queryParameters = array())
     {
-        $this->format = $format;
         $this->queryParameters = $queryParameters;
     }
     use \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\EndpointTrait;
@@ -26,7 +24,7 @@ class GetUndefinedShippingCostsCollectionReport extends \Datenkraft\Backbone\Cli
     }
     public function getUri() : string
     {
-        return str_replace(array('{format}'), array($this->format), '/report/undefined-shipping-costs.{format}');
+        return '/report/undefined-shipping-costs';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
@@ -52,6 +50,7 @@ class GetUndefinedShippingCostsCollectionReport extends \Datenkraft\Backbone\Cli
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportConflictException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -60,16 +59,18 @@ class GetUndefinedShippingCostsCollectionReport extends \Datenkraft\Backbone\Cli
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
-            return null;
         }
-        if (400 === $status) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportBadRequestException();
+        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportUnauthorizedException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportForbiddenException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
+        }
+        if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetUndefinedShippingCostsCollectionReportInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'));
