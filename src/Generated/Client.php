@@ -458,6 +458,36 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCollectionReport($queryParameters, $accept), $fetch);
     }
     /**
+    * 
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 20.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+                   
+    *     @var string $filter[projectId] Mandatory filter for the project id
+    *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
+    *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
+    *     @var string $filter[invoiceNumber] Comma delimited string of invoice numbers
+    *     @var string $filter[metaKey] Key of the meta field (required with metaValue)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
+    *     @var string $filter[metaValue] Value of the meta field (required with metaKey)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getReportDebtLineItemCollectionAggregated(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetReportDebtLineItemCollectionAggregated($queryParameters), $fetch);
+    }
+    /**
     * Get a list of undefined shipping costs in the specified time frame and the requested format.
            The file type is controlled by the accept header.
     *
