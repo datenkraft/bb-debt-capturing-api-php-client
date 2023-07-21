@@ -470,7 +470,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     *     @var string $filter[projectId] Mandatory filter for the project id
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
     *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
-    *     @var string $filter[invoiceNumber] Comma delimited string of invoice numbers
+    *     @var string $filter[invoiceId] Comma delimited string of invoice ids
     *     @var string $filter[metaKey] Key of the meta field (required with metaValue)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     *     @var string $filter[metaValue] Value of the meta field (required with metaKey)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     * }
