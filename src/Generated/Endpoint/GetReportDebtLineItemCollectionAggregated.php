@@ -17,7 +17,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     *     @var string $filter[projectId] Mandatory filter for the project id
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
     *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
-    *     @var string $filter[invoiceNumber] Comma delimited string of invoice numbers
+    *     @var string $filter[invoiceId] Comma delimited string of invoice ids
     *     @var string $filter[metaKey] Key of the meta field (required with metaValue)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     *     @var string $filter[metaValue] Value of the meta field (required with metaKey)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     * }
@@ -46,7 +46,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceNumber]', 'filter[metaKey]', 'filter[metaValue]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceId]', 'filter[metaKey]', 'filter[metaValue]'));
         $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->setAllowedTypes('page', array('int'));
@@ -55,7 +55,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
         $optionsResolver->setAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[usageStart]', array('string'));
         $optionsResolver->setAllowedTypes('filter[usageEnd]', array('string'));
-        $optionsResolver->setAllowedTypes('filter[invoiceNumber]', array('string'));
+        $optionsResolver->setAllowedTypes('filter[invoiceId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[metaKey]', array('string'));
         $optionsResolver->setAllowedTypes('filter[metaValue]', array('string'));
         return $optionsResolver;
