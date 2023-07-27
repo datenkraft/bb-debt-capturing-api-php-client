@@ -43,6 +43,12 @@ class DebtLineItemAggregated extends \ArrayObject
      */
     protected $priceTotal;
     /**
+     * 
+     *
+     * @var PriceProperty
+     */
+    protected $pricePerUnit;
+    /**
      * Id of the invoice (internal usage)
      *
      * @var string|null
@@ -168,6 +174,28 @@ class DebtLineItemAggregated extends \ArrayObject
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return PriceProperty
+     */
+    public function getPricePerUnit() : PriceProperty
+    {
+        return $this->pricePerUnit;
+    }
+    /**
+     * 
+     *
+     * @param PriceProperty $pricePerUnit
+     *
+     * @return self
+     */
+    public function setPricePerUnit(PriceProperty $pricePerUnit) : self
+    {
+        $this->initialized['pricePerUnit'] = true;
+        $this->pricePerUnit = $pricePerUnit;
         return $this;
     }
     /**

@@ -15,9 +15,10 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
                    
     *     @var string $filter[projectId] Mandatory filter for the project id
+    *     @var string $filter[skuCode] Like Search for the sku code
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
     *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
-    *     @var string $filter[invoiceId] Comma delimited string of invoice ids
+    *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
     *     @var string $filter[metaKey] Key of the meta field (required with metaValue)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     *     @var string $filter[metaValue] Value of the meta field (required with metaKey)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     * }
@@ -46,16 +47,17 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceId]', 'filter[metaKey]', 'filter[metaValue]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]'));
         $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->addAllowedTypes('page', array('int'));
         $optionsResolver->addAllowedTypes('pageSize', array('int'));
         $optionsResolver->addAllowedTypes('paginationMode', array('string'));
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[skuCode]', array('string'));
         $optionsResolver->addAllowedTypes('filter[usageStart]', array('string'));
         $optionsResolver->addAllowedTypes('filter[usageEnd]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[invoiceId]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[invoiceIds]', array('string'));
         $optionsResolver->addAllowedTypes('filter[metaKey]', array('string'));
         $optionsResolver->addAllowedTypes('filter[metaValue]', array('string'));
         return $optionsResolver;
