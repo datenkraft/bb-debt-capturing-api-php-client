@@ -54,6 +54,9 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
         if (\array_key_exists('priceTotal', $data)) {
             $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty', 'json', $context));
         }
+        if (\array_key_exists('pricePerUnit', $data)) {
+            $object->setPricePerUnit($this->denormalizer->denormalize($data['pricePerUnit'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\PriceProperty', 'json', $context));
+        }
         if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
             $object->setInvoiceId($data['invoiceId']);
         }
@@ -86,6 +89,9 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
         $data['usageStart'] = $object->getUsageStart()->format('Y-m-d');
         $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d');
         $data['priceTotal'] = $this->normalizer->normalize($object->getPriceTotal(), 'json', $context);
+        if (null !== $object->getPricePerUnit()) {
+            $data['pricePerUnit'] = $this->normalizer->normalize($object->getPricePerUnit(), 'json', $context);
+        }
         if (null !== $object->getInvoiceId()) {
             $data['invoiceId'] = $object->getInvoiceId();
         }
