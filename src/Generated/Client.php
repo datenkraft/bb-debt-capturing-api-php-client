@@ -239,7 +239,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
               given.
     *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
               given.
-    *     @var string $filter[invoiceId] invoiceId filter
+    *     @var string $filter[invoiceIds] invoiceId filter
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionBadRequestException
@@ -440,7 +440,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
     *     @var string $filter[dateTo] This filter enables retrieval of data ending up to a specified date in UTC.
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[invoiceId] This filter restricts the data by the invoice id.
+    *     @var string $filter[invoiceIds] This filter restricts the data by the invoice id.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportBadRequestException
@@ -467,9 +467,10 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
                    
     *     @var string $filter[projectId] Mandatory filter for the project id
+    *     @var string $filter[skuCode] Like Search for the sku code
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
     *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
-    *     @var string $filter[invoiceId] Comma delimited string of invoice ids
+    *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
     *     @var string $filter[metaKey] Key of the meta field (required with metaValue)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     *     @var string $filter[metaValue] Value of the meta field (required with metaKey)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
     * }

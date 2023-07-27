@@ -13,7 +13,7 @@ class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturin
               given.
     *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
               given.
-    *     @var string $filter[invoiceId] invoiceId filter
+    *     @var string $filter[invoiceIds] invoiceId filter
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -40,13 +40,13 @@ class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturin
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]', 'filter[invoiceId]'));
+        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]', 'filter[invoiceIds]'));
         $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array());
         $optionsResolver->setAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[dateFrom]', array('string'));
         $optionsResolver->setAllowedTypes('filter[dateTo]', array('string'));
-        $optionsResolver->setAllowedTypes('filter[invoiceId]', array('string'));
+        $optionsResolver->setAllowedTypes('filter[invoiceIds]', array('string'));
         return $optionsResolver;
     }
     /**

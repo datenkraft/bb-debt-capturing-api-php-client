@@ -14,7 +14,7 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
     *     @var string $filter[dateTo] This filter enables retrieval of data ending up to a specified date in UTC.
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[invoiceId] This filter restricts the data by the invoice id.
+    *     @var string $filter[invoiceIds] This filter restricts the data by the invoice id.
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -41,13 +41,13 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]', 'filter[invoiceId]'));
+        $optionsResolver->setDefined(array('filter[projectId]', 'filter[dateFrom]', 'filter[dateTo]', 'filter[invoiceIds]'));
         $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array());
         $optionsResolver->setAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[dateFrom]', array('string'));
         $optionsResolver->setAllowedTypes('filter[dateTo]', array('string'));
-        $optionsResolver->setAllowedTypes('filter[invoiceId]', array('string'));
+        $optionsResolver->setAllowedTypes('filter[invoiceIds]', array('string'));
         return $optionsResolver;
     }
     /**
