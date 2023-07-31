@@ -114,11 +114,13 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
         if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
             $data['invoiceNumber'] = $object->getInvoiceNumber();
         }
-        $values = array();
-        foreach ($object->getSkuUsages() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
+        if ($object->isInitialized('skuUsages') && null !== $object->getSkuUsages()) {
+            $values = array();
+            foreach ($object->getSkuUsages() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['skuUsages'] = $values;
         }
-        $data['skuUsages'] = $values;
         foreach ($object as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $data[$key] = $value_1;
