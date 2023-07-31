@@ -98,11 +98,13 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
         if (null !== $object->getInvoiceNumber()) {
             $data['invoiceNumber'] = $object->getInvoiceNumber();
         }
-        $values = array();
-        foreach ($object->getSkuUsages() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
+        if (null !== $object->getSkuUsages()) {
+            $values = array();
+            foreach ($object->getSkuUsages() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['skuUsages'] = $values;
         }
-        $data['skuUsages'] = $values;
         return $data;
     }
 }
