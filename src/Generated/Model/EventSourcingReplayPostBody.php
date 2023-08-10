@@ -19,6 +19,12 @@ class EventSourcingReplayPostBody extends \ArrayObject
      */
     protected $infoMailAddress;
     /**
+     * Array of projectIds specifying the projects for which the DebtLineItems should be replayed
+     *
+     * @var string[]
+     */
+    protected $projectIds;
+    /**
      * Email to send info messages about the event sourcing replay to
      *
      * @return string
@@ -38,6 +44,28 @@ class EventSourcingReplayPostBody extends \ArrayObject
     {
         $this->initialized['infoMailAddress'] = true;
         $this->infoMailAddress = $infoMailAddress;
+        return $this;
+    }
+    /**
+     * Array of projectIds specifying the projects for which the DebtLineItems should be replayed
+     *
+     * @return string[]
+     */
+    public function getProjectIds() : array
+    {
+        return $this->projectIds;
+    }
+    /**
+     * Array of projectIds specifying the projects for which the DebtLineItems should be replayed
+     *
+     * @param string[] $projectIds
+     *
+     * @return self
+     */
+    public function setProjectIds(array $projectIds) : self
+    {
+        $this->initialized['projectIds'] = true;
+        $this->projectIds = $projectIds;
         return $this;
     }
 }
