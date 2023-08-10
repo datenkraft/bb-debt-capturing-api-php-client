@@ -42,6 +42,13 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
         if (\array_key_exists('infoMailAddress', $data)) {
             $object->setInfoMailAddress($data['infoMailAddress']);
         }
+        if (\array_key_exists('projectIds', $data)) {
+            $values = array();
+            foreach ($data['projectIds'] as $value) {
+                $values[] = $value;
+            }
+            $object->setProjectIds($values);
+        }
         return $object;
     }
     /**
@@ -52,6 +59,13 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
         $data = array();
         if (null !== $object->getInfoMailAddress()) {
             $data['infoMailAddress'] = $object->getInfoMailAddress();
+        }
+        if (null !== $object->getProjectIds()) {
+            $values = array();
+            foreach ($object->getProjectIds() as $value) {
+                $values[] = $value;
+            }
+            $data['projectIds'] = $values;
         }
         return $data;
     }
