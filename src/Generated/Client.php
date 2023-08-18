@@ -441,7 +441,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
     *     @var string $filter[dateTo] This filter enables retrieval of data ending up to a specified date in UTC.
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[invoiceIds] This filter restricts the data by the invoice id.
+    *     @var string $filter[invoiceId] This filter restricts the data by the invoice id.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportBadRequestException
