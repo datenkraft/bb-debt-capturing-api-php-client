@@ -19,8 +19,8 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
     *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
     *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
-    *     @var string $filter[metaKey] Key of the meta field (required with metaValue)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
-    *     @var string $filter[metaValue] Value of the meta field (required with metaKey)<br>This filter has usually no effect on the prices and their sum,since prices are calculated for debt line items and not single sku usages!
+    *     @var string $filter[metaKey] Key of the skuUsage meta field (required with metaValue)
+    *     @var string $filter[metaValue] Value of the skuUsage meta field (required with metaKey)
     * }
     */
     public function __construct(array $queryParameters = array())
