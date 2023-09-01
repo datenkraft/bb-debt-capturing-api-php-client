@@ -21,6 +21,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
     *     @var string $filter[metaKey] Key of the skuUsage meta field (required with metaValue)
     *     @var string $filter[metaValue] Value of the skuUsage meta field (required with metaKey)
+    *     @var bool $filter[invoiced] Filter for invoiced or open (= not invoiced) debt line items
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -47,7 +48,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]', 'filter[invoiced]'));
         $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->addAllowedTypes('page', array('int'));
@@ -60,6 +61,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
         $optionsResolver->addAllowedTypes('filter[invoiceIds]', array('string'));
         $optionsResolver->addAllowedTypes('filter[metaKey]', array('string'));
         $optionsResolver->addAllowedTypes('filter[metaValue]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[invoiced]', array('bool'));
         return $optionsResolver;
     }
     /**

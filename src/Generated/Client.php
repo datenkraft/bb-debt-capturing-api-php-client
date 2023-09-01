@@ -475,6 +475,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
     *     @var string $filter[metaKey] Key of the skuUsage meta field (required with metaValue)
     *     @var string $filter[metaValue] Value of the skuUsage meta field (required with metaKey)
+    *     @var bool $filter[invoiced] Filter for invoiced or open (= not invoiced) debt line items
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException
