@@ -269,6 +269,11 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * Get debtLineItems by projectId and time range
     *
     * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
     *     @var string $filter[projectId] projectId filter
     *     @var string $filter[dateFrom] dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
               given.
@@ -283,7 +288,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\GetDebtLineItemCollectionResponse|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
     */
     public function getDebtLineItemCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
@@ -526,20 +531,25 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetReportDebtLineItemCollectionAggregated($queryParameters), $fetch);
     }
     /**
-     * Get skuUsages for debtLineItems
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[debtLineItemIds] debtLineItemIds filter
-     * }
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionBadRequestException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\SkuUsageDebtLineItemResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
+    * Get skuUsages for debtLineItems
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    *     @var string $filter[debtLineItemIds] debtLineItemIds filter
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionBadRequestException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\SkuUsageDebtLineItemResourceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
     public function getSkuUsageDebtLineItemCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetSkuUsageDebtLineItemCollection($queryParameters), $fetch);
@@ -549,7 +559,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = array();
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://debt-capturing-api.conqore.niceshops.com/v1');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://debt-capturing-api.conqore.niceshops.com/v2');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
             if (count($additionalPlugins) > 0) {
