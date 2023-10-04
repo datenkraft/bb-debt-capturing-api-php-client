@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class GetInvoiceCollectionNotFoundException extends NotFoundException
+class GetInvoiceCollectionBadRequestException extends BadRequestException
 {
     /**
      * @var \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
@@ -14,7 +14,7 @@ class GetInvoiceCollectionNotFoundException extends NotFoundException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Not Found');
+        parent::__construct('Bad Request');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
