@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class GetDebtLineItemCollectionReportConflictException extends ConflictException
+class GetInvoiceBadRequestException extends BadRequestException
 {
     /**
      * @var \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
@@ -14,7 +14,7 @@ class GetDebtLineItemCollectionReportConflictException extends ConflictException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Invalid or missing format');
+        parent::__construct('Bad Request');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
