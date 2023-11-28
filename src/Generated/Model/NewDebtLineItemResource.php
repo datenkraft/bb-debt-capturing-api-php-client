@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class DebtLineItemResource extends \ArrayObject
+class NewDebtLineItemResource extends \ArrayObject
 {
     /**
      * @var array
@@ -42,36 +42,6 @@ class DebtLineItemResource extends \ArrayObject
      * @var mixed|null
      */
     protected $priceTotal;
-    /**
-     * debtLineItemId
-     *
-     * @var string
-     */
-    protected $debtLineItemId;
-    /**
-     * projectId
-     *
-     * @var string
-     */
-    protected $projectId;
-    /**
-     * invoiceId
-     *
-     * @var string|null
-     */
-    protected $invoiceId;
-    /**
-     * Unit
-     *
-     * @var string|null
-     */
-    protected $unit;
-    /**
-     * 
-     *
-     * @var mixed|null
-     */
-    protected $pricePerUnit;
     /**
      * skuCode
      *
@@ -180,116 +150,6 @@ class DebtLineItemResource extends \ArrayObject
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;
-        return $this;
-    }
-    /**
-     * debtLineItemId
-     *
-     * @return string
-     */
-    public function getDebtLineItemId() : string
-    {
-        return $this->debtLineItemId;
-    }
-    /**
-     * debtLineItemId
-     *
-     * @param string $debtLineItemId
-     *
-     * @return self
-     */
-    public function setDebtLineItemId(string $debtLineItemId) : self
-    {
-        $this->initialized['debtLineItemId'] = true;
-        $this->debtLineItemId = $debtLineItemId;
-        return $this;
-    }
-    /**
-     * projectId
-     *
-     * @return string
-     */
-    public function getProjectId() : string
-    {
-        return $this->projectId;
-    }
-    /**
-     * projectId
-     *
-     * @param string $projectId
-     *
-     * @return self
-     */
-    public function setProjectId(string $projectId) : self
-    {
-        $this->initialized['projectId'] = true;
-        $this->projectId = $projectId;
-        return $this;
-    }
-    /**
-     * invoiceId
-     *
-     * @return string|null
-     */
-    public function getInvoiceId() : ?string
-    {
-        return $this->invoiceId;
-    }
-    /**
-     * invoiceId
-     *
-     * @param string|null $invoiceId
-     *
-     * @return self
-     */
-    public function setInvoiceId(?string $invoiceId) : self
-    {
-        $this->initialized['invoiceId'] = true;
-        $this->invoiceId = $invoiceId;
-        return $this;
-    }
-    /**
-     * Unit
-     *
-     * @return string|null
-     */
-    public function getUnit() : ?string
-    {
-        return $this->unit;
-    }
-    /**
-     * Unit
-     *
-     * @param string|null $unit
-     *
-     * @return self
-     */
-    public function setUnit(?string $unit) : self
-    {
-        $this->initialized['unit'] = true;
-        $this->unit = $unit;
-        return $this;
-    }
-    /**
-     * 
-     *
-     * @return mixed
-     */
-    public function getPricePerUnit()
-    {
-        return $this->pricePerUnit;
-    }
-    /**
-     * 
-     *
-     * @param mixed $pricePerUnit
-     *
-     * @return self
-     */
-    public function setPricePerUnit($pricePerUnit) : self
-    {
-        $this->initialized['pricePerUnit'] = true;
-        $this->pricePerUnit = $pricePerUnit;
         return $this;
     }
 }

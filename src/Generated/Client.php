@@ -478,6 +478,26 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PatchInvoice($invoiceId, $requestBody), $fetch);
     }
     /**
+     * Add a debtLineItem to an invoice.
+     *
+     * @param string $invoiceId Invoice id
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource $requestBody 
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemBadRequestException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemNotFoundException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemUnprocessableEntityException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function postInvoiceDebtLineItem(string $invoiceId, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource $requestBody, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PostInvoiceDebtLineItem($invoiceId, $requestBody), $fetch);
+    }
+    /**
     * Get debtLineItems file export by projectId and time range.
            The file type is controlled by the accept header.
     *
