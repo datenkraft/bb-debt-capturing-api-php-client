@@ -277,12 +277,11 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[projectId] projectId filter
-    *     @var string $filter[dateFrom] dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
-              given.
-    *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
-              given.
+    *     @var string $filter[dateFrom] dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
+    *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
     *     @var string $filter[invoiceId] invoiceId filter
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -402,8 +401,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-                   
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[projectId] Project id filter
     *     @var string $filter[invoiceNumber] Invoice number filter
     * }
@@ -414,7 +413,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
     */
     public function getInvoiceCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
@@ -532,8 +531,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-                   
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[projectId] Mandatory filter for the project id
     *     @var string $filter[skuCode] Like Search for the sku code
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
@@ -544,7 +543,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     *     @var bool $filter[invoiced] Filter for invoiced or open (= not invoiced) debt line items
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException
@@ -564,7 +562,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[debtLineItemIds] debtLineItemIds filter
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)

@@ -12,8 +12,8 @@ class GetInvoiceCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi\
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-                   
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[projectId] Project id filter
     *     @var string $filter[invoiceNumber] Invoice number filter
     * }
@@ -61,15 +61,12 @@ class GetInvoiceCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi\
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
+     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\InvoiceCollection', 'json');
-        }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }

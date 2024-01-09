@@ -12,12 +12,11 @@ class GetDebtLineItemCollection extends \Datenkraft\Backbone\Client\DebtCapturin
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[projectId] projectId filter
-    *     @var string $filter[dateFrom] dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
-              given.
-    *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is
-              given.
+    *     @var string $filter[dateFrom] dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
+    *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
     *     @var string $filter[invoiceId] invoiceId filter
     * }
     */

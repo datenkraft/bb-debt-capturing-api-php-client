@@ -12,8 +12,8 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-                   
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[projectId] Mandatory filter for the project id
     *     @var string $filter[skuCode] Like Search for the sku code
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
@@ -67,7 +67,6 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     /**
      * {@inheritdoc}
      *
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException
@@ -81,9 +80,6 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
         $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemAggregatedCollection', 'json');
-        }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
