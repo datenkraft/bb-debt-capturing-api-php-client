@@ -14,7 +14,10 @@ class GetDebtLineItemCollectionReportNotAcceptableException extends NotAcceptabl
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Not Acceptable');
+        parent::__construct('Not Acceptable
+
+Error codes:
+- ACCEPTABLE_RESPONSE_NOT_AVAILABLE: No response can be provided for the requested accept header.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }

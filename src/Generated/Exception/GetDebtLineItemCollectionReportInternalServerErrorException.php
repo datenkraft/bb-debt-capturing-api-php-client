@@ -14,7 +14,10 @@ class GetDebtLineItemCollectionReportInternalServerErrorException extends Intern
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Server Error');
+        parent::__construct('Server error
+
+Error codes:
+- SERVER_ERROR_OCCURRED: An internal server error occurred. Please try again later.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
