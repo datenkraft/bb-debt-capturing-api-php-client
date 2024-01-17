@@ -61,7 +61,7 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
             unset($data['usageEnd']);
         }
         if (\array_key_exists('priceTotal', $data) && $data['priceTotal'] !== null) {
-            $object->setPriceTotal($data['priceTotal']);
+            $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\NewDebtLineItemResourcePriceTotal', 'json', $context));
             unset($data['priceTotal']);
         }
         elseif (\array_key_exists('priceTotal', $data) && $data['priceTotal'] === null) {
@@ -90,7 +90,7 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
             $object->setUnit(null);
         }
         if (\array_key_exists('pricePerUnit', $data) && $data['pricePerUnit'] !== null) {
-            $object->setPricePerUnit($data['pricePerUnit']);
+            $object->setPricePerUnit($this->denormalizer->denormalize($data['pricePerUnit'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemResourcepricePerUnit', 'json', $context));
             unset($data['pricePerUnit']);
         }
         elseif (\array_key_exists('pricePerUnit', $data) && $data['pricePerUnit'] === null) {
@@ -113,7 +113,7 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         $data['quantity'] = $object->getQuantity();
         $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
         $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
-        $data['priceTotal'] = $object->getPriceTotal();
+        $data['priceTotal'] = $this->normalizer->normalize($object->getPriceTotal(), 'json', $context);
         if ($object->isInitialized('debtLineItemId') && null !== $object->getDebtLineItemId()) {
             $data['debtLineItemId'] = $object->getDebtLineItemId();
         }
@@ -127,7 +127,7 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
             $data['unit'] = $object->getUnit();
         }
         if ($object->isInitialized('pricePerUnit') && null !== $object->getPricePerUnit()) {
-            $data['pricePerUnit'] = $object->getPricePerUnit();
+            $data['pricePerUnit'] = $this->normalizer->normalize($object->getPricePerUnit(), 'json', $context);
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
