@@ -37,9 +37,9 @@ class NewDebtLineItemResource extends \ArrayObject
      */
     protected $usageEnd;
     /**
-     * 
+     * priceTotal
      *
-     * @var mixed|null
+     * @var NewDebtLineItemResourcePriceTotal|null
      */
     protected $priceTotal;
     /**
@@ -131,22 +131,22 @@ class NewDebtLineItemResource extends \ArrayObject
         return $this;
     }
     /**
-     * 
+     * priceTotal
      *
-     * @return mixed
+     * @return NewDebtLineItemResourcePriceTotal|null
      */
-    public function getPriceTotal()
+    public function getPriceTotal() : ?NewDebtLineItemResourcePriceTotal
     {
         return $this->priceTotal;
     }
     /**
-     * 
+     * priceTotal
      *
-     * @param mixed $priceTotal
+     * @param NewDebtLineItemResourcePriceTotal|null $priceTotal
      *
      * @return self
      */
-    public function setPriceTotal($priceTotal) : self
+    public function setPriceTotal(?NewDebtLineItemResourcePriceTotal $priceTotal) : self
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;

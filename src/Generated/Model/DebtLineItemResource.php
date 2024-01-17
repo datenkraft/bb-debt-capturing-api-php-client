@@ -37,9 +37,9 @@ class DebtLineItemResource extends \ArrayObject
      */
     protected $usageEnd;
     /**
-     * 
+     * priceTotal
      *
-     * @var mixed|null
+     * @var NewDebtLineItemResourcePriceTotal|null
      */
     protected $priceTotal;
     /**
@@ -67,9 +67,9 @@ class DebtLineItemResource extends \ArrayObject
      */
     protected $unit;
     /**
-     * 
+     * Price per Unit
      *
-     * @var mixed|null
+     * @var DebtLineItemResourcepricePerUnit|null
      */
     protected $pricePerUnit;
     /**
@@ -161,22 +161,22 @@ class DebtLineItemResource extends \ArrayObject
         return $this;
     }
     /**
-     * 
+     * priceTotal
      *
-     * @return mixed
+     * @return NewDebtLineItemResourcePriceTotal|null
      */
-    public function getPriceTotal()
+    public function getPriceTotal() : ?NewDebtLineItemResourcePriceTotal
     {
         return $this->priceTotal;
     }
     /**
-     * 
+     * priceTotal
      *
-     * @param mixed $priceTotal
+     * @param NewDebtLineItemResourcePriceTotal|null $priceTotal
      *
      * @return self
      */
-    public function setPriceTotal($priceTotal) : self
+    public function setPriceTotal(?NewDebtLineItemResourcePriceTotal $priceTotal) : self
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;
@@ -271,22 +271,22 @@ class DebtLineItemResource extends \ArrayObject
         return $this;
     }
     /**
-     * 
+     * Price per Unit
      *
-     * @return mixed
+     * @return DebtLineItemResourcepricePerUnit|null
      */
-    public function getPricePerUnit()
+    public function getPricePerUnit() : ?DebtLineItemResourcepricePerUnit
     {
         return $this->pricePerUnit;
     }
     /**
-     * 
+     * Price per Unit
      *
-     * @param mixed $pricePerUnit
+     * @param DebtLineItemResourcepricePerUnit|null $pricePerUnit
      *
      * @return self
      */
-    public function setPricePerUnit($pricePerUnit) : self
+    public function setPricePerUnit(?DebtLineItemResourcepricePerUnit $pricePerUnit) : self
     {
         $this->initialized['pricePerUnit'] = true;
         $this->pricePerUnit = $pricePerUnit;
