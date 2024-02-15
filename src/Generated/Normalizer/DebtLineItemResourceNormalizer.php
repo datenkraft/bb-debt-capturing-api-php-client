@@ -96,6 +96,13 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         elseif (\array_key_exists('pricePerUnit', $data) && $data['pricePerUnit'] === null) {
             $object->setPricePerUnit(null);
         }
+        if (\array_key_exists('note', $data) && $data['note'] !== null) {
+            $object->setNote($data['note']);
+            unset($data['note']);
+        }
+        elseif (\array_key_exists('note', $data) && $data['note'] === null) {
+            $object->setNote(null);
+        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value;
@@ -128,6 +135,9 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         }
         if ($object->isInitialized('pricePerUnit') && null !== $object->getPricePerUnit()) {
             $data['pricePerUnit'] = $this->normalizer->normalize($object->getPricePerUnit(), 'json', $context);
+        }
+        if ($object->isInitialized('note') && null !== $object->getNote()) {
+            $data['note'] = $object->getNote();
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
