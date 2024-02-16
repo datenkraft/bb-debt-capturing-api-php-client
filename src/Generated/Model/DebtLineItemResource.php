@@ -73,6 +73,12 @@ class DebtLineItemResource extends \ArrayObject
      */
     protected $pricePerUnit;
     /**
+     * note
+     *
+     * @var string|null
+     */
+    protected $note;
+    /**
      * skuCode
      *
      * @return string
@@ -290,6 +296,28 @@ class DebtLineItemResource extends \ArrayObject
     {
         $this->initialized['pricePerUnit'] = true;
         $this->pricePerUnit = $pricePerUnit;
+        return $this;
+    }
+    /**
+     * note
+     *
+     * @return string|null
+     */
+    public function getNote() : ?string
+    {
+        return $this->note;
+    }
+    /**
+     * note
+     *
+     * @param string|null $note
+     *
+     * @return self
+     */
+    public function setNote(?string $note) : self
+    {
+        $this->initialized['note'] = true;
+        $this->note = $note;
         return $this;
     }
 }
