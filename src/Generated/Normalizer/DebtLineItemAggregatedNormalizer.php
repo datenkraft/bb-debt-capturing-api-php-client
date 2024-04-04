@@ -79,6 +79,13 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
         elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
             $object->setInvoiceNumber(null);
         }
+        if (\array_key_exists('note', $data) && $data['note'] !== null) {
+            $object->setNote($data['note']);
+            unset($data['note']);
+        }
+        elseif (\array_key_exists('note', $data) && $data['note'] === null) {
+            $object->setNote(null);
+        }
         if (\array_key_exists('skuUsages', $data)) {
             $values = array();
             foreach ($data['skuUsages'] as $value) {
@@ -113,6 +120,9 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
         }
         if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
             $data['invoiceNumber'] = $object->getInvoiceNumber();
+        }
+        if ($object->isInitialized('note') && null !== $object->getNote()) {
+            $data['note'] = $object->getNote();
         }
         if ($object->isInitialized('skuUsages') && null !== $object->getSkuUsages()) {
             $values = array();

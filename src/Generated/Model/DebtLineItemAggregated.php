@@ -61,6 +61,12 @@ class DebtLineItemAggregated extends \ArrayObject
      */
     protected $invoiceNumber;
     /**
+     * note
+     *
+     * @var string|null
+     */
+    protected $note;
+    /**
      * 
      *
      * @var DebtLineItemAggregatedSkuUsage[]
@@ -240,6 +246,28 @@ class DebtLineItemAggregated extends \ArrayObject
     {
         $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
+        return $this;
+    }
+    /**
+     * note
+     *
+     * @return string|null
+     */
+    public function getNote() : ?string
+    {
+        return $this->note;
+    }
+    /**
+     * note
+     *
+     * @param string|null $note
+     *
+     * @return self
+     */
+    public function setNote(?string $note) : self
+    {
+        $this->initialized['note'] = true;
+        $this->note = $note;
         return $this;
     }
     /**
