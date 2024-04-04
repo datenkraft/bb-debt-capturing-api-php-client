@@ -15,7 +15,18 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
     *     @var string $filter[projectId] Mandatory filter for the project id
-    *     @var string $filter[skuCode] Like Search for the sku code
+    *     @var string $filter[skuCode] Filter for the sku code (full text search)
+    *     @var string $filter[note] Filter for the debt line item note (full text search)
+    *     @var string $filter[search] Provide a search term to filter debt line items.
+    
+    The search term is matched against the following fields:
+    - skuCode
+    - debtLineItems.*.note
+    - debtLineItems.*.skuUsages.*.meta.orderNumber (without internalReferencePrefix of the shop)
+    - debtLineItems.*.skuUsages.*.meta.inboundDeliveryNumber (without internalReferencePrefix of the shop)
+    
+    If the search term is found in one of the fields, the resource is included in the result.
+    The search is case insensitive.
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
     *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
     *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
@@ -48,7 +59,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]', 'filter[invoiced]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[note]', 'filter[search]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]', 'filter[invoiced]'));
         $optionsResolver->setRequired(array('filter[projectId]'));
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->addAllowedTypes('page', array('int'));
@@ -56,6 +67,8 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
         $optionsResolver->addAllowedTypes('paginationMode', array('string'));
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[skuCode]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[note]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[search]', array('string'));
         $optionsResolver->addAllowedTypes('filter[usageStart]', array('string'));
         $optionsResolver->addAllowedTypes('filter[usageEnd]', array('string'));
         $optionsResolver->addAllowedTypes('filter[invoiceIds]', array('string'));

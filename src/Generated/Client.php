@@ -534,7 +534,18 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
     *     @var string $filter[projectId] Mandatory filter for the project id
-    *     @var string $filter[skuCode] Like Search for the sku code
+    *     @var string $filter[skuCode] Filter for the sku code (full text search)
+    *     @var string $filter[note] Filter for the debt line item note (full text search)
+    *     @var string $filter[search] Provide a search term to filter debt line items.
+    
+    The search term is matched against the following fields:
+    - skuCode
+    - debtLineItems.*.note
+    - debtLineItems.*.skuUsages.*.meta.orderNumber (without internalReferencePrefix of the shop)
+    - debtLineItems.*.skuUsages.*.meta.inboundDeliveryNumber (without internalReferencePrefix of the shop)
+    
+    If the search term is found in one of the fields, the resource is included in the result.
+    The search is case insensitive.
     *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
     *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
     *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
