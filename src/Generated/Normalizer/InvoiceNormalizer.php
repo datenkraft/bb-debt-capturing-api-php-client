@@ -45,16 +45,13 @@ class InvoiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
             $object->setProjectId($data['projectId']);
             unset($data['projectId']);
         }
-        if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
-            $object->setInvoiceNumber($data['invoiceNumber']);
-            unset($data['invoiceNumber']);
-        }
-        elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
-            $object->setInvoiceNumber(null);
-        }
         if (\array_key_exists('cutoffDate', $data)) {
             $object->setCutoffDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['cutoffDate']));
             unset($data['cutoffDate']);
+        }
+        if (\array_key_exists('invoiceNumber', $data)) {
+            $object->setInvoiceNumber($data['invoiceNumber']);
+            unset($data['invoiceNumber']);
         }
         if (\array_key_exists('invoiceId', $data)) {
             $object->setInvoiceId($data['invoiceId']);
@@ -77,9 +74,15 @@ class InvoiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        $data['projectId'] = $object->getProjectId();
-        $data['invoiceNumber'] = $object->getInvoiceNumber();
-        $data['cutoffDate'] = $object->getCutoffDate()->format('Y-m-d\\TH:i:sP');
+        if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
+            $data['projectId'] = $object->getProjectId();
+        }
+        if ($object->isInitialized('cutoffDate') && null !== $object->getCutoffDate()) {
+            $data['cutoffDate'] = $object->getCutoffDate()->format('Y-m-d\\TH:i:sP');
+        }
+        if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
+            $data['invoiceNumber'] = $object->getInvoiceNumber();
+        }
         if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
             $data['invoiceId'] = $object->getInvoiceId();
         }
