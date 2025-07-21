@@ -19,12 +19,6 @@ class BaseInvoice extends \ArrayObject
      */
     protected $projectId;
     /**
-     * The invoice number, may be null.
-     *
-     * @var string|null
-     */
-    protected $invoiceNumber;
-    /**
      * The invoice includes all DebtLineItems with a usageStart and usageEnd date less or equal than the cutoff date, which existed and were not already invoiced at the time of processing the invoice.
      *
      * @var \DateTime
@@ -50,28 +44,6 @@ class BaseInvoice extends \ArrayObject
     {
         $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
-        return $this;
-    }
-    /**
-     * The invoice number, may be null.
-     *
-     * @return string|null
-     */
-    public function getInvoiceNumber() : ?string
-    {
-        return $this->invoiceNumber;
-    }
-    /**
-     * The invoice number, may be null.
-     *
-     * @param string|null $invoiceNumber
-     *
-     * @return self
-     */
-    public function setInvoiceNumber(?string $invoiceNumber) : self
-    {
-        $this->initialized['invoiceNumber'] = true;
-        $this->invoiceNumber = $invoiceNumber;
         return $this;
     }
     /**

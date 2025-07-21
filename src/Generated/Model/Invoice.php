@@ -19,17 +19,17 @@ class Invoice extends \ArrayObject
      */
     protected $projectId;
     /**
-     * The invoice number, may be null.
-     *
-     * @var string|null
-     */
-    protected $invoiceNumber;
-    /**
      * The invoice includes all DebtLineItems with a usageStart and usageEnd date less or equal than the cutoff date, which existed and were not already invoiced at the time of processing the invoice.
      *
      * @var \DateTime
      */
     protected $cutoffDate;
+    /**
+     * The invoice number.
+     *
+     * @var string
+     */
+    protected $invoiceNumber;
     /**
      * Invoice id
      *
@@ -68,28 +68,6 @@ class Invoice extends \ArrayObject
         return $this;
     }
     /**
-     * The invoice number, may be null.
-     *
-     * @return string|null
-     */
-    public function getInvoiceNumber() : ?string
-    {
-        return $this->invoiceNumber;
-    }
-    /**
-     * The invoice number, may be null.
-     *
-     * @param string|null $invoiceNumber
-     *
-     * @return self
-     */
-    public function setInvoiceNumber(?string $invoiceNumber) : self
-    {
-        $this->initialized['invoiceNumber'] = true;
-        $this->invoiceNumber = $invoiceNumber;
-        return $this;
-    }
-    /**
      * The invoice includes all DebtLineItems with a usageStart and usageEnd date less or equal than the cutoff date, which existed and were not already invoiced at the time of processing the invoice.
      *
      * @return \DateTime
@@ -109,6 +87,28 @@ class Invoice extends \ArrayObject
     {
         $this->initialized['cutoffDate'] = true;
         $this->cutoffDate = $cutoffDate;
+        return $this;
+    }
+    /**
+     * The invoice number.
+     *
+     * @return string
+     */
+    public function getInvoiceNumber() : string
+    {
+        return $this->invoiceNumber;
+    }
+    /**
+     * The invoice number.
+     *
+     * @param string $invoiceNumber
+     *
+     * @return self
+     */
+    public function setInvoiceNumber(string $invoiceNumber) : self
+    {
+        $this->initialized['invoiceNumber'] = true;
+        $this->invoiceNumber = $invoiceNumber;
         return $this;
     }
     /**

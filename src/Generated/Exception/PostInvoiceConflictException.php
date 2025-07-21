@@ -17,7 +17,8 @@ class PostInvoiceConflictException extends ConflictException
         parent::__construct('Conflict
 
 Error codes:
-- DATA_ALREADY_EXISTS: A data conflict was detected.');
+- DATA_ALREADY_EXISTS: A data conflict was detected.
+- PROCESSING_INVOICE_EXISTS: An invoice with status \'processing\' already exists for this project.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
