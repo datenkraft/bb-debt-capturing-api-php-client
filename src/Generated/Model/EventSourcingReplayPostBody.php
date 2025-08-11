@@ -7,8 +7,8 @@ class EventSourcingReplayPostBody extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -21,7 +21,7 @@ class EventSourcingReplayPostBody extends \ArrayObject
     /**
      * Array of projectIds specifying the projects for which the DebtLineItems should be replayed
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $projectIds;
     /**
@@ -29,7 +29,7 @@ class EventSourcingReplayPostBody extends \ArrayObject
      *
      * @return string
      */
-    public function getInfoMailAddress() : string
+    public function getInfoMailAddress(): string
     {
         return $this->infoMailAddress;
     }
@@ -40,7 +40,7 @@ class EventSourcingReplayPostBody extends \ArrayObject
      *
      * @return self
      */
-    public function setInfoMailAddress(string $infoMailAddress) : self
+    public function setInfoMailAddress(string $infoMailAddress): self
     {
         $this->initialized['infoMailAddress'] = true;
         $this->infoMailAddress = $infoMailAddress;
@@ -49,20 +49,20 @@ class EventSourcingReplayPostBody extends \ArrayObject
     /**
      * Array of projectIds specifying the projects for which the DebtLineItems should be replayed
      *
-     * @return string[]
+     * @return list<string>
      */
-    public function getProjectIds() : array
+    public function getProjectIds(): array
     {
         return $this->projectIds;
     }
     /**
      * Array of projectIds specifying the projects for which the DebtLineItems should be replayed
      *
-     * @param string[] $projectIds
+     * @param list<string> $projectIds
      *
      * @return self
      */
-    public function setProjectIds(array $projectIds) : self
+    public function setProjectIds(array $projectIds): self
     {
         $this->initialized['projectIds'] = true;
         $this->projectIds = $projectIds;

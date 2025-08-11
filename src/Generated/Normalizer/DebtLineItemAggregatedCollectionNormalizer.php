@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemAggregatedCollection';
+        return $type === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemAggregatedCollection';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -42,19 +38,19 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
             return $object;
         }
         if (\array_key_exists('pagination', $data)) {
-            $object->setPagination($this->denormalizer->denormalize($data['pagination'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\CollectionPagination', 'json', $context));
+            $object->setPagination($this->denormalizer->denormalize($data['pagination'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\CollectionPagination::class, 'json', $context));
             unset($data['pagination']);
         }
         if (\array_key_exists('data', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['data'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemAggregatedSku', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSku::class, 'json', $context);
             }
             $object->setData($values);
             unset($data['data']);
         }
         if (\array_key_exists('sum', $data)) {
-            $object->setSum($this->denormalizer->denormalize($data['sum'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemAggregatedCollectionsum', 'json', $context));
+            $object->setSum($this->denormalizer->denormalize($data['sum'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum::class, 'json', $context));
             unset($data['sum']);
         }
         foreach ($data as $key => $value_1) {
@@ -64,26 +60,27 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if ($object->isInitialized('pagination') && null !== $object->getPagination()) {
-            $data['pagination'] = $this->normalizer->normalize($object->getPagination(), 'json', $context);
+        $dataArray = [];
+        if ($data->isInitialized('pagination') && null !== $data->getPagination()) {
+            $dataArray['pagination'] = $this->normalizer->normalize($data->getPagination(), 'json', $context);
         }
-        $values = array();
-        foreach ($object->getData() as $value) {
+        $values = [];
+        foreach ($data->getData() as $value) {
             $values[] = $this->normalizer->normalize($value, 'json', $context);
         }
-        $data['data'] = $values;
-        $data['sum'] = $this->normalizer->normalize($object->getSum(), 'json', $context);
-        foreach ($object as $key => $value_1) {
+        $dataArray['data'] = $values;
+        $dataArray['sum'] = $this->normalizer->normalize($data->getSum(), 'json', $context);
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_1;
+                $dataArray[$key] = $value_1;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection::class => false];
     }
 }

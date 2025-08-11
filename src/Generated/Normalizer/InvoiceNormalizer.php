@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class InvoiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\Invoice';
+        return $type === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\Invoice';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -46,7 +42,7 @@ class InvoiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
             unset($data['projectId']);
         }
         if (\array_key_exists('cutoffDate', $data)) {
-            $object->setCutoffDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['cutoffDate']));
+            $object->setCutoffDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['cutoffDate']));
             unset($data['cutoffDate']);
         }
         if (\array_key_exists('invoiceNumber', $data)) {
@@ -68,32 +64,33 @@ class InvoiceNormalizer implements DenormalizerInterface, NormalizerInterface, D
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
-            $data['projectId'] = $object->getProjectId();
+        $dataArray = [];
+        if ($data->isInitialized('projectId') && null !== $data->getProjectId()) {
+            $dataArray['projectId'] = $data->getProjectId();
         }
-        if ($object->isInitialized('cutoffDate') && null !== $object->getCutoffDate()) {
-            $data['cutoffDate'] = $object->getCutoffDate()->format('Y-m-d\\TH:i:sP');
+        if ($data->isInitialized('cutoffDate') && null !== $data->getCutoffDate()) {
+            $dataArray['cutoffDate'] = $data->getCutoffDate()?->format('Y-m-d\TH:i:sP');
         }
-        if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
-            $data['invoiceNumber'] = $object->getInvoiceNumber();
+        if ($data->isInitialized('invoiceNumber') && null !== $data->getInvoiceNumber()) {
+            $dataArray['invoiceNumber'] = $data->getInvoiceNumber();
         }
-        if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
-            $data['invoiceId'] = $object->getInvoiceId();
+        if ($data->isInitialized('invoiceId') && null !== $data->getInvoiceId()) {
+            $dataArray['invoiceId'] = $data->getInvoiceId();
         }
-        if ($object->isInitialized('invoiceStatus') && null !== $object->getInvoiceStatus()) {
-            $data['invoiceStatus'] = $object->getInvoiceStatus();
+        if ($data->isInitialized('invoiceStatus') && null !== $data->getInvoiceStatus()) {
+            $dataArray['invoiceStatus'] = $data->getInvoiceStatus();
         }
-        foreach ($object as $key => $value) {
+        foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
+                $dataArray[$key] = $value;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice::class => false];
     }
 }

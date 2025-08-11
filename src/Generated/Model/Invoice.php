@@ -7,8 +7,8 @@ class Invoice extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -50,7 +50,7 @@ class Invoice extends \ArrayObject
      *
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -61,7 +61,7 @@ class Invoice extends \ArrayObject
      *
      * @return self
      */
-    public function setProjectId(string $projectId) : self
+    public function setProjectId(string $projectId): self
     {
         $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
@@ -72,7 +72,7 @@ class Invoice extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getCutoffDate() : \DateTime
+    public function getCutoffDate(): \DateTime
     {
         return $this->cutoffDate;
     }
@@ -83,7 +83,7 @@ class Invoice extends \ArrayObject
      *
      * @return self
      */
-    public function setCutoffDate(\DateTime $cutoffDate) : self
+    public function setCutoffDate(\DateTime $cutoffDate): self
     {
         $this->initialized['cutoffDate'] = true;
         $this->cutoffDate = $cutoffDate;
@@ -94,7 +94,7 @@ class Invoice extends \ArrayObject
      *
      * @return string
      */
-    public function getInvoiceNumber() : string
+    public function getInvoiceNumber(): string
     {
         return $this->invoiceNumber;
     }
@@ -105,7 +105,7 @@ class Invoice extends \ArrayObject
      *
      * @return self
      */
-    public function setInvoiceNumber(string $invoiceNumber) : self
+    public function setInvoiceNumber(string $invoiceNumber): self
     {
         $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
@@ -116,7 +116,7 @@ class Invoice extends \ArrayObject
      *
      * @return string
      */
-    public function getInvoiceId() : string
+    public function getInvoiceId(): string
     {
         return $this->invoiceId;
     }
@@ -127,7 +127,7 @@ class Invoice extends \ArrayObject
      *
      * @return self
      */
-    public function setInvoiceId(string $invoiceId) : self
+    public function setInvoiceId(string $invoiceId): self
     {
         $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
@@ -141,7 +141,7 @@ class Invoice extends \ArrayObject
     *
     * @return string
     */
-    public function getInvoiceStatus() : string
+    public function getInvoiceStatus(): string
     {
         return $this->invoiceStatus;
     }
@@ -155,7 +155,7 @@ class Invoice extends \ArrayObject
     *
     * @return self
     */
-    public function setInvoiceStatus(string $invoiceStatus) : self
+    public function setInvoiceStatus(string $invoiceStatus): self
     {
         $this->initialized['invoiceStatus'] = true;
         $this->invoiceStatus = $invoiceStatus;

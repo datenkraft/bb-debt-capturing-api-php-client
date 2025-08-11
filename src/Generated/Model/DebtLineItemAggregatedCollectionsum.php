@@ -7,8 +7,8 @@ class DebtLineItemAggregatedCollectionsum extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -23,7 +23,7 @@ class DebtLineItemAggregatedCollectionsum extends \ArrayObject
      *
      * @return PriceProperty
      */
-    public function getPriceTotal() : PriceProperty
+    public function getPriceTotal(): PriceProperty
     {
         return $this->priceTotal;
     }
@@ -34,7 +34,7 @@ class DebtLineItemAggregatedCollectionsum extends \ArrayObject
      *
      * @return self
      */
-    public function setPriceTotal(PriceProperty $priceTotal) : self
+    public function setPriceTotal(PriceProperty $priceTotal): self
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;

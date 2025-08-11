@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\EventSourcingReplayPostBody';
+        return $type === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\EventSourcingReplayPostBody';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -46,7 +42,7 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
             unset($data['infoMailAddress']);
         }
         if (\array_key_exists('projectIds', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['projectIds'] as $value) {
                 $values[] = $value;
             }
@@ -60,27 +56,28 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if ($object->isInitialized('infoMailAddress') && null !== $object->getInfoMailAddress()) {
-            $data['infoMailAddress'] = $object->getInfoMailAddress();
+        $dataArray = [];
+        if ($data->isInitialized('infoMailAddress') && null !== $data->getInfoMailAddress()) {
+            $dataArray['infoMailAddress'] = $data->getInfoMailAddress();
         }
-        if ($object->isInitialized('projectIds') && null !== $object->getProjectIds()) {
-            $values = array();
-            foreach ($object->getProjectIds() as $value) {
+        if ($data->isInitialized('projectIds') && null !== $data->getProjectIds()) {
+            $values = [];
+            foreach ($data->getProjectIds() as $value) {
                 $values[] = $value;
             }
-            $data['projectIds'] = $values;
+            $dataArray['projectIds'] = $values;
         }
-        foreach ($object as $key => $value_1) {
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_1;
+                $dataArray[$key] = $value_1;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody::class => false];
     }
 }

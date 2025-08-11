@@ -7,8 +7,8 @@ class DebtLineItemResource extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -83,7 +83,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return string
      */
-    public function getSkuCode() : string
+    public function getSkuCode(): string
     {
         return $this->skuCode;
     }
@@ -94,7 +94,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setSkuCode(string $skuCode) : self
+    public function setSkuCode(string $skuCode): self
     {
         $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
@@ -105,7 +105,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return int|null
      */
-    public function getQuantity() : ?int
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
@@ -116,7 +116,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setQuantity(?int $quantity) : self
+    public function setQuantity(?int $quantity): self
     {
         $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
@@ -127,7 +127,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageStart() : \DateTime
+    public function getUsageStart(): \DateTime
     {
         return $this->usageStart;
     }
@@ -138,7 +138,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageStart(\DateTime $usageStart) : self
+    public function setUsageStart(\DateTime $usageStart): self
     {
         $this->initialized['usageStart'] = true;
         $this->usageStart = $usageStart;
@@ -149,7 +149,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageEnd() : \DateTime
+    public function getUsageEnd(): \DateTime
     {
         return $this->usageEnd;
     }
@@ -160,7 +160,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageEnd(\DateTime $usageEnd) : self
+    public function setUsageEnd(\DateTime $usageEnd): self
     {
         $this->initialized['usageEnd'] = true;
         $this->usageEnd = $usageEnd;
@@ -171,7 +171,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return NewDebtLineItemResourcePriceTotal|null
      */
-    public function getPriceTotal() : ?NewDebtLineItemResourcePriceTotal
+    public function getPriceTotal(): ?NewDebtLineItemResourcePriceTotal
     {
         return $this->priceTotal;
     }
@@ -182,7 +182,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setPriceTotal(?NewDebtLineItemResourcePriceTotal $priceTotal) : self
+    public function setPriceTotal(?NewDebtLineItemResourcePriceTotal $priceTotal): self
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;
@@ -193,7 +193,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return string
      */
-    public function getDebtLineItemId() : string
+    public function getDebtLineItemId(): string
     {
         return $this->debtLineItemId;
     }
@@ -204,7 +204,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setDebtLineItemId(string $debtLineItemId) : self
+    public function setDebtLineItemId(string $debtLineItemId): self
     {
         $this->initialized['debtLineItemId'] = true;
         $this->debtLineItemId = $debtLineItemId;
@@ -215,7 +215,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -226,7 +226,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setProjectId(string $projectId) : self
+    public function setProjectId(string $projectId): self
     {
         $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
@@ -237,7 +237,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return string|null
      */
-    public function getInvoiceId() : ?string
+    public function getInvoiceId(): ?string
     {
         return $this->invoiceId;
     }
@@ -248,7 +248,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setInvoiceId(?string $invoiceId) : self
+    public function setInvoiceId(?string $invoiceId): self
     {
         $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
@@ -259,7 +259,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return string|null
      */
-    public function getUnit() : ?string
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
@@ -270,7 +270,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setUnit(?string $unit) : self
+    public function setUnit(?string $unit): self
     {
         $this->initialized['unit'] = true;
         $this->unit = $unit;
@@ -281,7 +281,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return DebtLineItemResourcepricePerUnit|null
      */
-    public function getPricePerUnit() : ?DebtLineItemResourcepricePerUnit
+    public function getPricePerUnit(): ?DebtLineItemResourcepricePerUnit
     {
         return $this->pricePerUnit;
     }
@@ -292,7 +292,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setPricePerUnit(?DebtLineItemResourcepricePerUnit $pricePerUnit) : self
+    public function setPricePerUnit(?DebtLineItemResourcepricePerUnit $pricePerUnit): self
     {
         $this->initialized['pricePerUnit'] = true;
         $this->pricePerUnit = $pricePerUnit;
@@ -303,7 +303,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return string|null
      */
-    public function getNote() : ?string
+    public function getNote(): ?string
     {
         return $this->note;
     }
@@ -314,7 +314,7 @@ class DebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setNote(?string $note) : self
+    public function setNote(?string $note): self
     {
         $this->initialized['note'] = true;
         $this->note = $note;

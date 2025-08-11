@@ -7,8 +7,8 @@ class NewDebtLineItemResource extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -47,7 +47,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return string
      */
-    public function getSkuCode() : string
+    public function getSkuCode(): string
     {
         return $this->skuCode;
     }
@@ -58,7 +58,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setSkuCode(string $skuCode) : self
+    public function setSkuCode(string $skuCode): self
     {
         $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
@@ -69,7 +69,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return int|null
      */
-    public function getQuantity() : ?int
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
@@ -80,7 +80,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setQuantity(?int $quantity) : self
+    public function setQuantity(?int $quantity): self
     {
         $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
@@ -91,7 +91,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageStart() : \DateTime
+    public function getUsageStart(): \DateTime
     {
         return $this->usageStart;
     }
@@ -102,7 +102,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageStart(\DateTime $usageStart) : self
+    public function setUsageStart(\DateTime $usageStart): self
     {
         $this->initialized['usageStart'] = true;
         $this->usageStart = $usageStart;
@@ -113,7 +113,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageEnd() : \DateTime
+    public function getUsageEnd(): \DateTime
     {
         return $this->usageEnd;
     }
@@ -124,7 +124,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageEnd(\DateTime $usageEnd) : self
+    public function setUsageEnd(\DateTime $usageEnd): self
     {
         $this->initialized['usageEnd'] = true;
         $this->usageEnd = $usageEnd;
@@ -135,7 +135,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return NewDebtLineItemResourcePriceTotal|null
      */
-    public function getPriceTotal() : ?NewDebtLineItemResourcePriceTotal
+    public function getPriceTotal(): ?NewDebtLineItemResourcePriceTotal
     {
         return $this->priceTotal;
     }
@@ -146,7 +146,7 @@ class NewDebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setPriceTotal(?NewDebtLineItemResourcePriceTotal $priceTotal) : self
+    public function setPriceTotal(?NewDebtLineItemResourcePriceTotal $priceTotal): self
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;

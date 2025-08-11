@@ -7,8 +7,8 @@ class SkuUsageDebtLineItemResource extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -29,7 +29,7 @@ class SkuUsageDebtLineItemResource extends \ArrayObject
      *
      * @return string
      */
-    public function getSkuUsageId() : string
+    public function getSkuUsageId(): string
     {
         return $this->skuUsageId;
     }
@@ -40,7 +40,7 @@ class SkuUsageDebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setSkuUsageId(string $skuUsageId) : self
+    public function setSkuUsageId(string $skuUsageId): self
     {
         $this->initialized['skuUsageId'] = true;
         $this->skuUsageId = $skuUsageId;
@@ -51,7 +51,7 @@ class SkuUsageDebtLineItemResource extends \ArrayObject
      *
      * @return string
      */
-    public function getDebtLineItemId() : string
+    public function getDebtLineItemId(): string
     {
         return $this->debtLineItemId;
     }
@@ -62,7 +62,7 @@ class SkuUsageDebtLineItemResource extends \ArrayObject
      *
      * @return self
      */
-    public function setDebtLineItemId(string $debtLineItemId) : self
+    public function setDebtLineItemId(string $debtLineItemId): self
     {
         $this->initialized['debtLineItemId'] = true;
         $this->debtLineItemId = $debtLineItemId;

@@ -35,46 +35,46 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     *     @var bool $filter[invoiced] Filter for invoiced or open (= not invoiced) debt line items
     * }
     */
-    public function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
     }
     use \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+    public function getMethod(): string
     {
         return 'GET';
     }
-    public function getUri() : string
+    public function getUri(): string
     {
         return '/report/debt-line-item/aggregated';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
-    public function getExtraHeaders() : array
+    public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
-    protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[note]', 'filter[search]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]', 'filter[invoiced]'));
-        $optionsResolver->setRequired(array('filter[projectId]'));
-        $optionsResolver->setDefaults(array('paginationMode' => 'default'));
-        $optionsResolver->addAllowedTypes('page', array('int'));
-        $optionsResolver->addAllowedTypes('pageSize', array('int'));
-        $optionsResolver->addAllowedTypes('paginationMode', array('string'));
-        $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[skuCode]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[note]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[search]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[usageStart]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[usageEnd]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[invoiceIds]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[metaKey]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[metaValue]', array('string'));
-        $optionsResolver->addAllowedTypes('filter[invoiced]', array('bool'));
+        $optionsResolver->setDefined(['page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[note]', 'filter[search]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]', 'filter[invoiced]']);
+        $optionsResolver->setRequired(['filter[projectId]']);
+        $optionsResolver->setDefaults(['paginationMode' => 'default']);
+        $optionsResolver->addAllowedTypes('page', ['int']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int']);
+        $optionsResolver->addAllowedTypes('paginationMode', ['string']);
+        $optionsResolver->addAllowedTypes('filter[projectId]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[skuCode]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[note]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[search]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[usageStart]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[usageEnd]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[invoiceIds]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[metaKey]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[metaValue]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[invoiced]', ['bool']);
         return $optionsResolver;
     }
     /**
@@ -92,24 +92,24 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\DebtLineItemAggregatedCollection', 'json');
+            return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection', 'json');
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
         if (mb_strpos($contentType, 'application/json') !== false) {
-            return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\ErrorResponse', 'json');
+            return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json');
         }
         throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException($status, $body);
     }
-    public function getAuthenticationScopes() : array
+    public function getAuthenticationScopes(): array
     {
-        return array('oAuthAuthorization', 'bearerAuth');
+        return ['oAuthAuthorization', 'bearerAuth'];
     }
 }

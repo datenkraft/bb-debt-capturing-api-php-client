@@ -7,8 +7,8 @@ class DebtLineItemAggregatedSku extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -27,7 +27,7 @@ class DebtLineItemAggregatedSku extends \ArrayObject
     /**
      * Sku Code
      *
-     * @var DebtLineItemAggregated[]
+     * @var list<DebtLineItemAggregated>
      */
     protected $debtLineItems;
     /**
@@ -35,7 +35,7 @@ class DebtLineItemAggregatedSku extends \ArrayObject
      *
      * @return string
      */
-    public function getSkuCode() : string
+    public function getSkuCode(): string
     {
         return $this->skuCode;
     }
@@ -46,7 +46,7 @@ class DebtLineItemAggregatedSku extends \ArrayObject
      *
      * @return self
      */
-    public function setSkuCode(string $skuCode) : self
+    public function setSkuCode(string $skuCode): self
     {
         $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
@@ -57,7 +57,7 @@ class DebtLineItemAggregatedSku extends \ArrayObject
      *
      * @return DebtLineItemAggregatedSkuSum
      */
-    public function getSum() : DebtLineItemAggregatedSkuSum
+    public function getSum(): DebtLineItemAggregatedSkuSum
     {
         return $this->sum;
     }
@@ -68,7 +68,7 @@ class DebtLineItemAggregatedSku extends \ArrayObject
      *
      * @return self
      */
-    public function setSum(DebtLineItemAggregatedSkuSum $sum) : self
+    public function setSum(DebtLineItemAggregatedSkuSum $sum): self
     {
         $this->initialized['sum'] = true;
         $this->sum = $sum;
@@ -77,20 +77,20 @@ class DebtLineItemAggregatedSku extends \ArrayObject
     /**
      * Sku Code
      *
-     * @return DebtLineItemAggregated[]
+     * @return list<DebtLineItemAggregated>
      */
-    public function getDebtLineItems() : array
+    public function getDebtLineItems(): array
     {
         return $this->debtLineItems;
     }
     /**
      * Sku Code
      *
-     * @param DebtLineItemAggregated[] $debtLineItems
+     * @param list<DebtLineItemAggregated> $debtLineItems
      *
      * @return self
      */
-    public function setDebtLineItems(array $debtLineItems) : self
+    public function setDebtLineItems(array $debtLineItems): self
     {
         $this->initialized['debtLineItems'] = true;
         $this->debtLineItems = $debtLineItems;

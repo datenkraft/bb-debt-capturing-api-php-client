@@ -7,8 +7,8 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -29,7 +29,7 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
      *
      * @return int
      */
-    public function getUsedCount() : int
+    public function getUsedCount(): int
     {
         return $this->usedCount;
     }
@@ -40,7 +40,7 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
      *
      * @return self
      */
-    public function setUsedCount(int $usedCount) : self
+    public function setUsedCount(int $usedCount): self
     {
         $this->initialized['usedCount'] = true;
         $this->usedCount = $usedCount;
@@ -51,7 +51,7 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
      *
      * @return PriceProperty
      */
-    public function getPriceTotal() : PriceProperty
+    public function getPriceTotal(): PriceProperty
     {
         return $this->priceTotal;
     }
@@ -62,7 +62,7 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
      *
      * @return self
      */
-    public function setPriceTotal(PriceProperty $priceTotal) : self
+    public function setPriceTotal(PriceProperty $priceTotal): self
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;

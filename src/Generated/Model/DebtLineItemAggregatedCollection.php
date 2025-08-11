@@ -7,8 +7,8 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -21,7 +21,7 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
     /**
      * 
      *
-     * @var DebtLineItemAggregatedSku[]
+     * @var list<DebtLineItemAggregatedSku>
      */
     protected $data;
     /**
@@ -35,7 +35,7 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
      *
      * @return CollectionPagination
      */
-    public function getPagination() : CollectionPagination
+    public function getPagination(): CollectionPagination
     {
         return $this->pagination;
     }
@@ -46,7 +46,7 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
      *
      * @return self
      */
-    public function setPagination(CollectionPagination $pagination) : self
+    public function setPagination(CollectionPagination $pagination): self
     {
         $this->initialized['pagination'] = true;
         $this->pagination = $pagination;
@@ -55,20 +55,20 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
     /**
      * 
      *
-     * @return DebtLineItemAggregatedSku[]
+     * @return list<DebtLineItemAggregatedSku>
      */
-    public function getData() : array
+    public function getData(): array
     {
         return $this->data;
     }
     /**
      * 
      *
-     * @param DebtLineItemAggregatedSku[] $data
+     * @param list<DebtLineItemAggregatedSku> $data
      *
      * @return self
      */
-    public function setData(array $data) : self
+    public function setData(array $data): self
     {
         $this->initialized['data'] = true;
         $this->data = $data;
@@ -79,7 +79,7 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
      *
      * @return DebtLineItemAggregatedCollectionsum
      */
-    public function getSum() : DebtLineItemAggregatedCollectionsum
+    public function getSum(): DebtLineItemAggregatedCollectionsum
     {
         return $this->sum;
     }
@@ -90,7 +90,7 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
      *
      * @return self
      */
-    public function setSum(DebtLineItemAggregatedCollectionsum $sum) : self
+    public function setSum(DebtLineItemAggregatedCollectionsum $sum): self
     {
         $this->initialized['sum'] = true;
         $this->sum = $sum;

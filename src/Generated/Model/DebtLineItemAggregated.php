@@ -7,8 +7,8 @@ class DebtLineItemAggregated extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -69,7 +69,7 @@ class DebtLineItemAggregated extends \ArrayObject
     /**
      * 
      *
-     * @var DebtLineItemAggregatedSkuUsage[]
+     * @var list<DebtLineItemAggregatedSkuUsage>
      */
     protected $skuUsages;
     /**
@@ -77,7 +77,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -88,7 +88,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setId(string $id) : self
+    public function setId(string $id): self
     {
         $this->initialized['id'] = true;
         $this->id = $id;
@@ -99,7 +99,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return int
      */
-    public function getQuantity() : int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
@@ -110,7 +110,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setQuantity(int $quantity) : self
+    public function setQuantity(int $quantity): self
     {
         $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
@@ -121,7 +121,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageStart() : \DateTime
+    public function getUsageStart(): \DateTime
     {
         return $this->usageStart;
     }
@@ -132,7 +132,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageStart(\DateTime $usageStart) : self
+    public function setUsageStart(\DateTime $usageStart): self
     {
         $this->initialized['usageStart'] = true;
         $this->usageStart = $usageStart;
@@ -143,7 +143,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageEnd() : \DateTime
+    public function getUsageEnd(): \DateTime
     {
         return $this->usageEnd;
     }
@@ -154,7 +154,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageEnd(\DateTime $usageEnd) : self
+    public function setUsageEnd(\DateTime $usageEnd): self
     {
         $this->initialized['usageEnd'] = true;
         $this->usageEnd = $usageEnd;
@@ -165,7 +165,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return PriceProperty
      */
-    public function getPriceTotal() : PriceProperty
+    public function getPriceTotal(): PriceProperty
     {
         return $this->priceTotal;
     }
@@ -176,7 +176,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setPriceTotal(PriceProperty $priceTotal) : self
+    public function setPriceTotal(PriceProperty $priceTotal): self
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;
@@ -187,7 +187,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return PriceProperty
      */
-    public function getPricePerUnit() : PriceProperty
+    public function getPricePerUnit(): PriceProperty
     {
         return $this->pricePerUnit;
     }
@@ -198,7 +198,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setPricePerUnit(PriceProperty $pricePerUnit) : self
+    public function setPricePerUnit(PriceProperty $pricePerUnit): self
     {
         $this->initialized['pricePerUnit'] = true;
         $this->pricePerUnit = $pricePerUnit;
@@ -209,7 +209,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return string|null
      */
-    public function getInvoiceId() : ?string
+    public function getInvoiceId(): ?string
     {
         return $this->invoiceId;
     }
@@ -220,7 +220,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setInvoiceId(?string $invoiceId) : self
+    public function setInvoiceId(?string $invoiceId): self
     {
         $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
@@ -231,7 +231,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return string|null
      */
-    public function getInvoiceNumber() : ?string
+    public function getInvoiceNumber(): ?string
     {
         return $this->invoiceNumber;
     }
@@ -242,7 +242,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setInvoiceNumber(?string $invoiceNumber) : self
+    public function setInvoiceNumber(?string $invoiceNumber): self
     {
         $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
@@ -253,7 +253,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return string|null
      */
-    public function getNote() : ?string
+    public function getNote(): ?string
     {
         return $this->note;
     }
@@ -264,7 +264,7 @@ class DebtLineItemAggregated extends \ArrayObject
      *
      * @return self
      */
-    public function setNote(?string $note) : self
+    public function setNote(?string $note): self
     {
         $this->initialized['note'] = true;
         $this->note = $note;
@@ -273,20 +273,20 @@ class DebtLineItemAggregated extends \ArrayObject
     /**
      * 
      *
-     * @return DebtLineItemAggregatedSkuUsage[]
+     * @return list<DebtLineItemAggregatedSkuUsage>
      */
-    public function getSkuUsages() : array
+    public function getSkuUsages(): array
     {
         return $this->skuUsages;
     }
     /**
      * 
      *
-     * @param DebtLineItemAggregatedSkuUsage[] $skuUsages
+     * @param list<DebtLineItemAggregatedSkuUsage> $skuUsages
      *
      * @return self
      */
-    public function setSkuUsages(array $skuUsages) : self
+    public function setSkuUsages(array $skuUsages): self
     {
         $this->initialized['skuUsages'] = true;
         $this->skuUsages = $skuUsages;

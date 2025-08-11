@@ -7,8 +7,8 @@ class NewInvoice extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -37,7 +37,7 @@ class NewInvoice extends \ArrayObject
      *
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -48,7 +48,7 @@ class NewInvoice extends \ArrayObject
      *
      * @return self
      */
-    public function setProjectId(string $projectId) : self
+    public function setProjectId(string $projectId): self
     {
         $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
@@ -59,7 +59,7 @@ class NewInvoice extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getCutoffDate() : \DateTime
+    public function getCutoffDate(): \DateTime
     {
         return $this->cutoffDate;
     }
@@ -70,7 +70,7 @@ class NewInvoice extends \ArrayObject
      *
      * @return self
      */
-    public function setCutoffDate(\DateTime $cutoffDate) : self
+    public function setCutoffDate(\DateTime $cutoffDate): self
     {
         $this->initialized['cutoffDate'] = true;
         $this->cutoffDate = $cutoffDate;
@@ -83,7 +83,7 @@ class NewInvoice extends \ArrayObject
     *
     * @return string|null
     */
-    public function getInvoiceNumber() : ?string
+    public function getInvoiceNumber(): ?string
     {
         return $this->invoiceNumber;
     }
@@ -96,7 +96,7 @@ class NewInvoice extends \ArrayObject
     *
     * @return self
     */
-    public function setInvoiceNumber(?string $invoiceNumber) : self
+    public function setInvoiceNumber(?string $invoiceNumber): self
     {
         $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;

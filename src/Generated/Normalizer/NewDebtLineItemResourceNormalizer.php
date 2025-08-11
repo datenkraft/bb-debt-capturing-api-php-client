@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class NewDebtLineItemResourceNormalizer implements DenormalizerInterface, Normal
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\NewDebtLineItemResource';
+        return $type === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\NewDebtLineItemResource';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -53,15 +49,15 @@ class NewDebtLineItemResourceNormalizer implements DenormalizerInterface, Normal
             $object->setQuantity(null);
         }
         if (\array_key_exists('usageStart', $data)) {
-            $object->setUsageStart(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageStart']));
+            $object->setUsageStart(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['usageStart']));
             unset($data['usageStart']);
         }
         if (\array_key_exists('usageEnd', $data)) {
-            $object->setUsageEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageEnd']));
+            $object->setUsageEnd(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['usageEnd']));
             unset($data['usageEnd']);
         }
         if (\array_key_exists('priceTotal', $data) && $data['priceTotal'] !== null) {
-            $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], 'Datenkraft\\Backbone\\Client\\DebtCapturingApi\\Generated\\Model\\NewDebtLineItemResourcePriceTotal', 'json', $context));
+            $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResourcePriceTotal::class, 'json', $context));
             unset($data['priceTotal']);
         }
         elseif (\array_key_exists('priceTotal', $data) && $data['priceTotal'] === null) {
@@ -74,22 +70,23 @@ class NewDebtLineItemResourceNormalizer implements DenormalizerInterface, Normal
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        $data['skuCode'] = $object->getSkuCode();
-        $data['quantity'] = $object->getQuantity();
-        $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
-        $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
-        $data['priceTotal'] = $this->normalizer->normalize($object->getPriceTotal(), 'json', $context);
-        foreach ($object as $key => $value) {
+        $dataArray = [];
+        $dataArray['skuCode'] = $data->getSkuCode();
+        $dataArray['quantity'] = $data->getQuantity();
+        $dataArray['usageStart'] = $data->getUsageStart()?->format('Y-m-d\TH:i:sP');
+        $dataArray['usageEnd'] = $data->getUsageEnd()?->format('Y-m-d\TH:i:sP');
+        $dataArray['priceTotal'] = $this->normalizer->normalize($data->getPriceTotal(), 'json', $context);
+        foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
+                $dataArray[$key] = $value;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource::class => false];
     }
 }
