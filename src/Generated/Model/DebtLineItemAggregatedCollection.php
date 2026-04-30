@@ -13,26 +13,18 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * 
-     *
      * @var CollectionPagination
      */
     protected $pagination;
     /**
-     * 
-     *
      * @var list<DebtLineItemAggregatedSku>
      */
     protected $data;
     /**
-     * 
-     *
-     * @var DebtLineItemAggregatedCollectionsum
+     * @var DebtLineItemAggregatedCollectionSum
      */
     protected $sum;
     /**
-     * 
-     *
      * @return CollectionPagination
      */
     public function getPagination(): CollectionPagination
@@ -40,8 +32,6 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
         return $this->pagination;
     }
     /**
-     * 
-     *
      * @param CollectionPagination $pagination
      *
      * @return self
@@ -53,8 +43,6 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return list<DebtLineItemAggregatedSku>
      */
     public function getData(): array
@@ -62,8 +50,6 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
         return $this->data;
     }
     /**
-     * 
-     *
      * @param list<DebtLineItemAggregatedSku> $data
      *
      * @return self
@@ -75,22 +61,18 @@ class DebtLineItemAggregatedCollection extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
-     * @return DebtLineItemAggregatedCollectionsum
+     * @return DebtLineItemAggregatedCollectionSum
      */
-    public function getSum(): DebtLineItemAggregatedCollectionsum
+    public function getSum(): DebtLineItemAggregatedCollectionSum
     {
         return $this->sum;
     }
     /**
-     * 
-     *
-     * @param DebtLineItemAggregatedCollectionsum $sum
+     * @param DebtLineItemAggregatedCollectionSum $sum
      *
      * @return self
      */
-    public function setSum(DebtLineItemAggregatedCollectionsum $sum): self
+    public function setSum(DebtLineItemAggregatedCollectionSum $sum): self
     {
         $this->initialized['sum'] = true;
         $this->sum = $sum;

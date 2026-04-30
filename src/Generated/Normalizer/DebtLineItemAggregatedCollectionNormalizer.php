@@ -27,15 +27,15 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('pagination', $data)) {
             $object->setPagination($this->denormalizer->denormalize($data['pagination'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\CollectionPagination::class, 'json', $context));
@@ -50,7 +50,7 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
             unset($data['data']);
         }
         if (\array_key_exists('sum', $data)) {
-            $object->setSum($this->denormalizer->denormalize($data['sum'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum::class, 'json', $context));
+            $object->setSum($this->denormalizer->denormalize($data['sum'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionSum::class, 'json', $context));
             unset($data['sum']);
         }
         foreach ($data as $key => $value_1) {

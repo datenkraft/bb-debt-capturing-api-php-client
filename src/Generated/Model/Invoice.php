@@ -37,13 +37,13 @@ class Invoice extends \ArrayObject
      */
     protected $invoiceId;
     /**
-    * The invoice status with the following possible values:
-    - processing: only initially set before the DebtLineItems have been linked with the invoice.
-    - completed: all DebtLineItems have been linked to the invoice.
-                       
-    *
-    * @var string
-    */
+     * The invoice status with the following possible values:
+     * - processing: only initially set before the DebtLineItems have been linked with the invoice.
+     * - completed: all DebtLineItems have been linked to the invoice.
+     * 
+     *
+     * @var string
+     */
     protected $invoiceStatus;
     /**
      * Project id
@@ -134,13 +134,13 @@ class Invoice extends \ArrayObject
         return $this;
     }
     /**
-    * The invoice status with the following possible values:
-    - processing: only initially set before the DebtLineItems have been linked with the invoice.
-    - completed: all DebtLineItems have been linked to the invoice.
-                       
-    *
-    * @return string
-    */
+     * The invoice status with the following possible values:
+     * - processing: only initially set before the DebtLineItems have been linked with the invoice.
+     * - completed: all DebtLineItems have been linked to the invoice.
+     * 
+     *
+     * @return string
+     */
     public function getInvoiceStatus(): string
     {
         return $this->invoiceStatus;

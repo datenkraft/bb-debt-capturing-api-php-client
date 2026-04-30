@@ -69,7 +69,7 @@ class DebtLineItemResource extends \ArrayObject
     /**
      * Price per Unit
      *
-     * @var DebtLineItemResourcepricePerUnit|null
+     * @var DebtLineItemResourcePricePerUnit|null
      */
     protected $pricePerUnit;
     /**
@@ -279,20 +279,20 @@ class DebtLineItemResource extends \ArrayObject
     /**
      * Price per Unit
      *
-     * @return DebtLineItemResourcepricePerUnit|null
+     * @return DebtLineItemResourcePricePerUnit|null
      */
-    public function getPricePerUnit(): ?DebtLineItemResourcepricePerUnit
+    public function getPricePerUnit(): ?DebtLineItemResourcePricePerUnit
     {
         return $this->pricePerUnit;
     }
     /**
      * Price per Unit
      *
-     * @param DebtLineItemResourcepricePerUnit|null $pricePerUnit
+     * @param DebtLineItemResourcePricePerUnit|null $pricePerUnit
      *
      * @return self
      */
-    public function setPricePerUnit(?DebtLineItemResourcepricePerUnit $pricePerUnit): self
+    public function setPricePerUnit(?DebtLineItemResourcePricePerUnit $pricePerUnit): self
     {
         $this->initialized['pricePerUnit'] = true;
         $this->pricePerUnit = $pricePerUnit;

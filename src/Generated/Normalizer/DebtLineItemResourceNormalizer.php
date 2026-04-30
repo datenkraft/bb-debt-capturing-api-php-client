@@ -27,15 +27,15 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('skuCode', $data)) {
             $object->setSkuCode($data['skuCode']);
@@ -86,7 +86,7 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
             $object->setUnit(null);
         }
         if (\array_key_exists('pricePerUnit', $data) && $data['pricePerUnit'] !== null) {
-            $object->setPricePerUnit($this->denormalizer->denormalize($data['pricePerUnit'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcepricePerUnit::class, 'json', $context));
+            $object->setPricePerUnit($this->denormalizer->denormalize($data['pricePerUnit'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit::class, 'json', $context));
             unset($data['pricePerUnit']);
         }
         elseif (\array_key_exists('pricePerUnit', $data) && $data['pricePerUnit'] === null) {
@@ -111,8 +111,8 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         $dataArray = [];
         $dataArray['skuCode'] = $data->getSkuCode();
         $dataArray['quantity'] = $data->getQuantity();
-        $dataArray['usageStart'] = $data->getUsageStart()?->format('Y-m-d\TH:i:sP');
-        $dataArray['usageEnd'] = $data->getUsageEnd()?->format('Y-m-d\TH:i:sP');
+        $dataArray['usageStart'] = $data->getUsageStart()->format('Y-m-d\TH:i:sP');
+        $dataArray['usageEnd'] = $data->getUsageEnd()->format('Y-m-d\TH:i:sP');
         $dataArray['priceTotal'] = $this->normalizer->normalize($data->getPriceTotal(), 'json', $context);
         if ($data->isInitialized('debtLineItemId') && null !== $data->getDebtLineItemId()) {
             $dataArray['debtLineItemId'] = $data->getDebtLineItemId();
@@ -120,16 +120,16 @@ class DebtLineItemResourceNormalizer implements DenormalizerInterface, Normalize
         if ($data->isInitialized('projectId') && null !== $data->getProjectId()) {
             $dataArray['projectId'] = $data->getProjectId();
         }
-        if ($data->isInitialized('invoiceId') && null !== $data->getInvoiceId()) {
+        if ($data->isInitialized('invoiceId')) {
             $dataArray['invoiceId'] = $data->getInvoiceId();
         }
-        if ($data->isInitialized('unit') && null !== $data->getUnit()) {
+        if ($data->isInitialized('unit')) {
             $dataArray['unit'] = $data->getUnit();
         }
-        if ($data->isInitialized('pricePerUnit') && null !== $data->getPricePerUnit()) {
+        if ($data->isInitialized('pricePerUnit')) {
             $dataArray['pricePerUnit'] = $this->normalizer->normalize($data->getPricePerUnit(), 'json', $context);
         }
-        if ($data->isInitialized('note') && null !== $data->getNote()) {
+        if ($data->isInitialized('note')) {
             $dataArray['note'] = $data->getNote();
         }
         foreach ($data as $key => $value) {

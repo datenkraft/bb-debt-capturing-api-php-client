@@ -27,15 +27,15 @@ class NewDebtLineItemResourceNormalizer implements DenormalizerInterface, Normal
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('skuCode', $data)) {
             $object->setSkuCode($data['skuCode']);
@@ -75,8 +75,8 @@ class NewDebtLineItemResourceNormalizer implements DenormalizerInterface, Normal
         $dataArray = [];
         $dataArray['skuCode'] = $data->getSkuCode();
         $dataArray['quantity'] = $data->getQuantity();
-        $dataArray['usageStart'] = $data->getUsageStart()?->format('Y-m-d\TH:i:sP');
-        $dataArray['usageEnd'] = $data->getUsageEnd()?->format('Y-m-d\TH:i:sP');
+        $dataArray['usageStart'] = $data->getUsageStart()->format('Y-m-d\TH:i:sP');
+        $dataArray['usageEnd'] = $data->getUsageEnd()->format('Y-m-d\TH:i:sP');
         $dataArray['priceTotal'] = $this->normalizer->normalize($data->getPriceTotal(), 'json', $context);
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {

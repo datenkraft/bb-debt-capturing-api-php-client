@@ -46,7 +46,7 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
         
         \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedCollectionNormalizer::class,
         
-        \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedCollectionsumNormalizer::class,
+        \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionSum::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedCollectionSumNormalizer::class,
         
         \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSku::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedSkuNormalizer::class,
         
@@ -56,7 +56,7 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
         
         \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemResourceNormalizer::class,
         
-        \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcepricePerUnit::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemResourcepricePerUnitNormalizer::class,
+        \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemResourcePricePerUnitNormalizer::class,
         
         \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Error::class => \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\ErrorNormalizer::class,
         
@@ -150,12 +150,12 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\CollectionPagination::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregated::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum::class => false,
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionSum::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSku::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuSum::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuUsage::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcepricePerUnit::class => false,
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Error::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorReferencesItem::class => false,
             \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse::class => false,

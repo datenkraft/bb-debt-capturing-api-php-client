@@ -27,15 +27,15 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregated();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregated();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
@@ -102,19 +102,19 @@ class DebtLineItemAggregatedNormalizer implements DenormalizerInterface, Normali
         $dataArray = [];
         $dataArray['id'] = $data->getId();
         $dataArray['quantity'] = $data->getQuantity();
-        $dataArray['usageStart'] = $data->getUsageStart()?->format('Y-m-d');
-        $dataArray['usageEnd'] = $data->getUsageEnd()?->format('Y-m-d');
+        $dataArray['usageStart'] = $data->getUsageStart()->format('Y-m-d');
+        $dataArray['usageEnd'] = $data->getUsageEnd()->format('Y-m-d');
         $dataArray['priceTotal'] = $this->normalizer->normalize($data->getPriceTotal(), 'json', $context);
         if ($data->isInitialized('pricePerUnit') && null !== $data->getPricePerUnit()) {
             $dataArray['pricePerUnit'] = $this->normalizer->normalize($data->getPricePerUnit(), 'json', $context);
         }
-        if ($data->isInitialized('invoiceId') && null !== $data->getInvoiceId()) {
+        if ($data->isInitialized('invoiceId')) {
             $dataArray['invoiceId'] = $data->getInvoiceId();
         }
-        if ($data->isInitialized('invoiceNumber') && null !== $data->getInvoiceNumber()) {
+        if ($data->isInitialized('invoiceNumber')) {
             $dataArray['invoiceNumber'] = $data->getInvoiceNumber();
         }
-        if ($data->isInitialized('note') && null !== $data->getNote()) {
+        if ($data->isInitialized('note')) {
             $dataArray['note'] = $data->getNote();
         }
         if ($data->isInitialized('skuUsages') && null !== $data->getSkuUsages()) {

@@ -37,14 +37,10 @@ class DebtLineItemAggregated extends \ArrayObject
      */
     protected $usageEnd;
     /**
-     * 
-     *
      * @var PriceProperty
      */
     protected $priceTotal;
     /**
-     * 
-     *
      * @var PriceProperty
      */
     protected $pricePerUnit;
@@ -67,8 +63,6 @@ class DebtLineItemAggregated extends \ArrayObject
      */
     protected $note;
     /**
-     * 
-     *
      * @var list<DebtLineItemAggregatedSkuUsage>
      */
     protected $skuUsages;
@@ -161,8 +155,6 @@ class DebtLineItemAggregated extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return PriceProperty
      */
     public function getPriceTotal(): PriceProperty
@@ -170,8 +162,6 @@ class DebtLineItemAggregated extends \ArrayObject
         return $this->priceTotal;
     }
     /**
-     * 
-     *
      * @param PriceProperty $priceTotal
      *
      * @return self
@@ -183,8 +173,6 @@ class DebtLineItemAggregated extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return PriceProperty
      */
     public function getPricePerUnit(): PriceProperty
@@ -192,8 +180,6 @@ class DebtLineItemAggregated extends \ArrayObject
         return $this->pricePerUnit;
     }
     /**
-     * 
-     *
      * @param PriceProperty $pricePerUnit
      *
      * @return self
@@ -271,8 +257,6 @@ class DebtLineItemAggregated extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return list<DebtLineItemAggregatedSkuUsage>
      */
     public function getSkuUsages(): array
@@ -280,8 +264,6 @@ class DebtLineItemAggregated extends \ArrayObject
         return $this->skuUsages;
     }
     /**
-     * 
-     *
      * @param list<DebtLineItemAggregatedSkuUsage> $skuUsages
      *
      * @return self
