@@ -27,15 +27,15 @@ class DebtLineItemAggregatedSkuUsageNormalizer implements DenormalizerInterface,
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuUsage();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuUsage();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
@@ -68,7 +68,7 @@ class DebtLineItemAggregatedSkuUsageNormalizer implements DenormalizerInterface,
         $dataArray = [];
         $dataArray['id'] = $data->getId();
         $dataArray['quantity'] = $data->getQuantity();
-        if ($data->isInitialized('meta') && null !== $data->getMeta()) {
+        if ($data->isInitialized('meta')) {
             $values = [];
             foreach ($data->getMeta() as $key => $value) {
                 $values[$key] = $value;

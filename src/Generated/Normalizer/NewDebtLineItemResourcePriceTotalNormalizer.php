@@ -27,18 +27,18 @@ class NewDebtLineItemResourcePriceTotalNormalizer implements DenormalizerInterfa
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResourcePriceTotal();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResourcePriceTotal();
         if (\array_key_exists('minorMicro', $data) && \is_int($data['minorMicro'])) {
             $data['minorMicro'] = (double) $data['minorMicro'];
-        }
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('minorMicro', $data) && $data['minorMicro'] !== null) {
             $object->setMinorMicro($data['minorMicro']);
@@ -64,10 +64,10 @@ class NewDebtLineItemResourcePriceTotalNormalizer implements DenormalizerInterfa
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('minorMicro') && null !== $data->getMinorMicro()) {
+        if ($data->isInitialized('minorMicro')) {
             $dataArray['minorMicro'] = $data->getMinorMicro();
         }
-        if ($data->isInitialized('currency') && null !== $data->getCurrency()) {
+        if ($data->isInitialized('currency')) {
             $dataArray['currency'] = $data->getCurrency();
         }
         foreach ($data as $key => $value) {

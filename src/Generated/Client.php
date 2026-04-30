@@ -6,18 +6,18 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
 {
     /**
     * Get the audit log.
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    *     @var string $filter[endpoint] A filter for restricting the audit log to a endpoint.
-    *     @var string $filter[version] A filter for restricting the audit log to a endpoint version.
-    *     @var mixed $filter[identifier] A filter for querying actions for a identifier.
-    * }
+    *    "filter[endpoint]"?: string, //A filter for restricting the audit log to a endpoint.
+    *    "filter[version]"?: string, //A filter for restricting the audit log to a endpoint version.
+    *    "filter[identifier]"?: mixed, //A filter for querying actions for a identifier.
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuditLogCollectionBadRequestException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuditLogCollectionUnauthorizedException
@@ -25,7 +25,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuditLogCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuditLogCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuditLogCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getAuditLogCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -33,8 +33,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Delete one or more role to permission assignments in this resource server
-     *
-     * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRoleResource[] $requestBody 
+     * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRoleResource[] $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthPermissionRoleCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthPermissionRoleCollectionUnauthorizedException
@@ -43,7 +42,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthPermissionRoleCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function deleteAuthPermissionRoleCollection(?array $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -51,22 +50,22 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
     * Get all role to permission assignments from this resource server
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    * }
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthPermissionRoleCollectionUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthPermissionRoleCollectionForbiddenException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthPermissionRoleCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRolePaginatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRolePaginatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getAuthPermissionRoleCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -74,8 +73,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Create one or more role to permission assignments in this resource server
-     *
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRoleResource[] $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRoleResource[] $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthPermissionRoleCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthPermissionRoleCollectionUnauthorizedException
@@ -85,7 +83,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthPermissionRoleCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRoleResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRoleResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function postAuthPermissionRoleCollection(array $requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -93,22 +91,22 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
     * Get all permissions from this resource server
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    * }
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthPermissionCollectionUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthPermissionCollectionForbiddenException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthPermissionCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\GetAuthPermissionCollectionResponse|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\GetAuthPermissionCollectionResponse|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getAuthPermissionCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -116,8 +114,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Delete one or more role to identity assignments in this resource server
-     *
-     * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityResource[] $requestBody 
+     * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityResource[] $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthRoleIdentityCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthRoleIdentityCollectionUnauthorizedException
@@ -126,7 +123,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthRoleIdentityCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function deleteAuthRoleIdentityCollection(?array $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -134,22 +131,22 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
     * Get all role to identity assignments from this resource server
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    * }
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleIdentityCollectionUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleIdentityCollectionForbiddenException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleIdentityCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityPaginatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityPaginatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getAuthRoleIdentityCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -157,8 +154,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Create one or more role to identity assignments in this resource server
-     *
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityResource[] $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityResource[] $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthRoleIdentityCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthRoleIdentityCollectionUnauthorizedException
@@ -168,7 +164,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthRoleIdentityCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityResource[]|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function postAuthRoleIdentityCollection(array $requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -176,22 +172,22 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
     * Get all available roles from this resource server
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    * }
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleCollectionUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleCollectionForbiddenException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getAuthRoleCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -199,7 +195,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Delete a role for this resource server
-     *
      * @param string $roleCode Identifier for the role
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthRoleUnauthorizedException
@@ -208,7 +203,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\DeleteAuthRoleInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function deleteAuthRole(string $roleCode, string $fetch = self::FETCH_OBJECT)
     {
@@ -216,7 +211,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Get a role from this resource server by its roleCode
-     *
      * @param string $roleCode Identifier for the role
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleUnauthorizedException
@@ -225,7 +219,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetAuthRoleInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function getAuthRole(string $roleCode, string $fetch = self::FETCH_OBJECT)
     {
@@ -233,9 +227,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Patch a role for this resource server
-     *
      * @param string $roleCode Identifier for the role
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewAuthRoleResource $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewAuthRoleResource $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchAuthRoleBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchAuthRoleUnauthorizedException
@@ -244,7 +237,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchAuthRoleInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function patchAuthRole(string $roleCode, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewAuthRoleResource $requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -252,9 +245,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Post a role for this resource server
-     *
      * @param string $roleCode Identifier for the role
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewAuthRoleResource $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewAuthRoleResource $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthRoleBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthRoleUnauthorizedException
@@ -263,7 +255,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostAuthRoleInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function postAuthRole(string $roleCode, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewAuthRoleResource $requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -271,19 +263,19 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
     * Get debtLineItems by projectId and time range
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    *     @var string $filter[projectId] projectId filter
-    *     @var string $filter[dateFrom] dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[dateTo] dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[invoiceId] invoiceId filter
-    * }
+    *    "filter[projectId]": string, //projectId filter
+    *    "filter[dateFrom]"?: string, //dateFrom filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
+    *    "filter[dateTo]"?: string, //dateTo filter. The filters dateFrom and dateTo are required unless an invoiceId filter is given.
+    *    "filter[invoiceId]"?: string, //invoiceId filter
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionBadRequestException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionUnauthorizedException
@@ -291,7 +283,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\GetDebtLineItemCollectionResponse|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\GetDebtLineItemCollectionResponse|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getDebtLineItemCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -299,7 +291,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Get a debtLineItem by debtLineItemId
-     *
      * @param string $debtLineItemId debtLineItemId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemBadRequestException
@@ -309,7 +300,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function getDebtLineItem(string $debtLineItemId, string $fetch = self::FETCH_OBJECT)
     {
@@ -319,7 +310,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      */
     public function getOpenApi(string $fetch = self::FETCH_OBJECT)
     {
@@ -327,14 +318,13 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Get the changelog in the specified format
-     *
      * @param string $format Changelog file format
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetChangelogInFormatNotFoundException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetChangelogInFormatBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      */
     public function getChangelogInFormat(string $format, string $fetch = self::FETCH_OBJECT)
     {
@@ -342,13 +332,12 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Get the openapi documentation in the specified format
-     *
      * @param string $format Openapi file format
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetOpenApiInFormatBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null : \Psr\Http\Message\ResponseInterface)
      */
     public function getOpenApiInFormat(string $format, string $fetch = self::FETCH_OBJECT)
     {
@@ -361,51 +350,50 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetEventSourcingReplayInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayGetResponse200|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayGetResponse200|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function getEventSourcingReplay(string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetEventSourcingReplay(), $fetch);
     }
     /**
-    * Execute event sourcing replay (recalculates DebtLineItems).
-    
-    Please be aware of the effects a replay involves!
-    - The replay does not affect DebtLineItems with an Invoice_Id set.
-    - Changes of the calculators/prices will affect non invoiced, past, events
-    and therefore also the resulting DebtLineItems.
-    - At the beginning/before the replay starts, the DebtLineItems, which are not invoiced yet/no Invoice_Id set,
-    get deleted.
-    - If no projectIds are provided, all DebtLineItems are affected by the replay.
-    *
-    * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody $requestBody 
-    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayBadRequestException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayUnauthorizedException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayForbiddenException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayConflictException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayInternalServerErrorException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
-    *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostResponse200|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-    */
+     * Execute event sourcing replay (recalculates DebtLineItems).
+     *
+     * Please be aware of the effects a replay involves!
+     * - The replay does not affect DebtLineItems with an Invoice_Id set.
+     * - Changes of the calculators/prices will affect non invoiced, past, events
+     * and therefore also the resulting DebtLineItems.
+     * - At the beginning/before the replay starts, the DebtLineItems, which are not invoiced yet/no Invoice_Id set,
+     * get deleted.
+     * - If no projectIds are provided, all DebtLineItems are affected by the replay.
+     * @param null|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody $requestBody
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayBadRequestException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayForbiddenException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayConflictException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostEventSourcingReplayInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostResponse200|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
+     */
     public function postEventSourcingReplay(?\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PostEventSourcingReplay($requestBody), $fetch);
     }
     /**
     * Get a list of invoices.
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    *     @var string $filter[projectId] Project id filter
-    *     @var string $filter[invoiceNumber] Invoice number filter
-    * }
+    *    "filter[projectId]"?: string, //Project id filter
+    *    "filter[invoiceNumber]"?: string, //Invoice number filter
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionBadRequestException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionUnauthorizedException
@@ -413,7 +401,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getInvoiceCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -421,8 +409,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Add a new invoice.
-     *
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewInvoice $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewInvoice $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceUnauthorizedException
@@ -432,7 +419,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function postInvoice(\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewInvoice $requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -440,7 +427,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Get the invoice with the given invoice id.
-     *
      * @param string $invoiceId invoice id
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceBadRequestException
@@ -450,7 +436,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function getInvoice(string $invoiceId, string $fetch = self::FETCH_OBJECT)
     {
@@ -458,9 +444,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Updates some fields on an invoice. Only a limited set of fields can be updated
-     *
      * @param string $invoiceId invoice id
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\UpdateInvoice $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\UpdateInvoice $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceUnauthorizedException
@@ -470,7 +455,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PatchInvoiceInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function patchInvoice(string $invoiceId, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\UpdateInvoice $requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -478,9 +463,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
      * Add a debtLineItem to an invoice.
-     *
      * @param string $invoiceId Invoice id
-     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource $requestBody 
+     * @param \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemUnauthorizedException
@@ -490,7 +474,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\PostInvoiceDebtLineItemInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
      */
     public function postInvoiceDebtLineItem(string $invoiceId, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource $requestBody, string $fetch = self::FETCH_OBJECT)
     {
@@ -498,18 +482,18 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
     * Get debtLineItems file export by projectId and time range.
-           The file type is controlled by the accept header.
-    *
-    * @param array $queryParameters {
-    *     @var string $filter[projectId] This filter restricts the data by the project id.
-    *     @var string $filter[dateFrom] This filter enables retrieval of data starting from a specified date in UTC.
+    *         The file type is controlled by the accept header.
+    * @param array{
+    *    "filter[projectId]": string, //This filter restricts the data by the project id.
+    *    "filter[dateFrom]"?: string, //This filter enables retrieval of data starting from a specified date in UTC.
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[dateTo] This filter enables retrieval of data ending up to a specified date in UTC.
+    *    "filter[dateTo]"?: string, //This filter enables retrieval of data ending up to a specified date in UTC.
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[invoiceId] This filter restricts the data by the invoice id.
-    * }
-    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    *    "filter[invoiceId]"?: string, //This filter restricts the data by the invoice id.
+    * } $queryParameters
     * @param array $accept Accept content header text/csv|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/json
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportBadRequestException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportForbiddenException
@@ -517,26 +501,24 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getDebtLineItemCollectionReport(array $queryParameters = [], string $fetch = self::FETCH_OBJECT, array $accept = [])
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCollectionReport($queryParameters, $accept), $fetch);
     }
     /**
-    * 
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    *     @var string $filter[projectId] Mandatory filter for the project id
-    *     @var string $filter[skuCode] Filter for the sku code (full text search)
-    *     @var string $filter[note] Filter for the debt line item note (full text search)
-    *     @var string $filter[search] Provide a search term to filter debt line items.
+    *    "filter[projectId]": string, //Mandatory filter for the project id
+    *    "filter[skuCode]"?: string, //Filter for the sku code (full text search)
+    *    "filter[note]"?: string, //Filter for the debt line item note (full text search)
+    *    "filter[search]"?: string, //Provide a search term to filter debt line items.
     
     The search term is matched against the following fields:
     - skuCode
@@ -546,20 +528,21 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     
     If the search term is found in one of the fields, the resource is included in the result.
     The search is case insensitive.
-    *     @var string $filter[usageStart] Start date of the usage (Y-m-d)
-    *     @var string $filter[usageEnd] End date of the usage (Y-m-d)
-    *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
-    *     @var string $filter[metaKey] Key of the skuUsage meta field (required with metaValue)
-    *     @var string $filter[metaValue] Value of the skuUsage meta field (required with metaKey)
-    *     @var bool $filter[invoiced] Filter for invoiced or open (= not invoiced) debt line items
-    * }
+    *    "filter[usageStart]"?: string, //Start date of the usage (Y-m-d)
+    *    "filter[usageEnd]"?: string, //End date of the usage (Y-m-d)
+    *    "filter[invoiceIds]"?: string, //Comma delimited string of invoice ids
+    *    "filter[metaKey]"?: string, //Key of the skuUsage meta field (required with metaValue)
+    *    "filter[metaValue]"?: string, //Value of the skuUsage meta field (required with metaKey)
+    *    "filter[invoiced]"?: bool, //Filter for invoiced or open (= not invoiced) debt line items
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getReportDebtLineItemCollectionAggregated(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
@@ -567,16 +550,16 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     }
     /**
     * Get skuUsages for debtLineItems
-    *
-    * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
+    * @param array{
+    *    "page"?: int, //The page to read. Default is the first page.
+    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+    *    "paginationMode"?: string, //The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    *     @var string $filter[debtLineItemIds] debtLineItemIds filter
-    * }
+    *    "filter[debtLineItemIds]"?: string, //debtLineItemIds filter
+    * } $queryParameters
+    
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionBadRequestException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionUnauthorizedException
@@ -584,7 +567,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetSkuUsageDebtLineItemCollectionInternalServerErrorException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
     *
-    * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\SkuUsageDebtLineItemResourceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\SkuUsageDebtLineItemResourceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
     */
     public function getSkuUsageDebtLineItemCollection(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {

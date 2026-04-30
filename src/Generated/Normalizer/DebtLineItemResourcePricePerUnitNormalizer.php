@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-class DebtLineItemAggregatedCollectionsumNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class DebtLineItemResourcePricePerUnitNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -19,27 +19,40 @@ class DebtLineItemAggregatedCollectionsumNormalizer implements DenormalizerInter
     use ValidatorTrait;
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum::class;
+        return $type === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit::class;
     }
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum::class;
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit::class;
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
+        if (\array_key_exists('minorMicro', $data) && \is_int($data['minorMicro'])) {
+            $data['minorMicro'] = (double) $data['minorMicro'];
         }
-        if (\array_key_exists('priceTotal', $data)) {
-            $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\PriceProperty::class, 'json', $context));
-            unset($data['priceTotal']);
+        if (\array_key_exists('minorMicro', $data) && $data['minorMicro'] !== null) {
+            $object->setMinorMicro($data['minorMicro']);
+            unset($data['minorMicro']);
+        }
+        elseif (\array_key_exists('minorMicro', $data) && $data['minorMicro'] === null) {
+            $object->setMinorMicro(null);
+        }
+        if (\array_key_exists('currency', $data) && $data['currency'] !== null) {
+            $object->setCurrency($data['currency']);
+            unset($data['currency']);
+        }
+        elseif (\array_key_exists('currency', $data) && $data['currency'] === null) {
+            $object->setCurrency(null);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -51,8 +64,11 @@ class DebtLineItemAggregatedCollectionsumNormalizer implements DenormalizerInter
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('priceTotal') && null !== $data->getPriceTotal()) {
-            $dataArray['priceTotal'] = $this->normalizer->normalize($data->getPriceTotal(), 'json', $context);
+        if ($data->isInitialized('minorMicro')) {
+            $dataArray['minorMicro'] = $data->getMinorMicro();
+        }
+        if ($data->isInitialized('currency')) {
+            $dataArray['currency'] = $data->getCurrency();
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -63,6 +79,6 @@ class DebtLineItemAggregatedCollectionsumNormalizer implements DenormalizerInter
     }
     public function getSupportedTypes(?string $format = null): array
     {
-        return [\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionsum::class => false];
+        return [\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit::class => false];
     }
 }

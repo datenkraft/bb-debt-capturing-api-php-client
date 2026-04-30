@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class DebtLineItemAggregatedCollectionsum extends \ArrayObject
+class DebtLineItemAggregatedCollectionSum extends \ArrayObject
 {
     /**
      * @var array
@@ -13,14 +13,10 @@ class DebtLineItemAggregatedCollectionsum extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * 
-     *
      * @var PriceProperty
      */
     protected $priceTotal;
     /**
-     * 
-     *
      * @return PriceProperty
      */
     public function getPriceTotal(): PriceProperty
@@ -28,8 +24,6 @@ class DebtLineItemAggregatedCollectionsum extends \ArrayObject
         return $this->priceTotal;
     }
     /**
-     * 
-     *
      * @param PriceProperty $priceTotal
      *
      * @return self

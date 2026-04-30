@@ -25,12 +25,12 @@ class NewInvoice extends \ArrayObject
      */
     protected $cutoffDate;
     /**
-    * Optional invoice number. If null or not set, it will be auto-generated based on the cutoffDate
-    in the format "YYYY-MM: RE01-YYYY-". Even when auto-generated, the invoice number must be unique
-    for a projectId.
-    *
-    * @var string|null
-    */
+     * Optional invoice number. If null or not set, it will be auto-generated based on the cutoffDate
+     * in the format "YYYY-MM: RE01-YYYY-". Even when auto-generated, the invoice number must be unique
+     * for a projectId.
+     *
+     * @var string|null
+     */
     protected $invoiceNumber;
     /**
      * Project id
@@ -77,12 +77,12 @@ class NewInvoice extends \ArrayObject
         return $this;
     }
     /**
-    * Optional invoice number. If null or not set, it will be auto-generated based on the cutoffDate
-    in the format "YYYY-MM: RE01-YYYY-". Even when auto-generated, the invoice number must be unique
-    for a projectId.
-    *
-    * @return string|null
-    */
+     * Optional invoice number. If null or not set, it will be auto-generated based on the cutoffDate
+     * in the format "YYYY-MM: RE01-YYYY-". Even when auto-generated, the invoice number must be unique
+     * for a projectId.
+     *
+     * @return string|null
+     */
     public function getInvoiceNumber(): ?string
     {
         return $this->invoiceNumber;

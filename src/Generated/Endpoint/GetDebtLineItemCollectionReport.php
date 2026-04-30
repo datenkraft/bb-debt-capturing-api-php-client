@@ -7,16 +7,15 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
     protected $accept;
     /**
     * Get debtLineItems file export by projectId and time range.
-           The file type is controlled by the accept header.
-    *
-    * @param array $queryParameters {
-    *     @var string $filter[projectId] This filter restricts the data by the project id.
-    *     @var string $filter[dateFrom] This filter enables retrieval of data starting from a specified date in UTC.
+    *         The file type is controlled by the accept header.
+    * @param array{
+    *    "filter[projectId]": string, //This filter restricts the data by the project id.
+    *    "filter[dateFrom]"?: string, //This filter enables retrieval of data starting from a specified date in UTC.
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[dateTo] This filter enables retrieval of data ending up to a specified date in UTC.
+    *    "filter[dateTo]"?: string, //This filter enables retrieval of data ending up to a specified date in UTC.
                    The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *     @var string $filter[invoiceId] This filter restricts the data by the invoice id.
-    * }
+    *    "filter[invoiceId]"?: string, //This filter restricts the data by the invoice id.
+    * } $queryParameters
     * @param array $accept Accept content header text/csv|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/json
     */
     public function __construct(array $queryParameters = [], array $accept = [])
@@ -74,22 +73,22 @@ class GetDebtLineItemCollectionReport extends \Datenkraft\Backbone\Client\DebtCa
         $body = (string) $response->getBody();
         if (200 === $status) {
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportBadRequestException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportUnauthorizedException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportForbiddenException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (406 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (406 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportNotAcceptableException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (mb_strpos($contentType, 'application/json') !== false) {
+        if (mb_strpos(strtolower($contentType), 'application/json') !== false) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json');
         }
         throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException($status, $body);

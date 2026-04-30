@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class DebtLineItemResourcepricePerUnit extends \ArrayObject
+class DebtLineItemResourcePricePerUnit extends \ArrayObject
 {
     /**
      * @var array

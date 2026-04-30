@@ -19,8 +19,6 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
      */
     protected $usedCount;
     /**
-     * 
-     *
      * @var PriceProperty
      */
     protected $priceTotal;
@@ -47,8 +45,6 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return PriceProperty
      */
     public function getPriceTotal(): PriceProperty
@@ -56,8 +52,6 @@ class DebtLineItemAggregatedSkuSum extends \ArrayObject
         return $this->priceTotal;
     }
     /**
-     * 
-     *
      * @param PriceProperty $priceTotal
      *
      * @return self

@@ -19,8 +19,6 @@ class DebtLineItemAggregatedSku extends \ArrayObject
      */
     protected $skuCode;
     /**
-     * 
-     *
      * @var DebtLineItemAggregatedSkuSum
      */
     protected $sum;
@@ -53,8 +51,6 @@ class DebtLineItemAggregatedSku extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return DebtLineItemAggregatedSkuSum
      */
     public function getSum(): DebtLineItemAggregatedSkuSum
@@ -62,8 +58,6 @@ class DebtLineItemAggregatedSku extends \ArrayObject
         return $this->sum;
     }
     /**
-     * 
-     *
      * @param DebtLineItemAggregatedSkuSum $sum
      *
      * @return self
