@@ -49,6 +49,10 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
             $object->setProjectIds($values);
             unset($data['projectIds']);
         }
+        if (\array_key_exists('organizationId', $data)) {
+            $object->setOrganizationId($data['organizationId']);
+            unset($data['organizationId']);
+        }
         foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value_1;
@@ -68,6 +72,9 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
                 $values[] = $value;
             }
             $dataArray['projectIds'] = $values;
+        }
+        if ($data->isInitialized('organizationId') && null !== $data->getOrganizationId()) {
+            $dataArray['organizationId'] = $data->getOrganizationId();
         }
         foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
