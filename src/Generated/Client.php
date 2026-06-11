@@ -484,33 +484,6 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\PostInvoiceDebtLineItem($invoiceId, $requestBody), $fetch);
     }
     /**
-    * Get debtLineItems file export by projectId and time range.
-    *         The file type is controlled by the accept header.
-    * @param array{
-    *    "filter[projectId]": string, //This filter restricts the data by the project id.
-    *    "filter[dateFrom]"?: string, //This filter enables retrieval of data starting from a specified date in UTC.
-                   The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *    "filter[dateTo]"?: string, //This filter enables retrieval of data ending up to a specified date in UTC.
-                   The filters dateFrom and dateTo are required unless an invoiceId filter is given.
-    *    "filter[invoiceId]"?: string, //This filter restricts the data by the invoice id.
-    * } $queryParameters
-    * @param array $accept Accept content header text/csv|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/json
-    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-    
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportBadRequestException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportUnauthorizedException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportForbiddenException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportNotAcceptableException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetDebtLineItemCollectionReportInternalServerErrorException
-    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
-    *
-    * @return ($fetch is 'object' ? \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse : \Psr\Http\Message\ResponseInterface)
-    */
-    public function getDebtLineItemCollectionReport(array $queryParameters = [], string $fetch = self::FETCH_OBJECT, array $accept = [])
-    {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint\GetDebtLineItemCollectionReport($queryParameters, $accept), $fetch);
-    }
-    /**
     * @param array{
     *    "page"?: int, //The page to read. Default is the first page.
     *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
