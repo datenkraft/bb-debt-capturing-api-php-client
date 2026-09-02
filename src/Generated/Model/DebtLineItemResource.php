@@ -43,6 +43,12 @@ class DebtLineItemResource extends \ArrayObject
      */
     protected $priceTotal;
     /**
+     * Free text note, e.g. the reason for a manual correction
+     *
+     * @var string|null
+     */
+    protected $note;
+    /**
      * debtLineItemId
      *
      * @var string
@@ -72,12 +78,6 @@ class DebtLineItemResource extends \ArrayObject
      * @var DebtLineItemResourcePricePerUnit|null
      */
     protected $pricePerUnit;
-    /**
-     * note
-     *
-     * @var string|null
-     */
-    protected $note;
     /**
      * skuCode
      *
@@ -189,6 +189,28 @@ class DebtLineItemResource extends \ArrayObject
         return $this;
     }
     /**
+     * Free text note, e.g. the reason for a manual correction
+     *
+     * @return string|null
+     */
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+    /**
+     * Free text note, e.g. the reason for a manual correction
+     *
+     * @param string|null $note
+     *
+     * @return self
+     */
+    public function setNote(?string $note): self
+    {
+        $this->initialized['note'] = true;
+        $this->note = $note;
+        return $this;
+    }
+    /**
      * debtLineItemId
      *
      * @return string
@@ -296,28 +318,6 @@ class DebtLineItemResource extends \ArrayObject
     {
         $this->initialized['pricePerUnit'] = true;
         $this->pricePerUnit = $pricePerUnit;
-        return $this;
-    }
-    /**
-     * note
-     *
-     * @return string|null
-     */
-    public function getNote(): ?string
-    {
-        return $this->note;
-    }
-    /**
-     * note
-     *
-     * @param string|null $note
-     *
-     * @return self
-     */
-    public function setNote(?string $note): self
-    {
-        $this->initialized['note'] = true;
-        $this->note = $note;
         return $this;
     }
 }
