@@ -43,6 +43,12 @@ class NewDebtLineItemResource extends \ArrayObject
      */
     protected $priceTotal;
     /**
+     * Free text note, e.g. the reason for a manual correction
+     *
+     * @var string|null
+     */
+    protected $note;
+    /**
      * skuCode
      *
      * @return string
@@ -150,6 +156,28 @@ class NewDebtLineItemResource extends \ArrayObject
     {
         $this->initialized['priceTotal'] = true;
         $this->priceTotal = $priceTotal;
+        return $this;
+    }
+    /**
+     * Free text note, e.g. the reason for a manual correction
+     *
+     * @return string|null
+     */
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+    /**
+     * Free text note, e.g. the reason for a manual correction
+     *
+     * @param string|null $note
+     *
+     * @return self
+     */
+    public function setNote(?string $note): self
+    {
+        $this->initialized['note'] = true;
+        $this->note = $note;
         return $this;
     }
 }

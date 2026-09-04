@@ -63,6 +63,13 @@ class NewDebtLineItemResourceNormalizer implements DenormalizerInterface, Normal
         elseif (\array_key_exists('priceTotal', $data) && $data['priceTotal'] === null) {
             $object->setPriceTotal(null);
         }
+        if (\array_key_exists('note', $data) && $data['note'] !== null) {
+            $object->setNote($data['note']);
+            unset($data['note']);
+        }
+        elseif (\array_key_exists('note', $data) && $data['note'] === null) {
+            $object->setNote(null);
+        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value;
@@ -78,6 +85,9 @@ class NewDebtLineItemResourceNormalizer implements DenormalizerInterface, Normal
         $dataArray['usageStart'] = $data->getUsageStart()?->format('Y-m-d\TH:i:sP');
         $dataArray['usageEnd'] = $data->getUsageEnd()?->format('Y-m-d\TH:i:sP');
         $dataArray['priceTotal'] = $this->normalizer->normalize($data->getPriceTotal(), 'json', $context);
+        if ($data->isInitialized('note') && null !== $data->getNote()) {
+            $dataArray['note'] = $data->getNote();
+        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
