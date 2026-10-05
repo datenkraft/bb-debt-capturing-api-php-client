@@ -504,8 +504,8 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     
     If the search term is found in one of the fields, the resource is included in the result.
     The search is case insensitive.
-    *    "filter[usageStart]"?: string, //Start date of the usage (Y-m-d)
-    *    "filter[usageEnd]"?: string, //End date of the usage (Y-m-d)
+    *    "filter[usageStart]"?: string, //Start date of the usage (Y-m-d, inclusive). Must not be after filter[usageEnd] if both are given.
+    *    "filter[usageEnd]"?: string, //End date of the usage (Y-m-d, inclusive). Must not be before filter[usageStart] if both are given.
     *    "filter[invoiceIds]"?: string, //Comma delimited string of invoice ids
     *    "filter[metaKey]"?: string, //Key of the skuUsage meta field (required with metaValue)
     *    "filter[metaValue]"?: string, //Value of the skuUsage meta field (required with metaKey)
@@ -513,6 +513,7 @@ class Client extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runt
     * } $queryParameters
     
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException
     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException
