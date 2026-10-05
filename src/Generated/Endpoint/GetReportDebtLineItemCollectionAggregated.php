@@ -25,8 +25,8 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     
     If the search term is found in one of the fields, the resource is included in the result.
     The search is case insensitive.
-    *    "filter[usageStart]"?: string, //Start date of the usage (Y-m-d)
-    *    "filter[usageEnd]"?: string, //End date of the usage (Y-m-d)
+    *    "filter[usageStart]"?: string, //Start date of the usage (Y-m-d, inclusive). Must not be after filter[usageEnd] if both are given.
+    *    "filter[usageEnd]"?: string, //End date of the usage (Y-m-d, inclusive). Must not be before filter[usageStart] if both are given.
     *    "filter[invoiceIds]"?: string, //Comma delimited string of invoice ids
     *    "filter[metaKey]"?: string, //Key of the skuUsage meta field (required with metaValue)
     *    "filter[metaValue]"?: string, //Value of the skuUsage meta field (required with metaKey)
@@ -78,6 +78,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     /**
      * {@inheritdoc}
      *
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException
@@ -91,6 +92,9 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
         $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection', 'json');
+        }
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
