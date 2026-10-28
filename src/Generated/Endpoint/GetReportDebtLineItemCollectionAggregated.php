@@ -27,8 +27,10 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     
     If the search term is found in one of the fields, the resource is included in the result.
     The search is case insensitive.
-    *     @var string $filter[usageStart] Start date of the usage (Y-m-d, inclusive). Must not be after filter[usageEnd] if both are given.
-    *     @var string $filter[usageEnd] End date of the usage (Y-m-d, inclusive). Must not be before filter[usageStart] if both are given.
+    *     @var string $filter[usageStart] Mandatory start date of the usage (Y-m-d, inclusive). Must not be after filter[usageEnd] if both are given.
+    The range between filter[usageStart] and filter[usageEnd] (or today if not given) must not exceed one year.
+    *     @var string $filter[usageEnd] End date of the usage (Y-m-d, inclusive). Must not be before filter[usageStart].
+    Must not be more than one year after filter[usageStart]. If not given, today is used for this check.
     *     @var string $filter[invoiceIds] Comma delimited string of invoice ids
     *     @var string $filter[metaKey] Key of the skuUsage meta field (required with metaValue)
     *     @var string $filter[metaValue] Value of the skuUsage meta field (required with metaKey)
@@ -60,7 +62,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     {
         $optionsResolver = parent::getQueryOptionsResolver();
         $optionsResolver->setDefined(['page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[skuCode]', 'filter[note]', 'filter[search]', 'filter[usageStart]', 'filter[usageEnd]', 'filter[invoiceIds]', 'filter[metaKey]', 'filter[metaValue]', 'filter[invoiced]']);
-        $optionsResolver->setRequired(['filter[projectId]']);
+        $optionsResolver->setRequired(['filter[projectId]', 'filter[usageStart]']);
         $optionsResolver->setDefaults(['paginationMode' => 'default']);
         $optionsResolver->addAllowedTypes('page', ['int']);
         $optionsResolver->addAllowedTypes('pageSize', ['int']);
