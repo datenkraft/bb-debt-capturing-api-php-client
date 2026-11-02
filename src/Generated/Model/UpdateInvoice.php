@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class UpdateInvoice extends \ArrayObject
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalPropertiesInterface;
+class UpdateInvoice implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * The invoice number. Once set, not nullable anymore.
      *
      * @var string
      */
-    protected $invoiceNumber;
-    /**
-     * The invoice number. Once set, not nullable anymore.
-     *
-     * @return string
-     */
-    public function getInvoiceNumber(): string
+    public string $invoiceNumber;
+    public function definedProperties(): array
     {
-        return $this->invoiceNumber;
-    }
-    /**
-     * The invoice number. Once set, not nullable anymore.
-     *
-     * @param string $invoiceNumber
-     *
-     * @return self
-     */
-    public function setInvoiceNumber(string $invoiceNumber): self
-    {
-        $this->initialized['invoiceNumber'] = true;
-        $this->invoiceNumber = $invoiceNumber;
-        return $this;
+        return ['invoiceNumber' => 'invoiceNumber'];
     }
 }

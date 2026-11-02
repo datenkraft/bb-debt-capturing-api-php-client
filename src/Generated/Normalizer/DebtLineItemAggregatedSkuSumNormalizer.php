@@ -38,11 +38,11 @@ class DebtLineItemAggregatedSkuSumNormalizer implements DenormalizerInterface, N
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('usedCount', $data)) {
-            $object->setUsedCount($data['usedCount']);
+            $object->usedCount = $data['usedCount'];
             unset($data['usedCount']);
         }
         if (\array_key_exists('priceTotal', $data)) {
-            $object->setPriceTotal($this->denormalizer->denormalize($data['priceTotal'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\PriceProperty::class, 'json', $context));
+            $object->priceTotal = $this->denormalizer->denormalize($data['priceTotal'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\PriceProperty::class, 'json', $context);
             unset($data['priceTotal']);
         }
         foreach ($data as $key => $value) {
@@ -55,9 +55,10 @@ class DebtLineItemAggregatedSkuSumNormalizer implements DenormalizerInterface, N
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['usedCount'] = $data->getUsedCount();
-        $dataArray['priceTotal'] = $this->normalizer->normalize($data->getPriceTotal(), 'json', $context);
-        foreach ($data as $key => $value) {
+        $dataArray['usedCount'] = $data->usedCount;
+        $normalized = $data->priceTotal === null ? null : $this->normalizer->normalize($data->priceTotal, 'json', $context);
+        $dataArray['priceTotal'] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\JsonObject($normalized) : $normalized;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

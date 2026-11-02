@@ -38,11 +38,11 @@ class DebtLineItemAggregatedSkuNormalizer implements DenormalizerInterface, Norm
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('skuCode', $data)) {
-            $object->setSkuCode($data['skuCode']);
+            $object->skuCode = $data['skuCode'];
             unset($data['skuCode']);
         }
         if (\array_key_exists('sum', $data)) {
-            $object->setSum($this->denormalizer->denormalize($data['sum'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuSum::class, 'json', $context));
+            $object->sum = $this->denormalizer->denormalize($data['sum'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuSum::class, 'json', $context);
             unset($data['sum']);
         }
         if (\array_key_exists('debtLineItems', $data)) {
@@ -50,7 +50,7 @@ class DebtLineItemAggregatedSkuNormalizer implements DenormalizerInterface, Norm
             foreach ($data['debtLineItems'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregated::class, 'json', $context);
             }
-            $object->setDebtLineItems($values);
+            $object->debtLineItems = $values;
             unset($data['debtLineItems']);
         }
         foreach ($data as $key => $value_1) {
@@ -63,14 +63,16 @@ class DebtLineItemAggregatedSkuNormalizer implements DenormalizerInterface, Norm
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['skuCode'] = $data->getSkuCode();
-        $dataArray['sum'] = $this->normalizer->normalize($data->getSum(), 'json', $context);
+        $dataArray['skuCode'] = $data->skuCode;
+        $normalized = $data->sum === null ? null : $this->normalizer->normalize($data->sum, 'json', $context);
+        $dataArray['sum'] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\JsonObject($normalized) : $normalized;
         $values = [];
-        foreach ($data->getDebtLineItems() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
+        foreach ($data->debtLineItems as $value) {
+            $normalized_1 = $value === null ? null : $this->normalizer->normalize($value, 'json', $context);
+            $values[] = \is_iterable($normalized_1) ? new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\JsonObject($normalized_1) : $normalized_1;
         }
         $dataArray['debtLineItems'] = $values;
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

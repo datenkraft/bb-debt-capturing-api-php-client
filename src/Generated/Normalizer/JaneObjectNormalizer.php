@@ -126,57 +126,61 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
     }
     private function initNormalizer(string $normalizerClass)
     {
-        $normalizer = new $normalizerClass();
-        $normalizer->setNormalizer($this->normalizer);
-        $normalizer->setDenormalizer($this->denormalizer);
+        $normalizer = match ($normalizerClass) {
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuditLogNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuditLogNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuditLogCollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuditLogCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthPermissionResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthPermissionResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthPermissionRolePaginatedCollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthPermissionRolePaginatedCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthPermissionRoleResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthPermissionRoleResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleCollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleIdentityPaginatedCollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleIdentityPaginatedCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleIdentityResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleIdentityResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\AuthRoleResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\BaseInvoiceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\BaseInvoiceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\CollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\CollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\CollectionPaginationNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\CollectionPaginationNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedCollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedCollectionSumNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedCollectionSumNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedSkuNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedSkuNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedSkuSumNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedSkuSumNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedSkuUsageNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemAggregatedSkuUsageNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemResourcePricePerUnitNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\DebtLineItemResourcePricePerUnitNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\ErrorNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\ErrorNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\ErrorReferencesItemNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\ErrorReferencesItemNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\ErrorResponseNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\ErrorResponseNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\GetAuthPermissionCollectionResponseNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\GetAuthPermissionCollectionResponseNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\GetDebtLineItemCollectionResponseNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\GetDebtLineItemCollectionResponseNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InformationNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InformationNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InformationResponseNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InformationResponseNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InvoiceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InvoiceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InvoiceCollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\InvoiceCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewAuthRoleResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewAuthRoleResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewDebtLineItemResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewDebtLineItemResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewDebtLineItemResourcePriceTotalNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewDebtLineItemResourcePriceTotalNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewInvoiceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\NewInvoiceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\PricePropertyNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\PricePropertyNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\SkuUsageDebtLineItemResourceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\SkuUsageDebtLineItemResourceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\SkuUsageDebtLineItemResourceCollectionNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\SkuUsageDebtLineItemResourceCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\UpdateInvoiceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\UpdateInvoiceNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\EventSourcingReplayGetResponse200Normalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\EventSourcingReplayGetResponse200Normalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\EventSourcingReplayPostBodyNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\EventSourcingReplayPostBodyNormalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\EventSourcingReplayPostResponse200Normalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Normalizer\EventSourcingReplayPostResponse200Normalizer(),
+            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ReferenceNormalizer::class => new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Normalizer\ReferenceNormalizer(),
+            default => throw new \InvalidArgumentException('Unknown normalizer class: ' . $normalizerClass),
+        };
+        if ($normalizer instanceof \Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface) {
+            $normalizer->setNormalizer($this->normalizer);
+        }
+        if ($normalizer instanceof \Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface) {
+            $normalizer->setDenormalizer($this->denormalizer);
+        }
         $this->normalizersCache[$normalizerClass] = $normalizer;
         return $normalizer;
     }
     public function getSupportedTypes(?string $format = null): array
     {
-        return [
-            
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuditLog::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuditLogCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRolePaginatedCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthPermissionRoleResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityPaginatedCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleIdentityResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\AuthRoleResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\BaseInvoice::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Collection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\CollectionPagination::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregated::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionSum::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSku::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuSum::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSkuUsage::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemResourcePricePerUnit::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Error::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorReferencesItem::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\GetAuthPermissionCollectionResponse::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\GetDebtLineItemCollectionResponse::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Information::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InformationResponse::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\Invoice::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewAuthRoleResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewDebtLineItemResourcePriceTotal::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\NewInvoice::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\PriceProperty::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\SkuUsageDebtLineItemResource::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\SkuUsageDebtLineItemResourceCollection::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\UpdateInvoice::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayGetResponse200::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostBody::class => false,
-            \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\EventSourcingReplayPostResponse200::class => false,
-            \Jane\Component\JsonSchemaRuntime\Reference::class => false,
-        ];
+        return array_combine(array_keys($this->normalizers), array_fill(0, count($this->normalizers), false));
     }
 }

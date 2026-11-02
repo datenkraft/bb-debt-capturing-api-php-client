@@ -5,18 +5,18 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint;
 class GetInvoiceCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\Endpoint
 {
     /**
-    * Get a list of invoices.
-    * @param array{
-    *    "page"?: int, //The page to read. Default is the first page.
-    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
-    *    "paginationMode"?: string, //The paginationMode to use:
-    - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated.
-    This can mean loss of performance.
-    *    "filter[projectId]"?: string, //Project id filter
-    *    "filter[invoiceNumber]"?: string, //Invoice number filter
-    * } $queryParameters
-    */
+     * Get a list of invoices.
+     * @param array{
+     *    "page"?: int, //The page to read. Default is the first page.
+     *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+     *    "paginationMode"?: string, //The paginationMode to use:
+     *                               //- default: The total number of items in the collection will not be calculated.
+     *                               //- totalCount: The total number of items in the collection will be calculated.
+     *                               //This can mean loss of performance.
+     *    "filter[projectId]"?: string, //Project id filter
+     *    "filter[invoiceNumber]"?: string, //Invoice number filter
+     * } $queryParameters
+     */
     public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
@@ -30,7 +30,7 @@ class GetInvoiceCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi\
     {
         return '/invoice';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer): array
     {
         return [[], null];
     }
@@ -58,36 +58,44 @@ class GetInvoiceCollection extends \Datenkraft\Backbone\Client\DebtCapturingApi\
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionForbiddenException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\BadResponseException
      *
      * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Symfony\Contracts\HttpClient\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        $body = $response->getContent(false);
+        if ($contentType !== null && (200 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\InvoiceCollection', 'json');
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (400 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionBadRequestException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (401 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionUnauthorizedException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (403 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionForbiddenException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (500 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetInvoiceCollectionInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (mb_strpos(strtolower($contentType), 'application/json') !== false) {
+        if (stripos(strtolower((string) $contentType), 'application/json') !== false) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json');
         }
-        throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException($status, $body);
+        throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\BadResponseException($status, $body, $response);
     }
     public function getAuthenticationScopes(): array
     {
         return ['oAuthAuthorization', 'bearerAuth'];
+    }
+    public function getFetchMode(): string
+    {
+        return \Jane\Component\OpenApiRuntime\Client\FetchMode::Eager->value;
+    }
+    public function getTargetClass(): ?string
+    {
+        return null;
     }
 }

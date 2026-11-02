@@ -38,11 +38,11 @@ class SkuUsageDebtLineItemResourceNormalizer implements DenormalizerInterface, N
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('skuUsageId', $data)) {
-            $object->setSkuUsageId($data['skuUsageId']);
+            $object->skuUsageId = $data['skuUsageId'];
             unset($data['skuUsageId']);
         }
         if (\array_key_exists('debtLineItemId', $data)) {
-            $object->setDebtLineItemId($data['debtLineItemId']);
+            $object->debtLineItemId = $data['debtLineItemId'];
             unset($data['debtLineItemId']);
         }
         foreach ($data as $key => $value) {
@@ -55,9 +55,9 @@ class SkuUsageDebtLineItemResourceNormalizer implements DenormalizerInterface, N
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['skuUsageId'] = $data->getSkuUsageId();
-        $dataArray['debtLineItemId'] = $data->getDebtLineItemId();
-        foreach ($data as $key => $value) {
+        $dataArray['skuUsageId'] = $data->skuUsageId;
+        $dataArray['debtLineItemId'] = $data->debtLineItemId;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

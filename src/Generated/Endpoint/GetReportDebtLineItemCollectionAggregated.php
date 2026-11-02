@@ -5,37 +5,37 @@ namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Endpoint;
 class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\Client\Endpoint
 {
     /**
-    * @param array{
-    *    "page"?: int, //The page to read. Default is the first page.
-    *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
-    *    "paginationMode"?: string, //The paginationMode to use:
-    - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated.
-    This can mean loss of performance.
-    *    "filter[projectId]": string, //Mandatory filter for the project id
-    *    "filter[skuCode]"?: string, //Filter for the sku code (full text search)
-    *    "filter[note]"?: string, //Filter for the debt line item note (full text search)
-    *    "filter[search]"?: string, //Provide a search term to filter debt line items.
-    
-    The search term is matched against the following fields:
-    - skuCode
-    - debtLineItems.*.note
-    - debtLineItems.*.skuUsages.*.meta.orderNumber (without internalReferencePrefix of the shop)
-    - debtLineItems.*.skuUsages.*.meta.inboundDeliveryNumber (without internalReferencePrefix of the shop)
-    
-    If the search term is found in one of the fields, the resource is included in the result.
-    The search is case insensitive.
-    *    "filter[usageStart]": string, //Mandatory start date of the usage (Y-m-d, inclusive). Must not be after filter[usageEnd] if both are given.
-    The range between filter[usageStart] and filter[usageEnd] (or today if not given) must not exceed one year.
-    *    "filter[usageEnd]"?: string, //End date of the usage (Y-m-d, inclusive). Must not be before filter[usageStart].
-    Must not be more than one year after filter[usageStart]. If not given, today is used for this check.
-    *    "filter[invoiceIds]"?: string, //Comma delimited string of invoice ids
-    *    "filter[metaKey]"?: string, //Key of the skuUsage meta field (required with metaValue)
-    *    "filter[metaValue]"?: string, //Value of the skuUsage meta field (required with metaKey)
-    *    "filter[invoiced]"?: bool, //Filter for invoiced or open (= not invoiced) debt line items
-    * } $queryParameters
-    */
-    public function __construct(array $queryParameters = [])
+     * @param array{
+     *    "page"?: int, //The page to read. Default is the first page.
+     *    "pageSize"?: int, //The maximum size per page is 100. Default is 100.
+     *    "paginationMode"?: string, //The paginationMode to use:
+     *                               //- default: The total number of items in the collection will not be calculated.
+     *                               //- totalCount: The total number of items in the collection will be calculated.
+     *                               //This can mean loss of performance.
+     *    "filter[projectId]": string, //Mandatory filter for the project id
+     *    "filter[skuCode]"?: string, //Filter for the sku code (full text search)
+     *    "filter[note]"?: string, //Filter for the debt line item note (full text search)
+     *    "filter[search]"?: string, //Provide a search term to filter debt line items.
+     *                               //
+     *                               //The search term is matched against the following fields:
+     *                               //- skuCode
+     *                               //- debtLineItems.*.note
+     *                               //- debtLineItems.*.skuUsages.*.meta.orderNumber (without internalReferencePrefix of the shop)
+     *                               //- debtLineItems.*.skuUsages.*.meta.inboundDeliveryNumber (without internalReferencePrefix of the shop)
+     *                               //
+     *                               //If the search term is found in one of the fields, the resource is included in the result.
+     *                               //The search is case insensitive.
+     *    "filter[usageStart]": string, //Mandatory start date of the usage (Y-m-d, inclusive). Must not be after filter[usageEnd] if both are given.
+     *                                  //The range between filter[usageStart] and filter[usageEnd] (or today if not given) must not exceed one year.
+     *    "filter[usageEnd]"?: string, //End date of the usage (Y-m-d, inclusive). Must not be before filter[usageStart].
+     *                                 //Must not be more than one year after filter[usageStart]. If not given, today is used for this check.
+     *    "filter[invoiceIds]"?: string, //Comma delimited string of invoice ids
+     *    "filter[metaKey]"?: string, //Key of the skuUsage meta field (required with metaValue)
+     *    "filter[metaValue]"?: string, //Value of the skuUsage meta field (required with metaKey)
+     *    "filter[invoiced]"?: bool, //Filter for invoiced or open (= not invoiced) debt line items
+     * } $queryParameters
+     */
+    public function __construct(array $queryParameters)
     {
         $this->queryParameters = $queryParameters;
     }
@@ -48,7 +48,7 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
     {
         return '/report/debt-line-item/aggregated';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer): array
     {
         return [[], null];
     }
@@ -84,36 +84,44 @@ class GetReportDebtLineItemCollectionAggregated extends \Datenkraft\Backbone\Cli
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException
      * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException
+     * @throws \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\BadResponseException
      *
      * @return \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection|\Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Symfony\Contracts\HttpClient\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
-        $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        $body = $response->getContent(false);
+        if ($contentType !== null && (200 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollection', 'json');
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (400 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedBadRequestException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (401 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedUnauthorizedException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (403 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedForbiddenException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
+        if ($contentType !== null && (500 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\GetReportDebtLineItemCollectionAggregatedInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (mb_strpos(strtolower($contentType), 'application/json') !== false) {
+        if (stripos(strtolower((string) $contentType), 'application/json') !== false) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse', 'json');
         }
-        throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\UnexpectedStatusCodeException($status, $body);
+        throw new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception\BadResponseException($status, $body, $response);
     }
     public function getAuthenticationScopes(): array
     {
         return ['oAuthAuthorization', 'bearerAuth'];
+    }
+    public function getFetchMode(): string
+    {
+        return \Jane\Component\OpenApiRuntime\Client\FetchMode::Eager->value;
+    }
+    public function getTargetClass(): ?string
+    {
+        return null;
     }
 }
