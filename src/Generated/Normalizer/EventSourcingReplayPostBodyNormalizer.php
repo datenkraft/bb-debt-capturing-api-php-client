@@ -38,7 +38,7 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('infoMailAddress', $data)) {
-            $object->setInfoMailAddress($data['infoMailAddress']);
+            $object->infoMailAddress = $data['infoMailAddress'];
             unset($data['infoMailAddress']);
         }
         if (\array_key_exists('projectIds', $data)) {
@@ -46,11 +46,11 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
             foreach ($data['projectIds'] as $value) {
                 $values[] = $value;
             }
-            $object->setProjectIds($values);
+            $object->projectIds = $values;
             unset($data['projectIds']);
         }
         if (\array_key_exists('organizationId', $data)) {
-            $object->setOrganizationId($data['organizationId']);
+            $object->organizationId = $data['organizationId'];
             unset($data['organizationId']);
         }
         foreach ($data as $key => $value_1) {
@@ -63,20 +63,20 @@ class EventSourcingReplayPostBodyNormalizer implements DenormalizerInterface, No
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('infoMailAddress') && null !== $data->getInfoMailAddress()) {
-            $dataArray['infoMailAddress'] = $data->getInfoMailAddress();
+        if (array_key_exists('infoMailAddress', get_object_vars($data)) && null !== ($data->infoMailAddress ?? null)) {
+            $dataArray['infoMailAddress'] = $data->infoMailAddress;
         }
-        if ($data->isInitialized('projectIds') && null !== $data->getProjectIds()) {
+        if (array_key_exists('projectIds', get_object_vars($data)) && null !== ($data->projectIds ?? null)) {
             $values = [];
-            foreach ($data->getProjectIds() as $value) {
+            foreach ($data->projectIds as $value) {
                 $values[] = $value;
             }
             $dataArray['projectIds'] = $values;
         }
-        if ($data->isInitialized('organizationId') && null !== $data->getOrganizationId()) {
-            $dataArray['organizationId'] = $data->getOrganizationId();
+        if (array_key_exists('organizationId', get_object_vars($data)) && null !== ($data->organizationId ?? null)) {
+            $dataArray['organizationId'] = $data->organizationId;
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

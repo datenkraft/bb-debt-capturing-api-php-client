@@ -38,7 +38,7 @@ class UpdateInvoiceNormalizer implements DenormalizerInterface, NormalizerInterf
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('invoiceNumber', $data)) {
-            $object->setInvoiceNumber($data['invoiceNumber']);
+            $object->invoiceNumber = $data['invoiceNumber'];
             unset($data['invoiceNumber']);
         }
         foreach ($data as $key => $value) {
@@ -51,8 +51,8 @@ class UpdateInvoiceNormalizer implements DenormalizerInterface, NormalizerInterf
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['invoiceNumber'] = $data->getInvoiceNumber();
-        foreach ($data as $key => $value) {
+        $dataArray['invoiceNumber'] = $data->invoiceNumber;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

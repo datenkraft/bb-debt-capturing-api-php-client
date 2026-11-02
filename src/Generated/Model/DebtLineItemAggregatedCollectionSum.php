@@ -2,36 +2,17 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class DebtLineItemAggregatedCollectionSum extends \ArrayObject
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalPropertiesInterface;
+class DebtLineItemAggregatedCollectionSum implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * @var PriceProperty
      */
-    protected $priceTotal;
-    /**
-     * @return PriceProperty
-     */
-    public function getPriceTotal(): PriceProperty
+    public PriceProperty $priceTotal;
+    public function definedProperties(): array
     {
-        return $this->priceTotal;
-    }
-    /**
-     * @param PriceProperty $priceTotal
-     *
-     * @return self
-     */
-    public function setPriceTotal(PriceProperty $priceTotal): self
-    {
-        $this->initialized['priceTotal'] = true;
-        $this->priceTotal = $priceTotal;
-        return $this;
+        return ['priceTotal' => 'priceTotal'];
     }
 }

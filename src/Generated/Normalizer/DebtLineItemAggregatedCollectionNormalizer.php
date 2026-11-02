@@ -38,7 +38,7 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('pagination', $data)) {
-            $object->setPagination($this->denormalizer->denormalize($data['pagination'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\CollectionPagination::class, 'json', $context));
+            $object->pagination = $this->denormalizer->denormalize($data['pagination'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\CollectionPagination::class, 'json', $context);
             unset($data['pagination']);
         }
         if (\array_key_exists('data', $data)) {
@@ -46,11 +46,11 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
             foreach ($data['data'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedSku::class, 'json', $context);
             }
-            $object->setData($values);
+            $object->data = $values;
             unset($data['data']);
         }
         if (\array_key_exists('sum', $data)) {
-            $object->setSum($this->denormalizer->denormalize($data['sum'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionSum::class, 'json', $context));
+            $object->sum = $this->denormalizer->denormalize($data['sum'], \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\DebtLineItemAggregatedCollectionSum::class, 'json', $context);
             unset($data['sum']);
         }
         foreach ($data as $key => $value_1) {
@@ -63,16 +63,19 @@ class DebtLineItemAggregatedCollectionNormalizer implements DenormalizerInterfac
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('pagination') && null !== $data->getPagination()) {
-            $dataArray['pagination'] = $this->normalizer->normalize($data->getPagination(), 'json', $context);
+        if (array_key_exists('pagination', get_object_vars($data)) && null !== ($data->pagination ?? null)) {
+            $normalized = $this->normalizer->normalize($data->pagination, 'json', $context);
+            $dataArray['pagination'] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\JsonObject($normalized) : $normalized;
         }
         $values = [];
-        foreach ($data->getData() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
+        foreach ($data->data as $value) {
+            $normalized_1 = $value === null ? null : $this->normalizer->normalize($value, 'json', $context);
+            $values[] = \is_iterable($normalized_1) ? new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\JsonObject($normalized_1) : $normalized_1;
         }
         $dataArray['data'] = $values;
-        $dataArray['sum'] = $this->normalizer->normalize($data->getSum(), 'json', $context);
-        foreach ($data as $key => $value_1) {
+        $normalized_2 = $data->sum === null ? null : $this->normalizer->normalize($data->sum, 'json', $context);
+        $dataArray['sum'] = \is_iterable($normalized_2) ? new \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\JsonObject($normalized_2) : $normalized_2;
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

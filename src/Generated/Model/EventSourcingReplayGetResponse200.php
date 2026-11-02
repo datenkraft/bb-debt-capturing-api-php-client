@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class EventSourcingReplayGetResponse200 extends \ArrayObject
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalPropertiesInterface;
+class EventSourcingReplayGetResponse200 implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * status
      *
      * @var string
      */
-    protected $status;
-    /**
-     * status
-     *
-     * @return string
-     */
-    public function getStatus(): string
+    public string $status;
+    public function definedProperties(): array
     {
-        return $this->status;
-    }
-    /**
-     * status
-     *
-     * @param string $status
-     *
-     * @return self
-     */
-    public function setStatus(string $status): self
-    {
-        $this->initialized['status'] = true;
-        $this->status = $status;
-        return $this;
+        return ['status' => 'status'];
     }
 }

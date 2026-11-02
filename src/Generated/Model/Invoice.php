@@ -2,40 +2,35 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model;
 
-class Invoice extends \ArrayObject
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Runtime\AdditionalPropertiesInterface;
+class Invoice implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Project id
      *
      * @var string
      */
-    protected $projectId;
+    public string $projectId;
     /**
      * The invoice includes all DebtLineItems with a usageStart and usageEnd date less or equal than the cutoff date, which existed and were not already invoiced at the time of processing the invoice.
      *
      * @var \DateTime
      */
-    protected $cutoffDate;
+    public \DateTime $cutoffDate;
     /**
      * The invoice number.
      *
      * @var string
      */
-    protected $invoiceNumber;
+    public string $invoiceNumber;
     /**
      * Invoice id
      *
      * @var string
      */
-    protected $invoiceId;
+    public string $invoiceId;
     /**
      * The invoice status with the following possible values:
      * - processing: only initially set before the DebtLineItems have been linked with the invoice.
@@ -44,121 +39,9 @@ class Invoice extends \ArrayObject
      *
      * @var string
      */
-    protected $invoiceStatus;
-    /**
-     * Project id
-     *
-     * @return string
-     */
-    public function getProjectId(): string
+    public string $invoiceStatus;
+    public function definedProperties(): array
     {
-        return $this->projectId;
-    }
-    /**
-     * Project id
-     *
-     * @param string $projectId
-     *
-     * @return self
-     */
-    public function setProjectId(string $projectId): self
-    {
-        $this->initialized['projectId'] = true;
-        $this->projectId = $projectId;
-        return $this;
-    }
-    /**
-     * The invoice includes all DebtLineItems with a usageStart and usageEnd date less or equal than the cutoff date, which existed and were not already invoiced at the time of processing the invoice.
-     *
-     * @return \DateTime
-     */
-    public function getCutoffDate(): \DateTime
-    {
-        return $this->cutoffDate;
-    }
-    /**
-     * The invoice includes all DebtLineItems with a usageStart and usageEnd date less or equal than the cutoff date, which existed and were not already invoiced at the time of processing the invoice.
-     *
-     * @param \DateTime $cutoffDate
-     *
-     * @return self
-     */
-    public function setCutoffDate(\DateTime $cutoffDate): self
-    {
-        $this->initialized['cutoffDate'] = true;
-        $this->cutoffDate = $cutoffDate;
-        return $this;
-    }
-    /**
-     * The invoice number.
-     *
-     * @return string
-     */
-    public function getInvoiceNumber(): string
-    {
-        return $this->invoiceNumber;
-    }
-    /**
-     * The invoice number.
-     *
-     * @param string $invoiceNumber
-     *
-     * @return self
-     */
-    public function setInvoiceNumber(string $invoiceNumber): self
-    {
-        $this->initialized['invoiceNumber'] = true;
-        $this->invoiceNumber = $invoiceNumber;
-        return $this;
-    }
-    /**
-     * Invoice id
-     *
-     * @return string
-     */
-    public function getInvoiceId(): string
-    {
-        return $this->invoiceId;
-    }
-    /**
-     * Invoice id
-     *
-     * @param string $invoiceId
-     *
-     * @return self
-     */
-    public function setInvoiceId(string $invoiceId): self
-    {
-        $this->initialized['invoiceId'] = true;
-        $this->invoiceId = $invoiceId;
-        return $this;
-    }
-    /**
-     * The invoice status with the following possible values:
-     * - processing: only initially set before the DebtLineItems have been linked with the invoice.
-     * - completed: all DebtLineItems have been linked to the invoice.
-     * 
-     *
-     * @return string
-     */
-    public function getInvoiceStatus(): string
-    {
-        return $this->invoiceStatus;
-    }
-    /**
-    * The invoice status with the following possible values:
-    - processing: only initially set before the DebtLineItems have been linked with the invoice.
-    - completed: all DebtLineItems have been linked to the invoice.
-                       
-    *
-    * @param string $invoiceStatus
-    *
-    * @return self
-    */
-    public function setInvoiceStatus(string $invoiceStatus): self
-    {
-        $this->initialized['invoiceStatus'] = true;
-        $this->invoiceStatus = $invoiceStatus;
-        return $this;
+        return ['projectId' => 'projectId', 'cutoffDate' => 'cutoffDate', 'invoiceNumber' => 'invoiceNumber', 'invoiceId' => 'invoiceId', 'invoiceStatus' => 'invoiceStatus'];
     }
 }
