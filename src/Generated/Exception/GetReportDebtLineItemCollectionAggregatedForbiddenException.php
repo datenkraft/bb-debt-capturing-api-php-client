@@ -18,7 +18,8 @@ class GetReportDebtLineItemCollectionAggregatedForbiddenException extends Forbid
         parent::__construct('Forbidden
 
 Error codes:
-- PERMISSIONS_MISSING: No authorization for the called action was found.');
+- PERMISSIONS_MISSING: No authorization for the called action was found.
+- PERMISSIONS_TO_PROJECT_MISSING: Permissions to the projectId are missing.');
     }
     public function getErrorResponse(): \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
     {
