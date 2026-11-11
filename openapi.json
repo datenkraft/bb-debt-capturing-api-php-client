@@ -2678,7 +2678,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden\n\nError codes:\n- PERMISSIONS_MISSING: No authorization for the called action was found.",
+                        "description": "Forbidden\n\nError codes:\n- PERMISSIONS_MISSING: No authorization for the called action was found.\n- PERMISSIONS_TO_PROJECT_MISSING: Permissions to the projectId are missing.",
                         "content": {
                             "application/json": {
                                 "schema": {
