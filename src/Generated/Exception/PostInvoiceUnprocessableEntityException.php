@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Exception;
 
-class PostInvoiceNotFoundException extends NotFoundException
+class PostInvoiceUnprocessableEntityException extends UnprocessableEntityException
 {
     public function __construct(
         /**
@@ -15,10 +15,10 @@ class PostInvoiceNotFoundException extends NotFoundException
         private readonly \Symfony\Contracts\HttpClient\ResponseInterface $response
     )
     {
-        parent::__construct('Not Found
+        parent::__construct('Unprocessable Entity
 
 Error codes:
-- DATA_NOT_FOUND: The requested data could not be found.');
+- DATA_NOT_PROCESSABLE: The given data is not processable.');
     }
     public function getErrorResponse(): \Datenkraft\Backbone\Client\DebtCapturingApi\Generated\Model\ErrorResponse
     {
