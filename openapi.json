@@ -2134,8 +2134,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found\n\nError codes:\n- DATA_NOT_FOUND: The requested data could not be found.",
+                    "409": {
+                        "description": "Conflict\n\nError codes:\n- DATA_ALREADY_EXISTS: A data conflict was detected.\n- PROCESSING_INVOICE_EXISTS: An invoice with status 'processing' already exists for this project.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2144,8 +2144,8 @@
                             }
                         }
                     },
-                    "409": {
-                        "description": "Conflict\n\nError codes:\n- DATA_ALREADY_EXISTS: A data conflict was detected.\n- PROCESSING_INVOICE_EXISTS: An invoice with status 'processing' already exists for this project.",
+                    "422": {
+                        "description": "Unprocessable Entity\n\nError codes:\n- DATA_NOT_PROCESSABLE: The given data is not processable.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2460,7 +2460,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden\n\nError codes:\n- PERMISSIONS_MISSING: No authorization for the called action was found.\n- PERMISSIONS_TO_PROJECT_MISSING: Permissions to the projectId are missing.",
+                        "description": "Forbidden\n\nError codes:\n- PERMISSIONS_MISSING: No authorization for the called action was found.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2678,7 +2678,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden\n\nError codes:\n- PERMISSIONS_MISSING: No authorization for the called action was found.\n- PERMISSIONS_TO_PROJECT_MISSING: Permissions to the projectId are missing.",
+                        "description": "Forbidden\n\nError codes:\n- PERMISSIONS_MISSING: No authorization for the called action was found.",
                         "content": {
                             "application/json": {
                                 "schema": {
